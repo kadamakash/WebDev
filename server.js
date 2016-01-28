@@ -2,7 +2,7 @@
 var express = require('express'); // loading the express library
 var app = express();              // creating an instance of express lib
 
-app.use(express.static(__dirname + '/public/'));
+app.use(express.static(__dirname + '/public'));
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
