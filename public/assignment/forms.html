@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>CS5610 Assignment</title>
+    <title>Form Maker</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -64,14 +64,71 @@
                 <div>
                     <ul class="nav nav-tabs">
                         <li role="presentation" class="active">
-                            <a href="#/form">Form</a>
+                            <a href="#">Forms</a>
                         </li>
                         <li role="presentation">
-                            <a href="#/form-field">Fields</a>
+                            <a href="form-fields.html">Fields</a>
                         </li>
                     </ul>
                 </div>
             </nav>
+
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>
+                        <scan class="glyphicon glyphicon-triangle-bottom"></scan> Form Name
+                    </th>
+                    <th>
+                        <scan class="glyphicon glyphicon-triangle-bottom"></scan> Action
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="form-control" type="text" name="Form Name" placeholder="Form Name">
+                    </td>
+                    <td>
+                        <a class="btn btn-primary">
+                            <scan class="glyphicon glyphicon-plus"></scan>
+                        </a>
+                        <a class="btn btn-success">
+                            <scan class="glyphicon glyphicon-ok"></scan>
+                        </a>
+                    </td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>
+                        <a href="form-fields.html">Registration Form</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger"><scan class="glyphicon glyphicon-remove"></scan></a>
+                        <a class="btn btn-warning"><scan class="glyphicon glyphicon-pencil"></scan></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="form-fields.html">Contact List</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger"><scan class="glyphicon glyphicon-remove"></scan></a>
+                        <a class="btn btn-warning"><scan class="glyphicon glyphicon-pencil"></scan></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="form-fields.html">To Do List</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger"><scan class="glyphicon glyphicon-remove"></scan></a>
+                        <a class="btn btn-warning"><scan class="glyphicon glyphicon-pencil"></scan></a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
 
 
 
