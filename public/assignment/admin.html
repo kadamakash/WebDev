@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>CS5610 Assignment</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Username</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="home.html">Logout</a></li>
             </ul>
 
         </div>
@@ -60,7 +60,7 @@
             <h1 class="page-header">Admin</h1>
             <h2>Users</h2>
 
-            <table class="table table-bordered">
+            <table class="table table-bordered table-stripped table-hover">
                 <thead>
                 <tr>
                     <th> <a class="dropdown-toggle" data-toggle="dropdown">Username
@@ -84,19 +84,32 @@
                     <td><div class="col-sg-2">
                         <input type="text" class="form-control" placeholder="role1, role2">
                     </div></td>
-                    <td></td>
+                    <td><a href="#" class="btn btn-success"><scan class="glyphicon glyphicon-plus"></scan></a>
+                        <a href="#" class="btn btn-primary"><scan class="glyphicon glyphicon-ok"></scan></a>
+                    </td>
                 </tr>
                 <tr>
                     <td>Alice</td>
                     <td></td>
                     <td>student</td>
-                    <td></td>
+                    <td> <a href="#" class="btn btn-danger"> <scan class="glyphicon glyphicon-remove"></scan></a>
+                         <a href="#" class="btn btn-warning"> <scan class="glyphicon glyphicon-pencil"></scan></a></td>
                 </tr>
+
                 <tr>
                     <td>Ben</td>
                     <td></td>
                     <td>faculty|admin</td>
+                    <td> <a href="#" class="btn btn-danger"> <scan class="glyphicon glyphicon-remove"></scan></a>
+                         <a href="#" class="btn btn-warning"> <scan class="glyphicon glyphicon-pencil"></scan></a></td>
+                </tr>
+
+                <tr>
+                    <td>Charlie</td>
                     <td></td>
+                    <td></td>
+                    <td> <a href="#" class="btn btn-danger"> <scan class="glyphicon glyphicon-remove"></scan></a>
+                         <a href="#" class="btn btn-warning"> <scan class="glyphicon glyphicon-pencil"></scan></a></td>
                 </tr>
                 </tbody>
             </table>
