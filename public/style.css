@@ -36,13 +36,23 @@ a:hover, a:active{
     margin-top: 0.5%;
 }
 
+@media handheld, screen and (max-width: 620px){
+    .mainHeader nav ul li{
+        width:70%;
+        float:none;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+
+}
+
 .mainHeader nav ul{
     list-style: none;
     margin: 0 auto;
     padding-top: 0px;
 
 }
-
 .mainHeader nav ul li{
     float: left;
     display: inline;
