@@ -4,6 +4,9 @@ body{
     font-size: 180%;
     font-family: "Ubuntu";
     text-align: left;
+    min-height: 400px;
+    margin-bottom: 100px;
+    clear: both;
 }
 
 a{
@@ -126,29 +129,32 @@ img{
      -moz-border-radius: 5px;
      -webkit-border-radius: 5px;
 
+
  }
     .content{
-        width: auto;
+        width: 98%;
         background-color: lavender;
         border-radius: 5px;
         -moz-border-radius: 5px;
         -webkit-border-radius: 5px;
         margin-top: 5%;
         font-size: large;
+        margin-left: 1%;
     }
 
 
 
     .myImage{
-        width: 100%;
+        width: 99%;
         float: left;
         position: relative;
         display: block;
-        overflow-x: hidden;
-        overflow-y: auto;
         margin-top: 1%;
+        overflow-y: auto;
+
 
     }
 
 
 }
+
