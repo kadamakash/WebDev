@@ -5,6 +5,9 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 50px;
+    min-height: 400px;
+    margin-bottom: 100px;
+    clear: both;
 }
 
 
@@ -106,4 +109,10 @@ body {
 .placeholder img {
     display: inline-block;
     border-radius: 50%;
+}
+
+.footer{
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
 }
