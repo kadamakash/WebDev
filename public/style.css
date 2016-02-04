@@ -117,3 +117,39 @@ img{
 
 }
 
+@media (max-width: 768px)
+{
+ .body{
+     width: 170%;
+     font-size: 100%;
+     border-radius: 5px;
+     -moz-border-radius: 5px;
+     -webkit-border-radius: 5px;
+
+ }
+    .topcontent{
+        background-color: lavender;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        margin-top: 5%;
+        font-size: large;
+
+
+    }
+
+
+
+    .myImage{
+        width: 58%;
+        float: left;
+        position: relative;
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto;
+        margin-top: 1%;
+
+    }
+
+
+}
