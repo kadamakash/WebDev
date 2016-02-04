@@ -120,28 +120,27 @@ img{
 @media (max-width: 768px)
 {
  .body{
-     width: 170%;
+     width: auto;
      font-size: 100%;
      border-radius: 5px;
      -moz-border-radius: 5px;
      -webkit-border-radius: 5px;
 
  }
-    .topcontent{
+    .content{
+        width: auto;
         background-color: lavender;
         border-radius: 5px;
         -moz-border-radius: 5px;
         -webkit-border-radius: 5px;
         margin-top: 5%;
         font-size: large;
-
-
     }
 
 
 
     .myImage{
-        width: 58%;
+        width: 100%;
         float: left;
         position: relative;
         display: block;
