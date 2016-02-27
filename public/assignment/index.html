@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang = "en" ng-app="FormBuilderApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>FormBuilderApp</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="main.controller.js"></script>
+    <script src="views/sidebar/sidebar.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/login/login.controller.js"></script>
+    <script src="views/register/register.controller.js"></script>
+    <script src="views/profile/profile.controller.js"></script>
+    <script src="views/form/form.controller.js"></script>
+    <script src="views/field/field.controller.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="services/forms.service.client.js"></script>
+
+
+</head>
+
+<body ng-controller="MainCOntroller">
+
+<div class="container-fluid">
+    <header ng-include="'views/header/header.view.html'"></header>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-1">
+            <section ng-include="'views/sidebar/sidebar.view.html'"></section>
+        </div>
+        <div class="col-sm-1" ng-view></div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -70,11 +70,11 @@ var SampleApp = function() {
      *!/
     self.populateCache = function() {
         if (typeof self.zcache === "undefined") {
-            self.zcache = { 'home.html': '' };
+            self.zcache = { 'home.view.html': '' };
         }
 
         //  Local cache for static content.
-        self.zcache['home.html'] = fs.readFileSync('./home.html');
+        self.zcache['home.view.html'] = fs.readFileSync('./home.view.html');
     };
 
 
@@ -133,7 +133,7 @@ var SampleApp = function() {
 
         self.routes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('home.html') );
+            res.send(self.cache_get('home.view.html') );
         };
     };
 
