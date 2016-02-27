@@ -1,6 +1,7 @@
 /**
  * Created by akash on 2/26/16.
  */
+"use strict";
 (function () {
     angular
         .module("FormBuilderApp")
@@ -22,6 +23,7 @@
         //callback
         function updateCallback(user) {
             console.log(user);
+            $scope.updateMessage = "Updated successfully"
         }
     }
 })();
