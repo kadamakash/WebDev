@@ -2,22 +2,19 @@
  * Created by akash on 2/26/16.
  */
 (function () {
-    'use strict';
 
     angular
         .module("FormBuilderApp")
-        .controller("HeaderController", HeaderController)
+        .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope, $location, $rootScope) {
+    function HeaderController($scope, $location, UserService) {
 
-        $scope.$location = $location;
+        $scope.logout = logout;
 
-
-        $scope.logout = function () {
-            $rootScope.user = null;
+        function logout() {
             $location.path("/home");
-        };
+            UserService.setCurrentUser(null);
+        }
     }
-
 
 })();

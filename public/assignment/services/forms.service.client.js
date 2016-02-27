@@ -4,21 +4,21 @@
 (function(){
     angular
         .module("FormBuilderApp")
-        .factory("FormService", FormService)
+        .factory("FormService", FormService);
 
     function FormService(){
         var forms = [
             {"_id": "000", "title": "Contacts", "userId": 123},
             {"_id": "010", "title": "ToDo",     "userId": 123},
-            {"_id": "020", "title": "CDs",      "userId": 234},
+            {"_id": "020", "title": "CDs",      "userId": 234}
         ];
 
     var api = {
         createFormForUser:createFormForUser,
+        updateFormById:updateFormById,
         findAllFormsForUser:findAllFormsForUser,
-        deleteFormById:deleteFormById,
-        updateFormById:updateFormById
-    }
+        deleteFormById:deleteFormById
+    };
 
         return api;
 
@@ -27,7 +27,7 @@
                 _id: (new Date).getTime(),
                 userId: userId,
                 title: form.title
-            }
+            };
 
             forms.push(newForm);
             callback(newForm);
