@@ -5,7 +5,7 @@
 (function () {
     angular
         .module("FormBuilderApp")
-        .controller("FormController",FormController)
+        .controller("FormController",FormController);
 
     function FormController($scope, $location, $rootScope, UserService, FormService) {
 
