@@ -10,15 +10,15 @@
 
         var users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": ["student"]		},
+                "username":"alice",  "password":"alice",   "roles": ["student"]	, "email":""	},
             {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "roles": ["admin"]		},
+                "username":"bob",    "password":"bob",     "roles": ["admin"], "email":""		},
             {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": ["faculty"]		},
+                "username":"charlie","password":"charlie", "roles": ["faculty"]	, "email":""	},
             {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]},
+                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"], "email":""},
             {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": ["student"]		}
+                "username":"ed",     "password":"ed",      "roles": ["student"]	, "email":""	}
         ];
 
 
@@ -72,6 +72,7 @@
                     users[index].password = user.password;
                     users[index].roles = user.roles;
                     users[index].username = user.username;
+                    users[index].email = user.email;
 
                 }
             }
