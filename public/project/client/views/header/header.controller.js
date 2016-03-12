@@ -2,20 +2,18 @@
  * Created by akash on 2/26/16.
  */
 "use strict";
-(function () {
-
+(function(){
     angular
-        .module("FormBuilderApp")
-        .controller("HeaderController", HeaderController);
+        .module("HospitalCompareApp")
+        .controller("HeaderController", headerController);
 
-    function HeaderController($scope, $location, UserService) {
-
+    function headerController($location, $scope, UserService) {
+        $scope.$location = $location;
         $scope.logout = logout;
 
         function logout() {
-            $location.path("/home");
             UserService.setCurrentUser(null);
+            $location.path("/home");
         }
     }
-
 })();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang = "en" data-ng-app="FormBuilderApp">
+<html lang = "en" data-ng-app="HospitalCompareApp">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,10 +18,14 @@
     <script src="client/views/main/main.controller.js"></script>
     <script src="client/views/sidebar/sidebar.controller.js"></script>
     <script src="client/views/header/header.controller.js"></script>
-    <script src="client/views/users/login.controller.js"></script>
-    <script src="client/views/users/register.controller.js"></script>
-    <script src="client/views/users/profile.controller.js"></script>
-    <script src="services/user.service.client.js"></script>
+    <script src="client/views/users/login/login.controller.js"></script>
+    <script src="client/views/users/register/register.controller.js"></script>
+    <script src="client/views/users/profile/profile.controller.js"></script>
+    <script src="client/views/hospital/hospital.controller.js"></script>
+    <script src="client/views/hospital/detail.controller.js"></script>
+    <script src="client/services/user.service.client.js"></script>
+    <script src="client/services/hospital.service.client.js"></script>
+
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -30,10 +34,22 @@
 
 </head>
 
-<body data-ng-controller="MainController">
+<body >
+<nav data-ng-controller="MainController">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Welcome!</h1>
 
-<div data-ng-include="'views/header/header.view.html'"></div>
-<div data-ng-include="'views/sidebar/sidebar.view.html'"></div>
+        <ul class="nav nav-tabs">
+            <li ng-class="{'active': $location.url() == '/home'}"><a href="#/home">Home</a></li>
+            <li ng-class="{'active': $location.url() == '/hospital'}"><a href="#/hospital">Search</a></li>
+        </ul>
+    </div>
+
+
+</nav>
+
+<div data-ng-include="'client/views/header/header.view.html'"></div>
+<div data-ng-include="'client/views/sidebar/sidebar.view.html'"></div>
 <div data-ng-view></div>
 
 </body>

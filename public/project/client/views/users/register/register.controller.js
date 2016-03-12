@@ -1,6 +1,7 @@
 /**
  * Created by akash on 3/10/16.
  */
+"use strict";
 (function(){
     angular
         .module("HospitalCompareApp")
@@ -28,14 +29,17 @@
                 $scope.message = "Passwords must match";
                 return;
             }
-            var user = UserService.findUserByUsername(user.username);
-            if (user != null) {
+            var auser = UserService.findUserByUsername(user.username);
+            if (auser != null) {
                 $scope.message = "User already exists";
                 return;
             }
-            var newUser = UserService.createUser($scope.user);
-            UserService.setCurrentUser(newUser);
-            $location.url("/profile");
+            UserService.createUser(user, registerCallback);
+        }
+           function registerCallback(user){
+            UserService.setCurrentUser(User);
+            $location.path("/profile");
+               consloe.log(user);
         }
     }
 })();

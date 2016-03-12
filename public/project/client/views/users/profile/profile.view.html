@@ -1,46 +1,75 @@
-<div ng-show="message" class="alert alert-success" role="alert">{{message}}</div>
-<div ng-show="error"  class="alert alert-danger"  role="alert">{{error}}</div>
+<div class="container-fluid">
+    <div class="row">
 
-<div class="form-horizontal">
-    <div class="form-group">
-        <label for="username" class="col-sm-2 control-label">Username</label>
-        <div class="col-sm-10">
-            <input ng-model="currentUser.username" type="text" class="form-control" id="username" placeholder="johndoe">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="password" class="col-sm-2 control-label">Password</label>
-        <div class="col-sm-10">
-            <input ng-model="currentUser.password" type="password" class="form-control" id="password" placeholder="p@ssw0rd">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="password2" class="col-sm-2 control-label">Verify Password</label>
-        <div class="col-sm-10">
-            <input ng-model="currentUser.password2" type="password" class="form-control" id="password2" placeholder="p@ssw0rd">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="firstName" class="col-sm-2 control-label">First Name</label>
-        <div class="col-sm-10">
-            <input ng-model="currentUser.firstName" type="text" class="form-control" id="firstName" placeholder="John">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="lastName" class="col-sm-2 control-label">Last Name</label>
-        <div class="col-sm-10">
-            <input ng-model="currentUser.lastName" type="text" class="form-control" id="lastName" placeholder="Doe">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="email" class="col-sm-2 control-label">Email</label>
-        <div class="col-sm-10">
-            <input ng-model="currentUser.email" type="email" class="form-control" id="email" placeholder="john@doe.com">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button ng-click="updateUser(currentUser)" class="btn btn-primary btn-block">Update Profile</button>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Profile</h1>
+            <form class="form-horizontal" >
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="user.username" class="form-control" id="inputUsername" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" ng-model="user.password" class="form-control" id="inputPassword" placeholder="Password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputFirstName" class="col-sm-2 control-label"><span class="no-breaking">First Name</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="user.firstName" class="form-control" id="inputFirstName" placeholder="First Name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputLastName" class="col-sm-2 control-label"><span class="no-breaking">Last Name</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="user.lastName" class="form-control" id="inputLastName" placeholder="Last Name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" ng-model="user.email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" ng-click="update(user)" class="btn btn-block">Update</button>
+                        <br>
+                        {{updateMessage}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" ng-click="showFavourites()" class="btn btn-block">View Favourite Hospitals</button>
+                        <br>
+                    </div>
+                </div>
+            </form>
+            <table class="table table-striped" ng-show="favoriteHospitals.length">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="hospital in favoriteHospitals"
+                    ng-click="findDetailsById(hospital.provider_id)">
+
+                    <td>{{hospital.hospital_name}}</td>
+                    <td><a href="" ng-click="removeFavourite(hospital.provider_id)"
+                           class="glyphicon glyphicon-remove my-styling" title="remove favourite" ></a></td>
+                </tr>
+                </tbody>
+            </table>
+
         </div>
     </div>
 </div>

@@ -1,6 +1,7 @@
 /**
  * Created by akash on 3/10/16.
  */
+"use strict";
 (function(){
     angular
         .module("HospitalCompareApp")
@@ -8,14 +9,23 @@
 
     function loginController ($scope, UserService, $location, $rootScope) {
         $scope.login = login;
+        $scope.location = $location;
 
-        function login (user) {
-            var user1 = UserService.findUserByCredentials({username: user.username, password: user.password});
-            if (user1) {
-                $rootScope.currentUser = user1;
-                UserService.setCurrentUser(user1);
-                $location.url("/profile");
-            }
+        function login(user) {
+            UserService.findUserByCredentials(user.username,user.password,loginCallback);
         }
+
+        function loginCallback(user) {
+            if(user!=null) {
+                UserService.setCurrentUser(user);
+                $location.path('/profile');
+            }
+            else {
+                $scope.loginFailed = "Login failed. Invalid username or password."
+            }
+
+        }
+
+
     }
 })();

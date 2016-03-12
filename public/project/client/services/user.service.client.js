@@ -1,6 +1,7 @@
 /**
  * Created by akash on 2/26/16.
  */
+"use strict";
 (function(){
     angular
         .module("HospitalCompareApp")
@@ -10,15 +11,15 @@
 
         var users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": ["student"]	, "email":""	},
+                "username":"alice",  "password":"alice",   "roles": ["student"], "email":"", "favourites":["220070"]	},
             {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "roles": ["admin"], "email":""		},
+                "username":"bob",    "password":"bob",     "roles": ["admin"], "email":"", "favourites":["220070"] },
             {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": ["faculty"]	, "email":""	},
+                "username":"charlie","password":"charlie", "roles": ["faculty"], "email":"", "favourites":["220070"]	},
             {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"], "email":""},
+                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"], "email":"", "favourites":["220070"] },
             {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": ["student"]	, "email":""	}
+                "username":"ed",     "password":"ed",      "roles": ["student"], "email":"", "favourites":["220070"] }
         ];
 
 
@@ -30,13 +31,15 @@
             updateUser:updateUser,
             setCurrentUser:setCurrentUser,
             getCurrentUser:getCurrentUser
+
         };
         return api;
 
         function findUserByCredentials(username, password, callback) {
-            for(index=0;index<users.length;index++) {
+            for(var index=0;index<users.length;index++) {
                 if(users[index].username == username) {
                     if(users[index].password==password) {
+                        console.log(users[index]);
                         callback(users[index]);
                     }
                 }
@@ -55,7 +58,7 @@
         }
 
         function deleteUserById(userId,callback) {
-            for(index=0;index<users.length;index++) {
+            for(var index=0;index<users.length;index++) {
                 if(users[index]._id == userId) {
                     users.remove(index);
                 }
@@ -65,7 +68,7 @@
         }
 
         function updateUser(userId, user, callback) {
-            for(index=0;index<users.length;index++) {
+            for(var index=0;index<users.length;index++) {
                 if(users[index]._id == userId) {
                     users[index].firstName = user.firstName;
                     users[index].lastName = user.lastName;
@@ -73,7 +76,7 @@
                     users[index].roles = user.roles;
                     users[index].username = user.username;
                     users[index].email = user.email;
-
+                    users[index].favourites = user.favourites;
                 }
             }
             callback(user);
@@ -85,7 +88,7 @@
             }
             else {
                 $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
-                    "username":aUser.username, "password":aUser.password, "roles": aUser.roles}
+                    "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email, "favourites":aUser.favourites}
             }
 
         }

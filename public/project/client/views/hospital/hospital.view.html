@@ -2,37 +2,39 @@
     <div class="row">
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h1>Search MediGov API</h1>
-<h2>Search</h2>
-<input ng-model="hospital" class="form-control"/>
-<!--<button ng-click="searchMovie(movieTitle)" class="btn btn-primary btn-block">-->
-<!--Search-->
-<!--</button>-->
-<a href="#/search/{{zipcode}}" class="btn btn-primary btn-block">
-    Search
-</a>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Hospital Name</th>
-        <th>Address</th>
-        <th>Zip</th>
-        <th>phone</th>
-        <th>abc</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-click="selectMovie(movie)" ng-repeat="movie in data.Search">
-        <td>
-            <img height="100px" ng-src="{{movie.Poster}}"/>
-        </td>
-        <td>
-            <a href="#/details/{{movie.imdbID}}">{{movie.Title}}</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-</div>
 
+            <h1>Search MediGov API</h1>
+            <input ng-model="zipcode" placeholder="Boston" class="form-control"/>
+            <button ng-click="search(zipcode)" class="btn btn-primary btn-block"> Search by City</button>
+
+
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Type</th>
+                        <th>City</th>
+                        <th>Zip Code</th>
+                        <th>ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="hospital in data">
+                        <td><a href="#/detail/{{hospital.provider_id}}">{{hospital.hospital_name}}</a></td>
+                        <td>{{hospital.address}}</td>
+                        <td>{{hospital.hospital_type}}</td>
+                        <td>{{hospital.city}}</td>
+                        <td>{{hospital.zip_code}}</td>
+                        <td>{{hospital.provider_id}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
     </div>
 </div>
