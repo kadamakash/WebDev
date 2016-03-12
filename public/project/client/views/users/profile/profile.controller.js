@@ -7,9 +7,9 @@
         .module("HospitalCompareApp")
         .controller("ProfileController", profileController);
 
-    function profileController($scope, UserService, $location, $rootscope, HospitalService) {
+    function profileController($scope, UserService, $location, HospitalService) {
 
-       var currentUser = UserService.getCUrrentUser();
+       var currentUser = UserService.getCurrentUser();
         $scope.favouriteHospitals = [];
         $scope.user = currentUser;
 
@@ -53,7 +53,7 @@
         }
 
         function removeFavouriteCallback(user) {
-            console.log("remove callback")
+            console.log("remove callback");
             console.log(user.favourites);
             showFavourites();
         }

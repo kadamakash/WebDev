@@ -3,8 +3,12 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-            <h1>Hospital Info</h1>
-            <h2> Hospital Name: {{hospital[0].hospital_name}}</h2>
+           <div class="top-buffer">
+               <h1 class="page-header">{{hospital[0].hospital_name}}
+               <button  class="btn" ng-click="addHospitalToFavourites()" ng-show="newUser" type="submit">Add to Favourite</button>
+               </h1>
+           </div>
+
             <h2> Type: {{hospital[0].hospital_type}}</h2>
             <h2> Address: {{hospital[0].address}}</h2>
             <h2> Zip Code: {{hospital[0].zip_code}}</h2>
