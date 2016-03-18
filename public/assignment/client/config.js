@@ -34,7 +34,7 @@
                 templateUrl: "views/forms/form-fields.view.html"
             })
             .when("/admin", {
-                templateUrl: "views/admin/admin.html"
+                templateUrl: "client/views/admin/admin.html"
             })
             .otherwise({
                 redirectTo: "/"
