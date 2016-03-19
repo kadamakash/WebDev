@@ -12,11 +12,13 @@
         $scope.register = register;
 
         function register (user) {
-            UserService.createUser(user,registerCallback);
+            UserService
+                .createUser(user)
+                .then(registerCallback);
         }
 
         function registerCallback(user) {
-            UserService.setCurrentUser(user);
+            UserService.setCurrentUser(user.data);
             $location.path('/profile');
             console.log(user);
         }

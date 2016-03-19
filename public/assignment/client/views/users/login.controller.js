@@ -14,13 +14,15 @@
 
 
         function login(user) {
-            UserService.findUserByCredentials(user.username,user.password,loginCallback);
+            UserService
+                .findUserByCredentials(user.username, user.password)
+                .then(loginCallback);
         }
 
         //Callback
         function loginCallback(user) {
             if(user!=null) {
-                UserService.setCurrentUser(user);
+                UserService.setCurrentUser(user.data);
                 $location.path('/profile');
             }
             else{

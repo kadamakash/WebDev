@@ -7,7 +7,7 @@
         .module("FormBuilderApp")
         .controller("FormController",FormController);
 
-    function FormController($scope, $location, $rootScope, UserService, FormService) {
+    function FormController($scope, $location, UserService, FormService, $routeParams) {
 
         //currently logged in user
         var currentUser = UserService.getCurrentUser();
@@ -18,10 +18,13 @@
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
         $scope.updateForm = updateForm;
+        $scope.formClick = formClick;
 
         //Fetching all forms for current user to display
         function init() {
-            FormService.findAllFormsForUser(currentUser._id, findAllFormsForUserCallback);
+            FormService
+                .findAllFormsForUser(currentUser._id)
+                .then(findAllFormsForUserCallback);
         }
         init();
 
@@ -29,14 +32,17 @@
         function addForm(form) {
             form.userId = currentUser._id;
             form._id = (new Date()).getTime();
-            FormService.createFormForUser(currentUser._id,form,addFormCallback);
+            FormService
+                .createFormForUser(currentUser._id,form)
+                .then(addFormCallback);
             $scope.form = null;
         }
 
         function deleteForm(index) {
             var formId = $scope.forms[index]._id;
-            FormService.deleteFormById(formId,deleteFormCallback)
-
+            FormService
+                .deleteFormById(formId)
+                .then(deleteFormCallback);
         }
 
         function selectForm(index) {
@@ -51,7 +57,9 @@
         }
 
         function updateForm(form) {
-            FormService.updateFormById(form._id,form,updateFormCallback);
+            FormService
+                .updateFormById(form._id,form)
+                .then(updateFormCallback);
             $scope.form = null;
         }
 

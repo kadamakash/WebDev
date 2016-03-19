@@ -35,7 +35,7 @@ module.exports = function (app, model) {
     function updateFormById(req, res) {
         var formId = req.params.formId;
         var newForm = req.body;
-        var form = model.updateFormById(formId,newForm)
+        var form = model.updateFormById(formId,newForm);
         if(form) {
             res.json(form);
             return;

@@ -30,8 +30,9 @@
                 templateUrl: "views/forms/forms.view.html",
                 controller: "FormController"
             })
-            .when("/form-fields", {
-                templateUrl: "views/forms/form-fields.view.html"
+            .when("/form/:formId/fields", {
+                templateUrl: "views/forms/fields.view.html",
+                controller: "FIeldController"
             })
             .when("/admin", {
                 templateUrl: "client/views/admin/admin.html"
