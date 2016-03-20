@@ -32,7 +32,7 @@
             })
             .when("/form/:formId/fields", {
                 templateUrl: "views/forms/fields.view.html",
-                controller: "FIeldController"
+                controller: "FieldController"
             })
             .when("/admin", {
                 templateUrl: "client/views/admin/admin.html"

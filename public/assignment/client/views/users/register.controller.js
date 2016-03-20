@@ -11,7 +11,7 @@
 
         $scope.register = register;
 
-        function register (user) {
+        function register(user) {
             UserService
                 .createUser(user)
                 .then(registerCallback);
