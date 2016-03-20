@@ -5,7 +5,7 @@
 (function() {
     angular
         .module("FormBuilderApp")
-        .controller("LoginController",LoginController)
+        .controller("LoginController",LoginController);
 
     function LoginController($scope, $location, UserService, $rootScope) {
 

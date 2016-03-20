@@ -63,9 +63,14 @@
             $scope.form = null;
         }
 
+        function formClick(form) {
+            console.log(form._id);
+            $location.path("/form/"+form._id+"/fields");
+        }
+
         //callback functions
         function findAllFormsForUserCallback(formsCurrentUser) {
-            $scope.forms = formsCurrentUser;
+            $scope.forms = formsCurrentUser.data;
 
         }
 

@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .factory("UserService",UserService);
 
-    function UserService($rootScope) {
+    function UserService($rootScope, $http) {
 
         var api = {
             findUserByCredentials: findUserByCredentials,
@@ -25,7 +25,7 @@
         }
 
         function findAllUsers(){
-            return $http.get("/api/assignment/user?username="+username);
+            return $http.get("/api/assignment/user");
         }
 
         function findUserByUsername(username) {
@@ -50,7 +50,7 @@
             }
             else {
                 $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
-                    "username":aUser.username, "password":aUser.password, "roles": aUser.roles}
+                    "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email}
             }
 
         }
