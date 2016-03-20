@@ -1,8 +1,8 @@
 /**
  * Created by akash on 3/17/16.
  */
-
-module.exports = function (app, model) {
+'use strict';
+module.exports = function (app, model, uuid) {
     app.get("/api/assignment/user/:userId/form", getAllFormsByUserId);
     app.get("/api/assignment/form/:formId", getFormById);
     app.put("/api/assignment/form/:formId",updateFormById);
@@ -12,19 +12,22 @@ module.exports = function (app, model) {
     function createFormForUser(req, res) {
         var userId = req.params.userId;
         var form = req.body;
+        form._id = uuid.v4();
+        form.fields = [];
         var newForm = model.createFormForUser(userId,form);
         res.send (200);
     }
 
     function getAllFormsByUserId(req, res) {
-        var userId = req.params.username;
+        var userId = req.params.userId;
+        console.log(req.params);
         var forms = model.findAllFormsForUser(userId);
         res.json(forms);
     }
 
     function getFormById(req, res) {
         var formId = req.params.formId;
-        var form = model.findFromById(formId);
+        var form = model.findFormById(formId);
         if(form) {
             res.json(form);
             return;

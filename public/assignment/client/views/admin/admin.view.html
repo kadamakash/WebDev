@@ -1,5 +1,3 @@
-
-<
 <div class="container-fluid">
     <div class="row">
 
@@ -8,57 +6,83 @@
             <h2>Users</h2>
 
             <table class="table table-bordered table-striped table-hover">
-                <thead>
                 <tr>
-                    <th> <a class="dropdown-toggle" data-toggle="dropdown"> &nbps; Username
-                        <span class="caret"></span></a></th>
-                    <th> <a class="dropdown-toggle" data-toggle="dropdown"> &nbps; Password
-                        <span class="caret"></span></a></th>
-                    <th> <a class="dropdown-toggle" data-toggle="dropdown"> &nbps; Role
-                        <span class="caret"></span></a></th>
-                    <th> <a class="dropdown-toggle" data-toggle="dropdown"> &nbps; Action
-                        <span class="caret"></span></a></th>
+                    <th>
+                        <a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Username
+                    </th>
+                    <th>
+                        <a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Password
+                    </th>
+                    <th>
+                        <a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Role
+                    </th>
+                    <th>
+                        &nbsp; Action
+                    </th>
                 </tr>
-                </thead>
-                <tbody>
+
                 <tr>
-                    <td><div class="col-sg-2">
-                        <input type="text" class="form-control" placeholder="username">
-                    </div></td>
-                    <td><div class="col-sg-2">
-                        <input type="text" class="form-control" placeholder="password">
-                    </div></td>
-                    <td><div class="col-sg-2">
-                        <input type="text" class="form-control" placeholder="role1, role2">
-                    </div></td>
-                    <td><a href="#" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></a>
-                        <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></a>
+                    <td>
+                        <input type="text" class="form-control" id="inputUsername" placeholder="username">
+                    </td>
+                    <td>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="password">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="inputRole" placeholder="role1, role2">
+                    </td>
+                    <td>
+                        <a href="#" class="glyphicon glyphicon-plus my-styling" title="Add "></a>
+                        <a href="#" class="glyphicon glyphicon-ok my-styling" title="Update "></a>
                     </td>
                 </tr>
                 <tr>
-                    <td>Alice</td>
-                    <td></td>
-                    <td>student</td>
-                    <td> <a href="#" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span></a>
-                         <a href="#" class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span></a></td>
-                </tr>
+                    <td>
+                        alice
+                    </td>
+                    <td>
 
-                <tr>
-                    <td>Ben</td>
-                    <td></td>
-                    <td>faculty|admin</td>
-                    <td> <a href="#" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span></a>
-                         <a href="#" class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                    </td>
+                    <td>
+                        student
+                    </td>
+                    <td>
+                        <a href="#" class="glyphicon glyphicon-remove my-styling" title="delete " ></a>
+                        <a href="#" class="glyphicon glyphicon-pencil my-styling" title="edit " ></a>
+                    </td>
                 </tr>
+                <tr>
+                    <td>
+                        bob
+                    </td>
+                    <td>
 
-                <tr>
-                    <td>Charlie</td>
-                    <td></td>
-                    <td></td>
-                    <td> <a href="#" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span></a>
-                         <a href="#" class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                    </td>
+                    <td>
+                        faculty | admin
+                    </td>
+                    <td>
+                        <span class="text-nowrap">
+                        <a href="#" class="glyphicon glyphicon-remove my-styling" title="delete "></a>
+                        <a href="#" class="glyphicon glyphicon-pencil my-styling" title="edit "></a>
+                        </span>
+                    </td>
                 </tr>
-                </tbody>
+                <tr>
+                    <td>
+                        charlie
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <a href="#" class="glyphicon glyphicon-remove my-styling" title="delete" ></a>
+                        <a href="#" class="glyphicon glyphicon-pencil my-styling" title="edit " ></a>
+                    </td>
+                </tr>
             </table>
 
         </div>

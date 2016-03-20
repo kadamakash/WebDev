@@ -13,7 +13,7 @@
 
                 console.log(editField.options);
                 var fromattedOptions = null;
-                for (var index =0; index< editField.options.length; index++) {
+                for (var index = 0; index< editField.options.length; index++) {
                     console.log(editField.options[index]);
                     var option = editField.options[index];
                     if (fromattedOptions) {

@@ -28,7 +28,7 @@
         }
 
         function findAllFormsForUser(userId) {
-            return $http.get("/api/assignment/user/"+userId+"/form");
+            return $http.get("/api/assignment/user/" +userId+ "/form");
         }
 
         function deleteFormById(formId) {

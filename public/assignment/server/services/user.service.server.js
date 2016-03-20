@@ -1,24 +1,37 @@
 /**
  * Created by akash on 3/17/16.
  */
-module.exports = function (app, model) {
+'use strict';
+module.exports = function (app, model, uuid) {
     app.get("/api/assignment/user", getAllUsers);
     app.get("/api/assignment/user/:id", getUserById);
     app.get("/api/assignment/user?username=username", getUserByUsername);
-    app.get("/api/assignment/user?username=alice&password=wonderland",getUserByCredentials);
+    app.get("/api/assignment/user?username=username&password=password",getUserByCredentials);
     app.put("/api/assignment/user/:id",updateUserById);
     app.post("/api/assignment/user",createUser);
     app.delete("/api/assignment/user/:id",deleteUserById);
 
     function createUser (req, res) {
         var user = req.body;
+        user._id=uuid.v4();
         model.createUser(user);
-        res.send (200);
+        res.send(user);
     }
 
     function getAllUsers (req, res) {
-        var users = model.findAllUsers();
-        res.json(users);
+        if(req.query.username) {
+            if(req.query.password) {
+                getUserByCredentials(req,res);
+            }
+            else {
+                getUserByUsername(req,res);
+            }
+        }
+        else {
+            var users = model.findAllUsers();
+            res.json(users);
+        }
+
     }
 
     function getUserById (req, res) {
@@ -32,8 +45,8 @@ module.exports = function (app, model) {
     }
 
     function getUserByCredentials (req, res) {
-        var username = req.params.username;
-        var password = req.params.password;
+        var username = req.query.username;
+        var password = req.query.password;
         var credentials = {
             username: username,
             password: password

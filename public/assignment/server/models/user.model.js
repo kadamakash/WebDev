@@ -1,6 +1,7 @@
 /**
  * Created by akash on 3/17/16.
  */
+'use strict';
 module.exports = function() {
     var users = require("./user.mock.json");
     var api = {
@@ -11,20 +12,17 @@ module.exports = function() {
         createUser:createUser,
         deleteUser:deleteUser,
         updateUser:updateUser
-        //setCurrentUser:setCurrentUser,
-        //getCurrentUser:getCurrentUser
     };
     return api;
 
     function findUserByCredentials(credentials) {
-        for(var index=0;index<users.length;index++) {
-            if(users[index].username == credentials.username) {
-                if(users[index].password==credentials.password) {
-                    return users[index];
-                }
+        for (var i in users){
+            if(users[i].username == credentials.username && users[i].password == credentials.password){
+                return users[i];
             }
         }
         return null;
+
     }
 
     function findUserByUsername(username) {
@@ -78,18 +76,4 @@ module.exports = function() {
         return user;
     }
 
-    //function setCurrentUser(aUser) {
-    //    if(aUser == null) {
-    //        $rootScope.newUser = null;
-    //    }
-    //    else {
-    //        $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
-    //            "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email}
-    //    }
-    //
-    //}
-    //
-    //function getCurrentUser() {
-    //    return $rootScope.newUser;
-    //}
 };

@@ -1,6 +1,7 @@
 /**
  * Created by akash on 2/26/16.
  */
+'use strict';
 (function(){
     angular
         .module("FormBuilderApp")
@@ -9,14 +10,14 @@
     function UserService($rootScope, $http) {
 
         var api = {
+            findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
-            createUser:createUser,
-            deleteUserById:deleteUserById,
-            updateUser:updateUser,
+            createUser: createUser,
+            deleteUserById: deleteUserById,
+            updateUser: updateUser,
             setCurrentUser:setCurrentUser,
-            getCurrentUser:getCurrentUser,
-            findUserByUsername: findUserByUsername
+            getCurrentUser:getCurrentUser
         };
         return api;
 
@@ -25,7 +26,7 @@
         }
 
         function findAllUsers(){
-            return $http.get("/api/assignment/user");
+            return $http.get("/api/assignment/user")
         }
 
         function findUserByUsername(username) {
@@ -33,7 +34,7 @@
         }
 
         function createUser(user) {
-            return $http.post("/api/assignment/user",user);
+            return $http.post("/api/assignment/user", user);
         }
 
         function deleteUserById(userId) {
