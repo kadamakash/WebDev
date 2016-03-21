@@ -4,18 +4,21 @@
 "use strict";
 (function () {
     angular
+        .module("FormBuilderApp")
+        .controller("FieldController",FieldController);
+
+    angular
         .module('FormBuilderApp')
         .controller('ModalInstance', function ($scope, $uibModalInstance, editField, popupHeader) {
 
-            $scope.editField = editField;
             $scope.popupHeader = popupHeader;
+            $scope.editField = editField;
+
             if(editField.options) {
 
                 console.log(editField.options);
                 var fromattedOptions = null;
-                for (var index = 0; index< editField.options.length; index++) {
-                    console.log(editField.options[index]);
-                    var option = editField.options[index];
+                _.forEach(editField.options, function(option){
                     if (fromattedOptions) {
 
                         fromattedOptions = fromattedOptions + "\n" + option.value + ":" + option.label;
@@ -23,21 +26,21 @@
 
                         fromattedOptions = option.value + ":" + option.label;
                     }
-                }
+                });
 
                 $scope.editField.placeholder = fromattedOptions;
             }
-            $scope.submit = function(updatedOptions) {
-                var temp = updatedOptions.placeholder.split('\n');
+            $scope.submit = function(editField) {
+                var temp = editField.placeholder.split('\n');
                 var newOptions = [];
-                for(var index =0;index<temp.length;index++) {
-                    var tempString = temp[index];
+                _.forEach(temp, function(string){
                     newOptions.push({
                         value: tempString.split(':')[0],
                         label: tempString.split(':')[1]
                     })
-                }
-                updatedOptions.options = newOptions;
+
+                });
+                editField.options = newOptions;
                 $uibModalInstance.close(updatedOptions);
             };
 
@@ -47,22 +50,29 @@
         });
 
 
-    angular
-        .module("FormBuilderApp")
-        .controller("FieldController",FieldController);
+
 
     function FieldController($scope, $location, UserService, FormService, $routeParams, FieldService, $uibModal) {
 
         //currently logged in user
         var currentUser = UserService.getCurrentUser();
+
         var formId = $routeParams.formId;
         function init() {
             FieldService.getFieldsForForm(formId)
-                .then(fieldsForFormCallback);
+                .then(function successCallback(response){
+                    $scope.fields = response.data;
+                });
+            console.log(formId);
         }
         init();
 
-        $scope.$location = $location;
+        //Event handler declarations
+        $scope.addField = addField;
+        $scope.removeField = removeField;
+        $scope.updateModelOnSort = updateModelOnSort;
+
+        /*$scope.$location = $location;
         $scope.model = {
             fieldType: null,
             availableOptions: [{id: '1', name: 'Single Line Text Field'},
@@ -71,7 +81,7 @@
                 {id: '4', name: 'Checkboxes Field'},
                 {id: '5', name: 'Dropdown Field'},
                 {id: '6', name: 'Radio Buttons Field'}]
-        };
+        };*/
 
 
         $scope.open = function (fieldType, field) {
@@ -196,16 +206,13 @@
 
         };
 
-        //Event handler declarations
-        $scope.addField = addField;
-        $scope.removeField = removeField;
-        $scope.updateModelOnSort = updateModelOnSort;
+
 
         //Event handler implementation
         function addField(fieldType) {
             if(fieldType) {
                 switch(fieldType) {
-                    case "Single Line Text Field":
+                    case 'Single Line Text Field':
                         FieldService.createFieldForForm(formId,{"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"})
                             .then(function(res) {
                                 $scope.fields = res.data.fields;
@@ -276,10 +283,10 @@
         }
 
         //callbacks
-        function fieldsForFormCallback(fields) {
+        /*function fieldsForFormCallback(fields) {
             $scope.fields = fields.data;
             console.log(fields);
-        }
+        }*/
     }
 
 

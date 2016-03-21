@@ -1,6 +1,7 @@
 /**
  * Created by akash on 3/19/16.
  */
+'use strict';
 module.exports = function (app, model, uuid) {
     app.get("/api/assignment/form/:formId/field", getAllFieldsByFormId);
     app.get("/api/assignment/form/:formId/field/:fieldId", getFieldById);

@@ -2,71 +2,64 @@
     <div class="row">
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Form</h1>
+            <h1 class="page-header">Form : Registration Form</h1>
             <ul class="nav nav-tabs">
-                <li><a href="#/forms">Forms</a></li>
-                <li class="active"><a href="#/fields">Fields</a></li>
+                <li role="presentation"><a href="#/forms">Forms</a></li>
+                <li role="presentation" class="active"><a href="#">Fields</a></li>
             </ul>
             <div my-sortable>
                 <div ng-repeat="field in fields" ng-switch on="field.type">
                     <div ng-switch-when="TEXT">
                         <fieldset class="form-group">
-                            <label for="{{field._id}}">{{field.label}}</label>
-                            <div class="row">
+                            <label for="{{field._id}}" class="control-label"> {{field.label}}</label>
+                            <div class="row nowrap">
                                 <div class="form-group col-xs-6">
                                     <input type="text" class="form-control" id="{{field._id}}" placeholder="{{field.placeholder}}">
                                 </div>
                                 <div class="form-group col-xs-6">
-                                    <div class=" no-breaking " >
-                                        <a ng-click="open('TEXT', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                        <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder" ></a>
-                                    </div>
+                                    <button class="btn btn-primary" ng-click="open('TEXT', field)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                                    <button class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    <button class="btn btn-danger" ng-click="removeField(field)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                    <button class="btn btn-default"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </fieldset>
                     </div>
                     <div ng-switch-when="EMAIL">
                         <fieldset class="form-group">
-
-                            <label for="{{field._id}}">{{field.label}}</label>
-                            <div class="row">
+                            <label for="{{field._id}}" class="control-label">{{field.label}}</label>
+                            <div class="row nowrap">
                                 <div class="form-group col-xs-6">
                                     <input type="email" class="form-control" id="{{field._id}}" placeholder="{{field.placeholder}}">
                                 </div>
                                 <div class="form-group col-xs-6">
-                                    <div class=" no-breaking ">
-                                        <a ng-click="open('EMAIL', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                        <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
-                                    </div>
+                                    <button class="btn btn-primary"  ng-click="open('EMAIL', field)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                                    <button class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    <button class="btn btn-danger" ng-click="removeField(field)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                    <button class="btn btn-default"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </fieldset>
                     </div>
                     <div ng-switch-when="TEXTAREA">
                         <fieldset class="form-group">
-                            <label for="{{field._id}}">{{field.label}}</label>
-                            <div class="row">
+                            <label for="{{field._id}}" class="control-label">{{field.label}}</label>
+                            <div class="row nowrap">
                                 <div class="form-group col-xs-6">
                                     <textarea class="form-control" id="{{field._id}}" placeholder={{field.placeholder}}></textarea>
                                 </div>
                                 <div class="form-group col-xs-6">
-                                    <div class=" no-breaking">
-                                        <a ng-click="open('TEXTAREA', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                        <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
-                                    </div>
+                                    <button class="btn btn-primary" ng-click="open('TEXTAREA', field)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                                    <button class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    <button class="btn btn-danger" ng-click="removeField(field)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                    <button class="btn btn-default"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </fieldset>
                     </div>
                     <div ng-switch-when="OPTIONS">
                         <fieldset class="form-group">
-                            <label for="{{field._id}}">{{field.label}}</label>
+                            <label for="{{field._id}}" class="control-label">{{field.label}}</label>
                             <div class="row">
                                 <div class="form-group col-xs-6">
                                     <select id="{{field._id}}" class="form-control">
@@ -74,12 +67,10 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-xs-6">
-                                    <div class=" no-breaking">
-                                        <a ng-click="open('OPTIONS', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                        <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
-                                    </div>
+                                    <button class="btn btn-primary" ng-click="open('OPTIONS', field)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                                    <button class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    <button class="btn btn-danger" ng-click="removeField(field)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                    <button class="btn btn-default"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </fieldset>
@@ -87,24 +78,22 @@
                     <div ng-switch-when="DATE">
                         <fieldset class="form-group">
                             <label for="{{field._id}}">{{field.label}}</label>
-                            <div class="row">
+                            <div class="row nowrap">
                                 <div class="form-group col-xs-6">
                                     <input type="date" class="form-control" id="{{field._id}}" placeholder="{{field.placeholder}}">
                                 </div>
                                 <div class="form-group col-xs-6">
-                                    <div class=" no-breaking ">
-                                        <a ng-click="open('DATE', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                        <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
-                                    </div>
+                                    <button class="btn btn-primary" ng-click="open('DATE', field)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                                    <button class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    <button class="btn btn-danger" ng-click="removeField(field)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                    <button class="btn btn-default"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </fieldset>
                     </div>
                     <div ng-switch-when="RADIOS">
                         <fieldset class="form-group">
-                            <label for="{{field._id}}">{{field.label}}</label>
+                            <label for="{{field._id}}" class="control-label">{{field.label}}</label>
                             <div class="row">
                                 <div id="{{field._id}}" class="col-xs-6">
                                     <div class="radio" ng-repeat="option in field.options">
@@ -116,10 +105,10 @@
                                 </div>
                                 <div class="form-group col-xs-6">
                                     <div class=" no-breaking ">
-                                        <a ng-click="open('RADIOS', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                        <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
+                                        <button class="btn btn-primary" ng-click="open('RADIO', field)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                                        <button class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                        <button class="btn btn-danger" ng-click="removeField(field)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                        <button class="btn btn-default"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></button>
                                     </div>
                                 </div>
                             </div>
@@ -138,36 +127,32 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
-                                    <div class=" no-breaking ">
-                                        <a ng-click="open('CHECKBOXES', field)" class="glyphicon glyphicon-pencil my-styling-pencil" title="edit"></a>
-                                        <a href="#" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                                        <a ng-click="removeField(field)" class="glyphicon glyphicon-remove my-styling-remove" title="remove field"></a>
-                                        <a href="#" class="glyphicon glyphicon-align-justify my-styling-lines" title="reorder"></a>
-                                    </div>
+                                    <button class="btn btn-primary" ng-click="open('CHECKBOX', field)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                                    <button class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    <button class="btn btn-danger" ng-click="removeField(field)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                    <button class="btn btn-default"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></button>
                                 </div>
                             </div>
                         </fieldset>
                     </div>
                 </div>
             </div>
-            <hr class="form-group" />
+
             <fieldset class="form-group">
-                <label for="inputAddField">Add New Field:</label>
-                <div class="row">
+                <label for="new_field" class="control-label">Add New Field:</label>
+                <div class="row nowrap">
                     <div class="form-group col-xs-6">
-                        <select ng-model="model.fieldType" id="inputAddField"  class="form-control">
-                            <option ng-repeat="option in model.availableOptions" value="{{option.name}}">{{option.name}}</option>
+                        <select  id="new_field" ng-model="model.fieldType" class="form-control">
+                            <option value="Single Line Text Field">Single Line Text</option>
+                            <option value="Multi Line Text Field">Paragraph Text Field</option>
+                            <option value="Date Field">Date</option>
+                            <option value="Dropdown Field">Dropdown</option>
+                            <option value="Checkboxes Field">Checkboxes</option>
+                            <option value="Radio Buttons Field">Radio Buttons</option>
                         </select>
                     </div>
                     <div class="form-group col-xs-6">
-                        <div class=" no-breaking">
-                            <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
-                            <a ng-click="addField(model.fieldType)" class="glyphicon glyphicon-plus my-styling-plus" title="clone field"></a>
-                            <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
-                            <a href="#" class="glyphicon glyphicon-plus my-styling invisible-link" ></a>
-
-
-                        </div>
+                        <button class="btn btn-success" ng-click="addField(model.fieldType)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                     </div>
                 </div>
 
