@@ -1,0 +1,13 @@
+[
+  {	"_id":123, "provider_id":"220070",
+    "feedback": "Everytime you use this hospital, you get billed for things that you did not get or have done while you were there. They will not remove charges until your insurance company or attorney has gotten involved.",
+    "rating":"4", "reviewed_by":123   },
+  {	"_id":234, "provider_id":"220070", "feedback": "Everytime you use this hospital, you get billed for things that you did not get or have done while you were there. They will not remove charges until your insurance company or attorney has gotten involved.",
+    "rating":"5", "reviewed_by":234   },
+  {	"_id":345, "provider_id":"220070", "feedback": "Everytime you use this hospital, you get billed for things that you did not get or have done while you were there. They will not remove charges until your insurance company or attorney has gotten involved.",
+    "rating":"3", "reviewed_by":345   },
+  {	"_id":456, "provider_id":"220070", "feedback": "Everytime you use this hospital, you get billed for things that you did not get or have done while you were there. They will not remove charges until your insurance company or attorney has gotten involved.",
+    "rating":"4", "reviewed_by":456   },
+  {	"_id":567, "provider_id":"220070", "feedback": "Everytime you use this hospital, you get billed for things that you did not get or have done while you were there. They will not remove charges until your insurance company or attorney has gotten involved.",
+    "rating":"2", "reviewed_by":567   }
+]

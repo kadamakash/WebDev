@@ -11,7 +11,7 @@
                 <div ng-repeat="field in fields" ng-switch on="field.type">
                     <div ng-switch-when="TEXT">
                         <fieldset class="form-group">
-                            <label for="{{field._id}}" class="control-label"> {{field.label}}</label>
+                            <label for="{{field._id}}" class="form-control"> {{field.label}}</label>
                             <div class="row nowrap">
                                 <div class="form-group col-xs-6">
                                     <input type="text" class="form-control" id="{{field._id}}" placeholder="{{field.placeholder}}">
