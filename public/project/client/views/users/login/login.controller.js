@@ -7,17 +7,19 @@
         .module("HospitalCompareApp")
         .controller("LoginController", loginController);
 
-    function loginController ($scope, UserService, $location, $rootScope) {
+    function loginController ($scope,  $location, UserService, $rootScope) {
         $scope.login = login;
         $scope.location = $location;
 
         function login(user) {
-            UserService.findUserByCredentials(user.username,user.password,loginCallback);
+            UserService
+                .findUserByCredentials(user.username, user.password)
+                .then(loginCallback);
         }
 
         function loginCallback(user) {
             if(user!=null) {
-                UserService.setCurrentUser(user);
+                UserService.setCurrentUser(user.data);
                 $location.path('/profile');
             }
             else {

@@ -3,8 +3,8 @@
  */
 "use strict";
 
-moduel.exports = function(){
-    var users = require("../user.mock.json");
+module.exports = function(){
+    var users = require("./user.mock.json");
     var api = {
         findUserByCredentials: findUserByCredentials,
         findUserByUsername: findUserByUsername,

@@ -6,26 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>FormBuilderApp</title>
+    <title>Hospital Compare</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 
     <script src="app.js"></script>
     <script src="config.js"></script>
     <script src="views/main/main.controller.js"></script>
-    <script src="views/sidebar/sidebar.controller.js"></script>
     <script src="views/header/header.controller.js"></script>
     <script src="views/users/login/login.controller.js"></script>
     <script src="views/users/register/register.controller.js"></script>
     <script src="views/users/profile/profile.controller.js"></script>
     <script src="views/hospital/hospital.controller.js"></script>
-    <script src="views/hospital/detail.controller.js"></script>
+    <script src="views/hospital/details.controller.js"></script>
+    <script src="views/review/review.controller.js"></script>
+    <script src="views/home/home.controller.js/"></script>
+
     <script src="services/user.service.client.js"></script>
     <script src="services/hospital.service.client.js"></script>
-
+    <script src="services/review.service.client.js"></script>
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -34,23 +37,11 @@
 
 </head>
 
-<body >
-<nav data-ng-controller="MainController">
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header">Welcome!</h1>
+<body ng-controller="MainController">
 
-        <ul class="nav nav-tabs">
-            <li ng-class="{'active': $location.url() == '/home'}"><a href="#/home">Home</a></li>
-            <li ng-class="{'active': $location.url() == '/hospital'}"><a href="#/hospital">Search</a></li>
-        </ul>
-    </div>
-
-
-</nav>
-
-<div data-ng-include="'client/views/header/header.view.html'"></div>
-<div data-ng-include="'client/views/sidebar/sidebar.view.html'"></div>
-<div data-ng-view></div>
+<div ng-include="'views/sidebar/sidebar.view.html'"></div>
+<div ng-include="'views/header/header.view.html'"></div>
+<div ng-view></div>
 
 </body>
 </html>

@@ -7,7 +7,7 @@ module.exports = function(app, model, uuid){
     app.get("/api/project/user", getAllUsers);
     app.get("/api/project/user/:id", getUserById);
     app.get("/api/project/user?username=username", getUserByUsername);
-    app.get("/api/project/user?username=username&password=password", getUserByCredentials);
+    app.get("/api/project/user?username=alice&password=wonderland", getUserByCredentials);
     app.put("/api/project/user/:id", updateUserById);
     app.post("/api/project/user", createUser);
     app.delete("/api/project/user/:id", deleteUserById);
@@ -51,7 +51,7 @@ module.exports = function(app, model, uuid){
 
     function getUserByCredentials(req, res){
         var username = req.query.username;
-        var password = req.query.passowrd;
+        var password = req.query.password;
         var credentials = {
             username: username,
             password: password

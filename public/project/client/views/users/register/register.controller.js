@@ -7,7 +7,7 @@
         .module("HospitalCompareApp")
         .controller("RegisterController", registerController);
 
-    function registerController($location, $scope, UserService, $rootScope) {
+    function registerController($location, UserService, $scope, $rootScope) {
         $scope.message = null;
         $scope.register = register;
 
