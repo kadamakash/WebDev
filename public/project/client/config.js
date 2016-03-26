@@ -23,6 +23,10 @@
                     templateUrl: "views/hospital/hospital.view.html",
                     controller: "SearchController"
                 })
+                .when("/hospital/:zipcode", {
+                    templateUrl: "views/hospital/hospital.view.html",
+                    controller: "SearchController"
+                })
                 .when("/details/:provider_id", {
                     templateUrl: "views/hospital/details.view.html",
                     controller: "DetailController"
