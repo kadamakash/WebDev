@@ -7,13 +7,17 @@
         .module("HospitalCompareApp")
         .controller("HeaderController", headerController);
 
-    function headerController($location, $scope, UserService) {
-        $scope.$location = $location;
-        $scope.logout = logout;
+    function headerController($location, UserService) {
+       var vm = this;
+        vm.logout = logout;
 
         function logout() {
-            UserService.setCurrentUser(null);
-            $location.path("/home");
+           UserService
+               .logout()
+               .then(function(){
+                   UserService.setCurrentUser(null);
+                   $location.url("/home");
+               })
         }
     }
 })();

@@ -11,6 +11,8 @@ module.exports = function(app, model, uuid){
     app.put("/api/project/user/:id", updateUserById);
     app.post("/api/project/user", createUser);
     app.delete("/api/project/user/:id", deleteUserById);
+    app.get("/api/project/loggedin", loggedin);
+    app.post("/api/project/logout", logout);
 
     function getAllUsers(req, res){
         if(req.query.username){
@@ -91,5 +93,14 @@ module.exports = function(app, model, uuid){
             return;
         }
         res.json ({message: "No User Found"});
+    }
+
+    function loggedin(req, res){
+        res.json(req.session.newUser);
+    }
+
+    function logout(req, res){
+        req.session.destroy();
+        res.send(200);
     }
 };
