@@ -13,9 +13,25 @@ module.exports = function (app, model, uuid) {
 
     function createUser (req, res) {
         var user = req.body;
-        user._id=uuid.v4();
+
+        /*user._id=uuid.v4();
         model.createUser(user);
-        res.send(user);
+        res.send(user);*/
+
+        user = userModel.createUser(user)
+        // handle model promise
+            .then(
+                //login user if promise resolved
+                function(doc){
+                    req.session.currentUser = doc;
+                    res.json(user);
+                },
+                //send error if promise rejected
+                function(err){
+                    res.status(400).send(err);
+
+                }
+            );
     }
 
     function getAllUsers (req, res) {
@@ -36,18 +52,31 @@ module.exports = function (app, model, uuid) {
 
     function getUserById (req, res) {
         var id = req.params.id;
-        var user = model.findUserById(id);
+        /*var user = model.findUserById(id);
         if(user) {
             res.json(user);
             return;
         }
-        res.json({message: "User not found"});
+        res.json({message: "User not found"});*/
+
+        // use model to find user by id
+        var user = userModel.findUserById(userId)
+            .then(
+                //return user if promise resolved
+                function(doc){
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function getUserByCredentials (req, res) {
         var username = req.query.username;
         var password = req.query.password;
-        var credentials = {
+        var credentials = req.body;
+        /*var credentials = {
             username: username,
             password: password
         };
@@ -56,7 +85,20 @@ module.exports = function (app, model, uuid) {
             res.json(user);
             return;
         }
-        res.json({message: "User not found"});
+        res.json({message: "User not found"});*/
+
+        var user = userModel.findUserByCredentials(credentials)
+            .then(
+                function(doc){
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+
+
     }
 
     function getUserByUsername (req, res) {
