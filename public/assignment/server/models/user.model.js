@@ -2,7 +2,7 @@
  * Created by akash on 3/17/16.
  */
 'use strict';
-module.exports = function() {
+module.exports = function(db, mongoose) {
     var users = require("./user.mock.json");
     var api = {
         findUserByCredentials: findUserByCredentials,
