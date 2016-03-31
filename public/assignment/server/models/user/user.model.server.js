@@ -71,15 +71,9 @@ module.exports = function(db, mongoose) {
 
 
     function findUserById(userId) {
-        /*for(var index=0;index<users.length;index++) {
-         if (users[index]._id == userId) {
-         return user[index];
-         }
-         }
-         return null;*/
 
         var deferred = q.defer();
-        UserModel.findById({_id: userId}, function (err, doc) {
+        UserModel.findById(userId, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
@@ -153,18 +147,6 @@ module.exports = function(db, mongoose) {
 
 
     function updateUser(userId, user) {
-        /*for(var index=0;index<users.length;index++) {
-         if(users[index]._id == userId) {
-         users[index].firstName = user.firstName;
-         users[index].lastName = user.lastName;
-         users[index].password = user.password;
-         users[index].roles = user.roles;
-         users[index].username = user.username;
-         users[index].email = user.email;
-         }
-         }
-         return user;
-         }*/
         var deferred = q.defer();
         UserModel
             .update(

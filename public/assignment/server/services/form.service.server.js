@@ -2,7 +2,7 @@
  * Created by akash on 3/17/16.
  */
 'use strict';
-module.exports = function (app, model, uuid) {
+module.exports = function (app, formModel) {
     app.get("/api/assignment/user/:userId/form", getAllFormsByUserId);
     app.get("/api/assignment/form/:formId", getFormById);
     app.put("/api/assignment/form/:formId",updateFormById);
@@ -12,47 +12,73 @@ module.exports = function (app, model, uuid) {
     function createFormForUser(req, res) {
         var userId = req.params.userId;
         var form = req.body;
-        form._id = uuid.v4();
-        form.fields = [];
-        var newForm = model.createFormForUser(userId,form);
-        res.send (200);
+        formModel
+            .createFormForUser(userId, form)
+            .then(function(form){
+                res.json(form);
+            }, function(err){
+                res.status(400).send(err);
+            });
     }
 
     function getAllFormsByUserId(req, res) {
         var userId = req.params.userId;
-        console.log(req.params);
-        var forms = model.findAllFormsForUser(userId);
-        res.json(forms);
+        formModel
+            .findAllFormsForUser(userId)
+            .then(
+                function(forms){
+                    res.json(fomrs);
+                },
+                function(err){
+                    res.status(400).send(err);
+                });
     }
 
     function getFormById(req, res) {
         var formId = req.params.formId;
-        var form = model.findFormById(formId);
-        if(form) {
-            res.json(form);
-            return;
-        }
-        res.json({message: "Form not found"});
+        formModel
+            .findFormById(formId)
+            .then(
+                function(form){
+                    res.json(form);
+                },
+                function(err){
+                    res.status(400).send(err);
+                });
     }
 
     function updateFormById(req, res) {
         var formId = req.params.formId;
         var newForm = req.body;
-        var form = model.updateFormById(formId,newForm);
+        /*var form = model.updateFormById(formId,newForm);
         if(form) {
             res.json(form);
             return;
         }
-        res.json({message: "Form not found"});
+        res.json({message: "Form not found"});*/
+
+        formModel
+            .updateFormById(formId, newForm)
+            .then(
+                function(form){
+                    res.json(form);
+                },
+                function(err){
+                    res.status(400).send(err);
+                });
     }
 
     function deleteFormById (req, res) {
         var formId = req.params.formId;
-        if(model.deleteFormById(formId)) {
-            res.send(200);
-            return;
-        }
-        res.json ({message: "Form not found"});
+        formModel
+            .deleteFormById(formId)
+            .then(
+                function(form){
+                    res.json(form);
+                },
+                function(err){
+                    res.status(400).send(err);
+                });
     }
 
 };

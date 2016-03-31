@@ -3,10 +3,13 @@
  */
 "use strict";
 module.exports = function(mongoose){
+
+    var FieldSchema = require("./../field/field.schema.server.js")();
+
     var FormSchema = mongoose.Schema({
         userId: String,
         title: String,
-        fields: [String],
+        fields: [FieldSchema],
         created: {type: Date, default: Date.now},
         updated: {type: Date, default: Date.now}
     }, {collection: 'form'});
