@@ -1,8 +1,17 @@
 /**
  * Created by akash on 3/17/16.
  */
+"use strict";
+
+var q = require("q");
+
 module.exports = function(db, mongoose) {
-    var forms = require("./form.mock.json");
+    /*var forms = require("./form.mock.json");*/
+
+    var FormSchema = require("./form.schema.server.js")(mongoose);
+
+    var FormModel = mongoose.model('Form', FormSchema);
+
     var api = {
         createFormForUser:createFormForUser,
         findAllFormsForUser:findAllFormsForUser,

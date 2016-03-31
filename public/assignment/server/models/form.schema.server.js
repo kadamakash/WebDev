@@ -8,7 +8,7 @@ module.exports = function(mongoose){
         title: String,
         fields: [String],
         created: {type: Date, default: Date.now},
-        updated: Date
+        updated: {type: Date, default: Date.now}
     }, {collection: 'form'});
     return FormSchema;
 };

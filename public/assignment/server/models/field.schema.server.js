@@ -9,5 +9,6 @@ module.exports = function(mongoose){
         'DATE', 'RADIOS', 'CHECKBOXES']},
         placeholder: String,
         options: [{label: String, value: String}]
-    })
+    });
+    return FieldSchema;
 };
