@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var uuid = require('node-uuid');
 var session = require('express-session');
 var mongoose = require('mongoose');
+var passport = require('passport');
 
 // creating default connection string
 var connectionString ='mongodb://127.0.0.1:27017/webDevAssignment';

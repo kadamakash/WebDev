@@ -15,7 +15,7 @@
             vm.popupHeader = popupHeader;
             vm.editField = editField;
 
-            if(editField.options) {
+            if(vm.editField.options.length > 0) {
 
                 console.log(editField.options);
                 var fromattedOptions = null;
@@ -51,8 +51,6 @@
                 $uibModalInstance.dismiss();
             };
         });
-
-
 
 
     function FieldController($location, UserService, FormService, $routeParams, FieldService, $uibModal) {

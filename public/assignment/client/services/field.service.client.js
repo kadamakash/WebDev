@@ -20,12 +20,12 @@
 
         return api;
 
-        function createFieldForForm(formId, filed) {
-            return $http.post("/api/assignment/form/"+ formId +"/field",filed);
+        function createFieldForForm(formId, field) {
+            return $http.post("/api/assignment/form/"+ formId +"/field",field);
         }
 
         function getFieldsForForm(formId) {
-            return $htpp.get("/api/assignment/form/"+formId+"/field");
+            return $http.get("/api/assignment/form/"+formId+"/field");
         }
 
         function getFieldForForm(formId, fieldId) {
@@ -33,7 +33,7 @@
         }
 
         function deleteFieldFromForm(formId,fieldId) {
-            return $htpp.delete("/api/assignment/form/"+formId+"/field/"+fieldId);
+            return $http.delete("/api/assignment/form/"+formId+"/field/"+fieldId);
         }
 
         function updateField(formId,fieldId, field) {
