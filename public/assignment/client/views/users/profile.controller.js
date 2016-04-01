@@ -7,13 +7,14 @@
         .module("FormBuilderApp")
         .controller("ProfileController",ProfileController);
 
-    function ProfileController($scope, $location, UserService, $rootScope) {
+    function ProfileController($location, UserService, $rootScope) {
 
+        var vm = this;
         var currentUser = UserService.getCurrentUser();
-        $scope.user = currentUser;
+        vm.user = currentUser;
 
 
-        $scope.update = update;
+        vm.update = update;
 
 
         function update(user) {
@@ -25,7 +26,7 @@
         //callback
         function updateCallback(user) {
             console.log(user);
-            $scope.updateMessage = "Updated successfully"
+            vm.updateMessage = "Updated successfully"
         }
     }
 })();

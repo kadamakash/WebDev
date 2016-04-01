@@ -7,18 +7,19 @@
         .module("FormBuilderApp")
         .controller("FormController",FormController);
 
-    function FormController($scope, $location, UserService, FormService, $routeParams) {
+    function FormController($location, UserService, FormService, $routeParams) {
 
+        var vm = this;
         //currently logged in user
         var currentUser = UserService.getCurrentUser();
-        $scope.$location = $location;
+        vm.$location = $location;
 
         //Event handler declarations
-        $scope.addForm = addForm;
-        $scope.deleteForm = deleteForm;
-        $scope.selectForm = selectForm;
-        $scope.updateForm = updateForm;
-        $scope.formClick = formClick;
+        vm.addForm = addForm;
+        vm.deleteForm = deleteForm;
+        vm.selectForm = selectForm;
+        vm.updateForm = updateForm;
+        vm.formClick = formClick;
 
         //Fetching all forms for current user to display
         function init() {
@@ -35,11 +36,11 @@
             FormService
                 .createFormForUser(currentUser._id,form)
                 .then(addFormCallback);
-            $scope.form = null;
+            vm.form = null;
         }
 
         function deleteForm(index) {
-            var formId = $scope.forms[index]._id;
+            var formId = vm.forms[index]._id;
             FormService
                 .deleteFormById(formId)
                 .then(deleteFormCallback);
@@ -47,11 +48,11 @@
 
         function selectForm(index) {
 
-            $scope.selectedRow = index;
-            $scope.form = {
-                _id: $scope.forms[index]._id,
-                title: $scope.forms[index].title,
-                userId: $scope.forms[index].userId
+            vm.selectedRow = index;
+            vm.form = {
+                _id: vm.forms[index]._id,
+                title: vm.forms[index].title,
+                userId: vm.forms[index].userId
             };
 
         }
@@ -60,7 +61,7 @@
             FormService
                 .updateFormById(form._id,form)
                 .then(updateFormCallback);
-            $scope.form = null;
+            vm.form = null;
         }
 
         function formClick(form) {
@@ -70,7 +71,7 @@
 
         //callback functions
         function findAllFormsForUserCallback(formsCurrentUser) {
-            $scope.forms = formsCurrentUser.data;
+            vm.forms = formsCurrentUser.data;
 
         }
 

@@ -9,10 +9,11 @@
 
     angular
         .module('FormBuilderApp')
-        .controller('ModalInstance', function ($scope, $uibModalInstance, editField, popupHeader) {
+        .controller('ModalInstance', function ($uibModalInstance, editField, popupHeader) {
 
-            $scope.popupHeader = popupHeader;
-            $scope.editField = editField;
+            var vm = this;
+            vm.popupHeader = popupHeader;
+            vm.editField = editField;
 
             if(editField.options) {
 
@@ -28,7 +29,7 @@
                     }
                 });
 
-                $scope.editField.placeholder = fromattedOptions;
+                vm.editField.placeholder = fromattedOptions;
             }
             $scope.submit = function(editField) {
                 var temp = editField.placeholder.split('\n');
@@ -44,7 +45,7 @@
                 $uibModalInstance.close(updatedOptions);
             };
 
-            $scope.cancel = function() {
+            vm.cancel = function() {
                 $uibModalInstance.dismiss();
             };
         });
@@ -52,7 +53,7 @@
 
 
 
-    function FieldController($scope, $location, UserService, FormService, $routeParams, FieldService, $uibModal) {
+    function FieldController($location, UserService, FormService, $routeParams, FieldService, $uibModal) {
 
         //currently logged in user
         var currentUser = UserService.getCurrentUser();
@@ -61,16 +62,16 @@
         function init() {
             FieldService.getFieldsForForm(formId)
                 .then(function successCallback(response){
-                    $scope.fields = response.data;
+                    vm.fields = response.data;
                 });
             console.log(formId);
         }
         init();
 
         //Event handler declarations
-        $scope.addField = addField;
-        $scope.removeField = removeField;
-        $scope.updateModelOnSort = updateModelOnSort;
+        vm.addField = addField;
+        vm.removeField = removeField;
+        vm.updateModelOnSort = updateModelOnSort;
 
         /*$scope.$location = $location;
         $scope.model = {
@@ -84,7 +85,7 @@
         };*/
 
 
-        $scope.open = function (fieldType, field) {
+        vm.open = function (fieldType, field) {
 
             var modalInstance = null;
             var currentLabel = field.label,
@@ -196,7 +197,7 @@
             modalInstance.result.then(function (model) {
                 field.label = model.label;
                 field.placeholder = model.placeholder;
-                FieldService.updateFields(formId, $scope.fields);
+                FieldService.updateFields(formId, vm.fields);
                 console.log(field);
             }, function () {
                 field.label = currentLabel;
@@ -215,20 +216,20 @@
                     case 'Single Line Text Field':
                         FieldService.createFieldForForm(formId,{"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"})
                             .then(function(res) {
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
 
                         break;
                     case "Multi Line Text Field":
                         FieldService.createFieldForForm(formId,{"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"})
                             .then(function(res) {
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
                         break;
                     case "Date Field":
                         FieldService.createFieldForForm(formId,{"_id": null, "label": "New Date Field", "type": "DATE"})
                             .then(function(res) {
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
                         break;
                     case "Checkboxes Field":
@@ -238,7 +239,7 @@
                                 {"label": "Option C", "value": "OPTION_C"}
                             ]})
                             .then(function(res) {
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
                         break;
 
@@ -249,7 +250,7 @@
                                 {"label": "Option 3", "value": "OPTION_3"}
                             ]})
                             .then(function(res) {
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
                         break;
                     case "Radio Buttons Field":
@@ -260,7 +261,7 @@
                             ]})
                             .then(function(res) {
                                 console.log(res.data.fields);
-                                $scope.fields = res.data.fields;
+                                vm.fields = res.data.fields;
                             });
                         break;
                     default:
@@ -274,12 +275,12 @@
             console.log("remove"+field._id);
             FieldService.deleteFieldFromForm(formId,field._id)
                 .then(function(res) {
-                    $scope.fields = res.data.fields;
+                    vm.fields = res.data.fields;
                 })
         }
 
         function updateModelOnSort() {
-            FieldService.updateFields(formId, $scope.fields);
+            FieldService.updateFields(formId, vm.fields);
         }
 
         //callbacks

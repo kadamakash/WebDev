@@ -7,10 +7,11 @@
         .module("FormBuilderApp")
         .controller("LoginController",LoginController);
 
-    function LoginController($scope, $location, UserService, $rootScope) {
+    function LoginController($location, UserService, $rootScope) {
 
-        $scope.login = login;
-        $scope.$location = $location;
+        var vm = this;
+        this.login = login;
+        this.$location = $location;
 
 
         function login(user) {
@@ -26,7 +27,7 @@
                 $location.path('/profile');
             }
             else{
-                $scope.loginFailed = "Invalid username and password combination"
+                vm.loginFailed = "Invalid username and password combination"
             }
         }
     }

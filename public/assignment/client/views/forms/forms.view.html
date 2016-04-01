@@ -20,7 +20,7 @@
 
                     <tr>
                         <td>
-                            <input ng-model="form.title" type="text" class="form-control" id="inputName" placeholder="name">
+                            <input ng-model="model.form.title" type="text" class="form-control" id="inputName" placeholder="name">
                         </td>
                         <td>
                             <div class="nowrap">
@@ -29,7 +29,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr ng-repeat="form in forms" ng-class="{'success' : $index === selectedRow }">
+                    <tr ng-repeat="form in model.forms" ng-class="{'success' : $index === selectedRow }">
                         <td><a ng-click="formClick(form)">{{form.title}}</a></td>
                         <td>
                             <a ng-click="deleteForm($index)" class="glyphicon glyphicon-remove my-styling" title="delete form" ></a>
