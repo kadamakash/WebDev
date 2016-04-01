@@ -12,6 +12,6 @@ module.exports = function(mongoose){
         fields: [FieldSchema],
         created: {type: Date, default: Date.now},
         updated: {type: Date, default: Date.now}
-    }, {collection: 'form'});
+    }, {collection: 'assignment.formmaker.form'});
     return FormSchema;
 };

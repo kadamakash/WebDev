@@ -35,19 +35,6 @@ module.exports = function (app, userModel) {
     }
 
     function getAllUsers(req, res) {
-        /*if (req.query.username) {
-            if (req.query.password) {
-                getUserByCredentials(req, res);
-            }
-            else {
-                getUserByUsername(req, res);
-            }
-        }
-        else {
-            var users = model.findAllUsers();
-            res.json(users);
-        }*/
-
         userModel
             .findAllUsers()
             .then(
@@ -63,13 +50,6 @@ module.exports = function (app, userModel) {
 
     function getUserById(req, res) {
         var id = req.params.id;
-        /*var user = model.findUserById(id);
-         if(user) {
-         res.json(user);
-         return;
-         }
-         res.json({message: "User not found"});*/
-
         // use model to find user by id
         var user = userModel.findUserById(userId)
             .then(
@@ -87,16 +67,6 @@ module.exports = function (app, userModel) {
         var username = req.query.username;
         var password = req.query.password;
         var credentials = req.body;
-        /*var credentials = {
-         username: username,
-         password: password
-         };
-         var user = model.findUserByCredentials(credentials);
-         if(user) {
-         res.json(user);
-         return;
-         }
-         res.json({message: "User not found"});*/
 
         var user = userModel.findUserByCredentials(credentials)
             .then(
@@ -114,12 +84,6 @@ module.exports = function (app, userModel) {
 
     function getUserByUsername(req, res) {
         var username = req.params.username;
-        /*var user = model.findUserByUsername(username);
-        if (user) {
-            res.json(user);
-            return;
-        }
-        res.json({message: "User not found"});*/
 
         userModel
             .findUserByUsername(username)
@@ -136,12 +100,6 @@ module.exports = function (app, userModel) {
     function updateUserById(req, res) {
         var id = req.params.id;
         var user = req.body;
-        /*user = model.updateUser(id, user);
-        if (user) {
-            res.json(user);
-            return;
-        }
-        res.json({message: "User not found"});*/
 
         userModel
             .updateUser(id, user)
@@ -157,12 +115,7 @@ module.exports = function (app, userModel) {
 
     function deleteUserById(req, res) {
         var id = req.params.id;
-        /*if(model.deleteUser(id)) {
-         res.send(200);
-         return;
-         }
-         res.json ({message: "User not found"});
-         }*/
+
         userModel
             .deleteUser(id)
             .then(

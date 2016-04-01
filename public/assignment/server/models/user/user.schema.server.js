@@ -14,6 +14,6 @@ modules.exports = function(mongoose){
         phones: [String]
 
 
-    }, {collection: 'user'});
+    }, {collection: 'assignment.formmaker.user'});
     return UserSchema;
 };

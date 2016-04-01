@@ -12,7 +12,7 @@ module.exports = function(formModel) {
         findAllFieldsForForm: findAllFieldsForForm,
         findFieldById: findFieldById,
         updateFieldById: updateFieldById,
-        updateAllFieldsInForm: updateAllFieldsInForm,
+        sortField: sortField,
         deleteFieldById: deleteFieldById
     };
 
@@ -63,4 +63,14 @@ module.exports = function(formModel) {
             });
     }
 
+    function sortField(formId, startIndex, endIndex){
+        return FormModel
+            .findFormById(formId)
+            .then(
+                function(form){
+                    form.fields.splice(endIndex, 0, form.fields.splice(startIndex, 1)[0]);
+                    form.makrModified("fields"); // notify mongoose 'fields' feild changed
+                    form.save();
+                });
+    }
 };
