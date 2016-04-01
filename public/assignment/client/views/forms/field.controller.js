@@ -29,19 +29,21 @@
                     }
                 });
 
-                vm.editField.placeholder = fromattedOptions;
+                vm.editField.options = fromattedOptions;
             }
-            $scope.submit = function(editField) {
-                var temp = editField.placeholder.split('\n');
-                var newOptions = [];
-                _.forEach(temp, function(string){
-                    newOptions.push({
-                        value: tempString.split(':')[0],
-                        label: tempString.split(':')[1]
-                    })
+            vm.submit = function(editField) {
+                if(editField.options.length > 0) {
 
-                });
-                editField.options = newOptions;
+                    var temp = editField.placeholder.split('\n');
+                    var newOptions = [];
+                    _.forEach(temp, function (string) {
+                        newOptions.push({
+                            value: string.split(':')[0],
+                            label: string.split(':')[1]
+                        })
+                    });
+                    editField.options = newOptions;
+                }
                 $uibModalInstance.close(updatedOptions);
             };
 
@@ -55,6 +57,7 @@
 
     function FieldController($location, UserService, FormService, $routeParams, FieldService, $uibModal) {
 
+        var vm = this;
         //currently logged in user
         var currentUser = UserService.getCurrentUser();
 
@@ -208,7 +211,6 @@
         };
 
 
-
         //Event handler implementation
         function addField(fieldType) {
             if(fieldType) {
@@ -273,10 +275,14 @@
 
         function removeField(field) {
             console.log("remove"+field._id);
-            FieldService.deleteFieldFromForm(formId,field._id)
-                .then(function(res) {
-                    vm.fields = res.data.fields;
-                })
+            FieldService.deleteFieldFromForm(formId, field._id)
+                .then(function successCallback(response) {
+                    if(response.status === 200){
+                        _.remove(vm.fields, {
+                            _id: field._id
+                        })
+                    }
+                });
         }
 
         function updateModelOnSort() {

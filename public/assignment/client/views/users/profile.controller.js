@@ -18,8 +18,16 @@
 
 
         function update(user) {
+            var updateUser = {
+                username: user.username,
+                password: user.password,
+                firstName: user.firstName,
+                lastname: user.lastName,
+                email: user.email,
+                phones: user.phones
+            };
             UserService
-                .updateUser(user._id, user)
+                .updateUser(user._id, updateUser)
                 .then(updateCallback);
         }
 

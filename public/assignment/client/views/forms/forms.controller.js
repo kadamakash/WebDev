@@ -32,7 +32,7 @@
         //Event handler implementations
         function addForm(form) {
             form.userId = currentUser._id;
-            form._id = (new Date()).getTime();
+            //form._id = (new Date()).getTime();
             FormService
                 .createFormForUser(currentUser._id,form)
                 .then(addFormCallback);
@@ -79,7 +79,7 @@
             init();
         }
 
-        function deleteFormCallback(forms) {
+        function deleteFormCallback(form) {
             init();
         }
 
