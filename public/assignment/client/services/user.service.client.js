@@ -17,7 +17,9 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser:setCurrentUser,
-            getCurrentUser:getCurrentUser
+            getCurrentUser:getCurrentUser,
+            getCurrentSessionUser: getCurrentSessionUser,
+            logout: logout
         };
         return api;
 
@@ -46,14 +48,7 @@
         }
 
         function setCurrentUser(aUser) {
-            if(aUser == null) {
-                $rootScope.newUser = null;
-            }
-            else {
-                $rootScope.newUser = {"_id":aUser._id, "firstName":aUser.firstName, "lastName":aUser.lastName,
-                    "username":aUser.username, "password":aUser.password, "roles": aUser.roles, "email":aUser.email}
-            }
-
+            $rootscope.newUser = aUser;
         }
 
         function getCurrentUser() {

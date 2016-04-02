@@ -10,6 +10,8 @@ module.exports = function (app, userModel) {
     app.put("/api/assignment/user/:id", updateUserById);
     app.post("/api/assignment/user", createUser);
     app.delete("/api/assignment/user/:id", deleteUserById);
+    app.get("/api/assignment/loggedin", loggedin);
+    app.post("/api/assignment/logout", logout);
 
     function createUser(req, res) {
         var user = req.body;
@@ -39,6 +41,7 @@ module.exports = function (app, userModel) {
             .findAllUsers()
             .then(
                 function(doc){
+                    req.session.newUser = doc;
                     res.json(doc);
                 },
                 function(err){
@@ -124,7 +127,18 @@ module.exports = function (app, userModel) {
                 },
                 function (err) {
                     res.status(400).send(err);
-                }
-            );
+                });
     }
+
+    function loggedin(req, res) {
+        res.json(req.session.newUser);
+    }
+
+
+    function logout(req, res) {
+        req.session.destroy();
+        res.send(200);
+    }
+
+
 };

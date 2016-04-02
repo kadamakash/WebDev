@@ -10,14 +10,19 @@
     function LoginController($location, UserService, $rootScope) {
 
         var vm = this;
-        this.login = login;
-        this.$location = $location;
-
+        vm.login = login;
+        vm.$location = $location;
 
         function login(user) {
+            if(user)
             UserService
                 .findUserByCredentials(user.username, user.password)
-                .then(loginCallback);
+                .then(
+                    function(response){
+                        $rootScope.currentUser = response.data;
+                        $location.url("/profile");
+                    }
+                );
         }
 
         //Callback
