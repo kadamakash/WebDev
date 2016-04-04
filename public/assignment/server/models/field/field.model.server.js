@@ -13,7 +13,8 @@ module.exports = function(formModel) {
         findFieldById: findFieldById,
         updateFieldById: updateFieldById,
         sortField: sortField,
-        deleteFieldById: deleteFieldById
+        deleteFieldById: deleteFieldById,
+        updateAllFieldsInForm: updateAllFieldsInForm
     };
 
     return api;
@@ -29,7 +30,11 @@ module.exports = function(formModel) {
     }
 
     function findAllFieldsForForm(formId){
-        return FormModel.findById(formId).select("fields");
+        return FormModel
+            .findById(formId)
+            .then(function(form){
+                return form.fields;
+            })
     }
 
     function findFieldById(formId, fieldId){
@@ -72,5 +77,14 @@ module.exports = function(formModel) {
                     form.makrModified("fields"); // notify mongoose 'fields' feild changed
                     form.save();
                 });
+    }
+
+    function updateAllFieldsInForm(formId, fields){
+        return FormModel.findById(formId).then(
+            function(form){
+                form.fields = fields;
+                return form.save();
+            }
+        )
     }
 };
