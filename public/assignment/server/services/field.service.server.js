@@ -2,15 +2,13 @@
  * Created by akash on 3/19/16.
  */
 'use strict';
-module.exports = function (app, formModel) {
+module.exports = function (app, formModel, fieldModel) {
     app.get("/api/assignment/form/:formId/field", getAllFieldsByFormId);
     app.get("/api/assignment/form/:formId/field/:fieldId", getFieldById);
     app.put("/api/assignment/form/:formId/field/:fieldId",updateFieldById);
     app.put("/api/assignment/form/:formId/field/",updateAllFields);
     app.post("/api/assignment/form/:formId/field",createFieldForForm);
     app.delete("/api/assignment/form/:formId/field/:fieldId",deleteFieldById);
-
-    var fieldModel = require("../models/field/field.model.server.js")(formModel);
 
     function createFieldForForm(req, res) {
         var formId = req.params.formId;

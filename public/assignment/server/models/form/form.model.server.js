@@ -5,10 +5,10 @@
 
 var q = require("q");
 
-module.exports = function(db, mongoose) {
+module.exports = function(db, mongoose, Form) {
 
-    var FormSchema = require("./form.schema.server.js")(mongoose);
-    var FormModel = mongoose.model('Form', FormSchema);
+   /* var FormSchema = require("./form.schema.server.js")(mongoose);
+    var Form = mongoose.model('Form', FormSchema);*/
 
     var api = {
         createFormForUser:createFormForUser,
@@ -26,7 +26,7 @@ module.exports = function(db, mongoose) {
 
     function createFormForUser(userId, form) {
         var deferred = q.defer();
-        FormModel
+        Form
             .create(form,
             function(err, doc){
                 if(err){
@@ -40,7 +40,7 @@ module.exports = function(db, mongoose) {
 
     function findAllFormsForUser(userId) {
         var deferred = q.defer();
-        FormModel
+        Form
             .find({userId: userId},
             function(err, doc){
                 if(!err){
@@ -54,7 +54,7 @@ module.exports = function(db, mongoose) {
 
     function findFormByTitle(title) {
         var deferred = q.defer();
-        FormModel
+        Form
             .find({title: title}, function(err, doc){
                 if(!err){
                     deferred.resolve(doc);
@@ -67,7 +67,7 @@ module.exports = function(db, mongoose) {
 
     function updateFormById(formId, newForm) {
         var deferred = q.defer();
-        FormModel
+        Form
             .update({formId: formId}, {$set: newForm}, function(err, doc){
                 if(!err){
                     deferred.resolve(doc);
@@ -80,7 +80,7 @@ module.exports = function(db, mongoose) {
 
     function deleteFormById(formId) {
         var deferred = q.defer();
-        FormModel
+        Form
             .remove({formId: formId}, function(err, doc){
                 if(!err){
                     deferred.resolve(doc);
@@ -93,7 +93,7 @@ module.exports = function(db, mongoose) {
 
     function findFormById (formId) {
         var deferred = q.defer();
-        FormModel
+        Form
             .findOne({formId: formId}, function(err, doc){
                 if(!err){
                     deferred.resolve(doc);
@@ -105,7 +105,7 @@ module.exports = function(db, mongoose) {
     }
 
     function getMongooseModel(){
-        return FormModel;
+        return Form;
     }
 
 

@@ -1,4 +1,3 @@
-
 var express = require('express'); // loading the express library
 var http = require('https');
 var app = express();              // creating an instance of express lib
@@ -12,6 +11,11 @@ var passport = require('passport');
 
 // creating default connection string
 var connectionString ='mongodb://127.0.0.1:27017/webDevAssignment';
+// connect to the database
+var db = mongoose.connect(connectionString);
+mongoose.connection.once('connected', function() {
+    console.log("Database connected successfully")
+});
 
 // use remote connection string
 // if running in remote server
@@ -23,8 +27,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         process.env.OPENSHIFT_APP_NAME;
 }
 
-// connect to the database
-var db = mongoose.connect(connectionString);
+
 
 app.use(express.static(__dirname + '/public'));
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
@@ -41,7 +44,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./public/assignment/server/app.js")(app, uuid, db, mongoose);
+require("./public/assignment/server/app.js")(app, db, mongoose);
 require("./public/project/server/app.js")(app, uuid, db, mongoose);
 
 app.get('/hello', function(req,res){

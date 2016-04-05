@@ -3,9 +3,11 @@
  */
 "use strict";
 var q = require("q");
-module.exports = function(formModel) {
+module.exports = function(db, mongoose, Form) {
 
-    var FormModel = formModel.getMongooseModel();
+    /*var FormSchema = require("./models/form/form.schema.server.js")(mongoose);
+
+    var Form = mongoose.model("Form", FormSchema);*/
 
     var api = {
         createField: createField,
@@ -20,7 +22,7 @@ module.exports = function(formModel) {
     return api;
 
     function createField(formId, field){
-        return FormModel.findById(formId)
+        return Form.findById(formId)
             .then(
                 function(form){
                     form.fields.push(field);
@@ -30,7 +32,7 @@ module.exports = function(formModel) {
     }
 
     function findAllFieldsForForm(formId){
-        return FormModel
+        return Form
             .findById(formId)
             .then(function(form){
                 return form.fields;
@@ -38,7 +40,7 @@ module.exports = function(formModel) {
     }
 
     function findFieldById(formId, fieldId){
-        return FormModel
+        return Form
             .findById(formId)
             .then(function(form){
                 return form.fields.id(fieldId);
@@ -46,7 +48,7 @@ module.exports = function(formModel) {
     }
 
     function updateFieldById(formId, fieldObj){
-        return FormModel
+        return Form
             .findById(formId)
             .then(function(form){
                 var field = form.fields.id(fieldObj._id);
@@ -60,7 +62,7 @@ module.exports = function(formModel) {
     }
 
     function deleteFieldById(formId, fieldId){
-        return FormModel
+        return Form
             .findFormById(formId)
             .then(function(form){
                 form.fields.id(fieldId).remove();
@@ -69,7 +71,7 @@ module.exports = function(formModel) {
     }
 
     function sortField(formId, startIndex, endIndex){
-        return FormModel
+        return Form
             .findFormById(formId)
             .then(
                 function(form){
@@ -80,7 +82,7 @@ module.exports = function(formModel) {
     }
 
     function updateAllFieldsInForm(formId, fields){
-        return FormModel.findById(formId).then(
+        return Form.findById(formId).then(
             function(form){
                 form.fields = fields;
                 return form.save();
