@@ -13,9 +13,6 @@
             })
             .when("/home", {
                 templateUrl: "views/home/home.view.html",
-                resolve: {
-                    getLoggedIn: getLoggedIn
-                }
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",

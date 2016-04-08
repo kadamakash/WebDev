@@ -11,21 +11,20 @@
 
         var api = {
             findUserByUsername: findUserByUsername,
-            findUserByCredentials: findUserByCredentials,
+            /*findUserByCredentials: findUserByCredentials,*/
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser:setCurrentUser,
-            getCurrentUser:getCurrentUser,
-            getCurrentSessionUser: getCurrentSessionUser,
-            logout: logout
+            getCurrentUser:getCurrentUser
+
         };
         return api;
 
-        function findUserByCredentials(username, password) {
+       /* function findUserByCredentials(username, password) {
             return $http.get("/api/assignment/user?username="+username+"&password="+password);
-        }
+        }*/
 
         function findAllUsers(){
             return $http.get("/api/assignment/user")

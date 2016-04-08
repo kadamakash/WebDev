@@ -36,11 +36,12 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
-/*app.use(session({
-    secret: "MySecret",
-    resave: false,
-    saveUnitialized: true}));*/
 app.use(cookieParser());
+app.use(session({
+    secret: "MySecret"
+    /*resave: false,
+    saveUnitialized: true*/}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
