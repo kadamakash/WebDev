@@ -11,18 +11,23 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-hide="newUser" ng-class="{'active': $location.url()=='/register'}">
+                <li ng-show="!currentUser" ng-class="{'active': $location.url()=='/register'}">
                     <a href="#/register">Register</a></li>
-                <li ng-show="newUser.roles.indexOf('admin') >= 0" ng-class="{'active': $location.url()=='/admin'}">
+
+                <li ng-show="currentUser.roles.indexOf('admin') >= 0" ng-class="{'active': $location.url()=='/admin'}">
                     <a href="#/admin">Admin</a></li>
-                <li ng-show="newUser" ng-class="{'active': $location.url()=='/profile'}">
-                    <a href="#/profile"><span class="cap">{{newUser.username}}</span></a></li>
+
+                <li ng-show="currentUser" ng-class="{'active': $location.url()=='/profile'}">
+                    <a href="#/profile"><span class="cap">{{currentUser.username}}</span></a></li>
+
                 <li ng-show="newUser" ng-class="{'active': $location.url()=='/forms'}" class="visible-xs-block">
                     <a href="#/forms">Forms</a></li>
-                <li ng-hide="newUser" ng-class="{'active': $location.url()=='/login'}">
+
+                <li ng-show="!currentUser" ng-class="{'active': $location.url()=='/login'}">
                     <a href="#/login">Login</a></li>
-                <li ng-show="newUser">
-                    <a href="" ng-click="logout()">Logout</a></li>
+
+                <li ng-show="currentUser">
+                    <a href="#/logout" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
     </div>

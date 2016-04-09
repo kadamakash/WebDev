@@ -8,17 +8,18 @@ var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function (app, userModel) {
-    app.post("/api/assignment/user", createUser);
+
+    var auth = authorized;
+
+    app.post("/api/assignment/user", auth, createUser);
     app.get("/api/assignment/user", getAllUsers);
     app.get("/api/assignment/user?username=username", getUserByUsername);
-    app.put("/api/assignment/user/:id", updateUserById);
-    app.delete("/api/assignment/user/:id", deleteUserById);
-    app.get("/api/assignment/user/:id", getUserById);
+    app.put("/api/assignment/user/:id", auth, updateUserById);
+    app.delete("/api/assignment/user/:id", auth, deleteUserById);
+    app.get("/api/assignment/user/:id", auth, getUserById);
 
    /* app.get("/api/assignment/user?username=username&password=password", getUserByCredentials);*/
 
-
-    var auth = authorized;
     app.post('/api/assignment/login', passport.authenticate('local'), login);
     app.post('/api/assignment/logout', logout);
     app.get("/api/assignment/loggedin", loggedin);
@@ -51,6 +52,10 @@ module.exports = function (app, userModel) {
         } else {
             next();
         }
+    }
+
+    function isAdmin(user) {
+        return (user.roles.indexOf("admin") > 0)
     }
 
     function serializeUser(user, done) {
@@ -89,6 +94,8 @@ module.exports = function (app, userModel) {
 
     function register (req, res){
         var user = req.body;
+        user.roles = ['student'];
+
         userModel
             .findUserByUsername(user.username)
             .then(
@@ -123,40 +130,62 @@ module.exports = function (app, userModel) {
     }
 
     function createUser(req, res) {
-        var user = req.body;
+        var newUser = req.body;
 
-        /*user._id=uuid.v4();
-         model.createUser(user);
-         res.send(user);*/
+        if(newUser.roles && newUser.roles.length > 1){
+            newUser.roles = newUser.roles.split(",");
+        } else {
+            newUser.roles = ["student"];
+        }
 
-        user = userModel.createUser(user)
-            // handle model promise
-            .then(
-                //login user if promise resolved
-                function (doc) {
-                    req.session.currentUser = doc;
-                    res.json(user);
-                },
-                //send error if promise rejected
-                function (err) {
-                    res.status(400).send(err);
-
-                }
-            );
-    }
-
-    function getAllUsers(req, res) {
         userModel
-            .findAllUsers()
+            .findUserByUsername(newUser.username)
             .then(
-                function(doc){
-                    req.session.newUser = doc;
-                    res.json(doc);
+                function(user){
+                    if(user == null){
+                        return userModel.createUser(newUser)
+                            .then(
+                                function(){
+                                    return userModel.getAllUsers();
+                                },
+                                function(err){
+                                    res.status(400).send(err);
+                                }
+                            );
+                    } else {
+                        return userModel.getAllUsers();
+                    }
                 },
                 function(err){
                     res.status(400).send(err);
                 }
-            );
+            )
+            .then(
+                function(users){
+                    res.json(users);
+                },
+                function(){
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+    function getAllUsers(req, res) {
+        if(isAdmin(req.user)) {
+            userModel
+                .findAllUsers()
+                .then(
+                    function (doc) {
+                        /* req.session.newUser = doc;*/
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
+        } else {
+            res.status(403);
+        }
 
     }
 
@@ -212,32 +241,59 @@ module.exports = function (app, userModel) {
 
     function updateUserById(req, res) {
         var id = req.params.id;
-        var user = req.body;
+        var newUser = req.body;
+
+        if(!isAdmin(req.user)){
+            delete newUser.roles;
+        }
+        if(typeof newUser.roles == "string"){
+            newUser.roles = newUser.roles.split(",");
+        }
 
         userModel
-            .updateUser(id, user)
+            .updateUser(id, newUser)
             .then(
-                function(doc){
-                    res.json(doc);
+                function(user){
+                    return userModel.getAllUsers();
                 },
                 function (err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(users){
+                    res.josn(users);
+                },
+                function(err){
                     res.status(400).send(err);
                 }
             );
     }
 
     function deleteUserById(req, res) {
-        var id = req.params.id;
+        if(isAdmin(req.user)) {
+            var id = req.params.id;
 
-        userModel
-            .deleteUser(id)
-            .then(
-                function (doc) {
-                    res.send(200);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                });
+            userModel
+                .deleteUser(id)
+                .then(
+                    function (doc) {
+                        return userModel.getAllUsers();
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    })
+                .then(
+                    function (users) {
+                        res.json(users);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
+        } else {
+            res.status(403);
+        }
     }
 
 

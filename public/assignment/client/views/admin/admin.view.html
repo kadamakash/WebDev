@@ -7,12 +7,12 @@
 
             <table class="table table-striped">
                 <tr>
-                    <th><a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Username</th>
-                    <th> &nbsp; Password</th>
-                    <th><a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; First Name</th>
-                    <th><a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Last Name</th>
-                    <th> &nbsp; Roles</th>
-                    <th> &nbsp; Actions</th>
+                    <th><a href="#" class="glyphicon glyphicon-triangle-bottom"></a> Username</th>
+                    <th>Password</th>
+                    <th><a href="#" class="glyphicon glyphicon-triangle-bottom"></a>First Name</th>
+                    <th><a href="#" class="glyphicon glyphicon-triangle-bottom"></a>Last Name</th>
+                    <th> Roles </th>
+                    <th> Actions </th>
                 </tr>
 
                 <tr>
@@ -22,8 +22,8 @@
                     <td><input ng-model="user.firstName" class="form-control" placeholder="first"/></td>
                     <td><input ng-model="user.lastName" class="form-control" placeholder="last"/></td>
                     <td><input ng-model="user.roles" class="form-control" placeholder="roles"/></td>
-                    <td><button ng-click="add(user)" class="btn btn-primary">&plus;</button>
-                    <button ng-click="update(user)" class="btn btn-success">&check;</button></td>
+                    <td><button ng-click="add(user)" class="glyphicon glyphicon-plus"></button>
+                    <button ng-click="update(user)" class="glyphicon glyphicon-ok"></button></td>
                 </tr>
 
                 <tr ng-repeat="user in users">
@@ -32,8 +32,8 @@
                     <td>{{user.firstName}}</td>
                     <td>{{user.lastName}}</td>
                     <td>{{user.roles}}</td>
-                    <td><button ng-click="remove(user)" class="btn btn-danger">X</button>
-                    <button ng-click="select(user)" class="btn btn-success">...</button></td>
+                    <td><button ng-click="remove(user)" class="glyphicon glyphicon-remove"></button>
+                    <button ng-click="select(user)" class="glyphicon glyphicon-cog"></button></td>
                 </tr>
             </table>
 

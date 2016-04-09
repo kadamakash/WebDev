@@ -11,20 +11,20 @@
 
         var api = {
             findUserByUsername: findUserByUsername,
-            /*findUserByCredentials: findUserByCredentials,*/
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
-            setCurrentUser:setCurrentUser,
-            getCurrentUser:getCurrentUser
+            login: login,
+            logout: logout,
+            register: register
+
+            /*setCurrentUser:setCurrentUser,
+            getCurrentUser:getCurrentUser*/
+
 
         };
         return api;
-
-       /* function findUserByCredentials(username, password) {
-            return $http.get("/api/assignment/user?username="+username+"&password="+password);
-        }*/
 
         function findAllUsers(){
             return $http.get("/api/assignment/user")
@@ -46,12 +46,29 @@
             return $http.put("/api/assignment/user/"+userId,user);
         }
 
-        function setCurrentUser(aUser) {
-            $rootscope.newUser = aUser;
+        function login(user){
+            return $http.post("/api/assignment/login", user);
         }
 
-        function getCurrentUser() {
-            return $rootScope.newUser;
+        function logout(){
+            return $http.post("/api/assignment/logout");
+        }
+
+        function register(user){
+            return $http.post("/api/assignment/register", user);
         }
     }
 })();
+
+
+/* function findUserByCredentials(username, password) {
+ return $http.get("/api/assignment/user?username="+username+"&password="+password);
+ }*/
+
+/* function setCurrentUser(aUser) {
+ $rootscope.newUser = aUser;
+ }
+
+ function getCurrentUser() {
+ return $rootScope.newUser;
+ }*/

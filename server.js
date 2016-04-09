@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 app.use(cookieParser());
 app.use(session({
-    secret: "MySecret"
+    secret: process.env.SESSION_SECRET
     /*resave: false,
     saveUnitialized: true*/}));
 

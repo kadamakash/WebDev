@@ -15,13 +15,24 @@
         function register(user) {
             UserService
                 .createUser(user)
-                .then(registerCallback);
+                .then(
+                    function(response){
+                        var user = response.data;
+                        if(user != null){
+                            $rootScope.currentUser = user;
+                            $location.url("/profile");
+                        }
+                    },
+                    function(err){
+                        vm.error = err;
+                    }
+                );
         }
 
-        function registerCallback(user) {
+        /*function registerCallback(user) {
             UserService.setCurrentUser(user.data);
             $location.path('/profile');
             console.log(user);
-        }
+        }*/
     }
 })();
