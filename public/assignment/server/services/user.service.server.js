@@ -11,19 +11,15 @@ module.exports = function (app, userModel) {
 
     var auth = authorized;
 
-    app.post("/api/assignment/user", auth, createUser);
     app.get("/api/assignment/user", getAllUsers);
     app.get("/api/assignment/user?username=username", getUserByUsername);
     app.put("/api/assignment/user/:id", auth, updateUserById);
     app.delete("/api/assignment/user/:id", auth, deleteUserById);
     app.get("/api/assignment/user/:id", auth, getUserById);
-
-   /* app.get("/api/assignment/user?username=username&password=password", getUserByCredentials);*/
-
     app.post('/api/assignment/login', passport.authenticate('local'), login);
     app.post('/api/assignment/logout', logout);
     app.get("/api/assignment/loggedin", loggedin);
-    app.post("/api/assignment/register", register);
+    app.post("/api/assignment/register", auth, createUser);
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -31,7 +27,7 @@ module.exports = function (app, userModel) {
 
     function localStrategy(username, password, done){
         userModel
-            .findUserByUsername(username)
+            .findUserByCredentials({username: username, password: password})
             .then(
                 function(user){
                     if(user && bcrypt.compareSync(password, user.password)) {
@@ -59,7 +55,6 @@ module.exports = function (app, userModel) {
     }
 
     function serializeUser(user, done) {
-        delete user.password;
         done(null, user);
     }
 
@@ -68,7 +63,6 @@ module.exports = function (app, userModel) {
             .findUserById(user._id)
             .then(
                 function(user){
-                    delete user.password;
                     done(null, user);
                 },
                 function(err){
@@ -88,7 +82,6 @@ module.exports = function (app, userModel) {
 
     function login(req, res){
         var user = req.user;
-        delete user.password;
         res.json(user);
     }
 
@@ -132,28 +125,18 @@ module.exports = function (app, userModel) {
     function createUser(req, res) {
         var newUser = req.body;
 
-        if(newUser.roles && newUser.roles.length > 1){
-            newUser.roles = newUser.roles.split(",");
-        } else {
-            newUser.roles = ["student"];
-        }
+        newUser.emails = [newUser.email];
+        newUser.phones = [newUser.phone];
+        newUser.roles = ["student"];
 
         userModel
             .findUserByUsername(newUser.username)
             .then(
                 function(user){
-                    if(user == null){
-                        return userModel.createUser(newUser)
-                            .then(
-                                function(){
-                                    return userModel.getAllUsers();
-                                },
-                                function(err){
-                                    res.status(400).send(err);
-                                }
-                            );
+                    if(user){
+                        res.json(null);
                     } else {
-                        return userModel.getAllUsers();
+                        return userModel.createUser(newUser);
                     }
                 },
                 function(err){
@@ -161,36 +144,38 @@ module.exports = function (app, userModel) {
                 }
             )
             .then(
-                function(users){
-                    res.json(users);
+                function(user){
+                    if(user){
+                    req.login(user, function(err){
+                        if(err){
+                            res.status(400).send(err);
+                        } else {
+                            res.json(user);
+                        }
+                    });
+                    }
                 },
-                function(){
+                function(err){
                     res.status(400).send(err);
                 }
-            )
+            );
     }
 
     function getAllUsers(req, res) {
-        if(isAdmin(req.user)) {
-            userModel
-                .findAllUsers()
-                .then(
-                    function (doc) {
-                        /* req.session.newUser = doc;*/
-                        res.json(doc);
-                    },
-                    function (err) {
-                        res.status(400).send(err);
-                    }
-                );
-        } else {
-            res.status(403);
-        }
-
+        userModel
+            .findAllUsers()
+            .then(
+                function(docs){
+                    res.json(docs);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function getUserById(req, res) {
-        var id = req.params.id;
+        var userId = req.params.userId;
         // use model to find user by id
         userModel
             .findUserById(userId)
@@ -240,29 +225,23 @@ module.exports = function (app, userModel) {
     }
 
     function updateUserById(req, res) {
-        var id = req.params.id;
-        var newUser = req.body;
-
-        if(!isAdmin(req.user)){
-            delete newUser.roles;
-        }
-        if(typeof newUser.roles == "string"){
-            newUser.roles = newUser.roles.split(",");
-        }
+        var userId = req.params.userId;
+        var userData = req.body;
 
         userModel
-            .updateUser(id, newUser)
+            .updateUser(userId, userData)
             .then(
                 function(user){
-                    return userModel.getAllUsers();
+                    return userModel.findUserById(userId);
                 },
                 function (err){
                     res.status(400).send(err);
                 }
             )
             .then(
-                function(users){
-                    res.josn(users);
+                function(user){
+                    req.session.currentUser = user;
+                    res.json(user);
                 },
                 function(err){
                     res.status(400).send(err);
@@ -271,30 +250,28 @@ module.exports = function (app, userModel) {
     }
 
     function deleteUserById(req, res) {
-        if(isAdmin(req.user)) {
-            var id = req.params.id;
-
-            userModel
-                .deleteUser(id)
-                .then(
-                    function (doc) {
-                        return userModel.getAllUsers();
-                    },
-                    function (err) {
-                        res.status(400).send(err);
-                    })
-                .then(
-                    function (users) {
-                        res.json(users);
-                    },
-                    function (err) {
-                        res.status(400).send(err);
-                    }
-                );
-        } else {
-            res.status(403);
-        }
+        var userId = req.params.userId;
+        userModel
+            .deleteUserById(userId)
+            .then(
+                function(stats){
+                    res.send(200);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
+
+    /*function isAdmin(user){
+        userModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    if(user.roles.indexof("admin") > 0)
+                }
+            )
+    }*/
 
 
 };

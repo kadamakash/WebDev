@@ -5,34 +5,64 @@
 (function() {
     angular
         .module("FormBuilderApp")
-        .controller("RegisterController",RegisterController);
+        .controller("RegisterController", RegisterController);
 
     function RegisterController($location, UserService, $rootScope) {
 
         var vm = this;
-        vm.register = register;
+        this.register = register;
 
         function register(user) {
+            vm.message = null;
+
+            if(user = null){
+                vm.message = "Please fill in the required fields";
+                return;
+            }
+
+            if (!user.username){
+                vm.message ="Please provide a username";
+                return;
+            }
+
+            if (!user.password || !user.password2){
+                vm.message = "Please enter the password";
+                return;
+            }
+
+            if(user.password != user.password2){
+                vm.message = "Both Passwords must match";
+                return;
+            }
             UserService
                 .createUser(user)
                 .then(
                     function(response){
-                        var user = response.data;
-                        if(user != null){
-                            $rootScope.currentUser = user;
+                        var currentUser = response.data;
+                        if(currentUser){
+                            UserService.setCurrentUser(currentUser);
                             $location.url("/profile");
                         }
                     },
                     function(err){
-                        vm.error = err;
+                        console.log(err);
                     }
                 );
         }
 
-        /*function registerCallback(user) {
-            UserService.setCurrentUser(user.data);
-            $location.path('/profile');
-            console.log(user);
-        }*/
+        function isDuplicateUsername(username){
+            UserService
+                .findUserByUsername(username)
+                .then(function(response){
+                    var user = response.data;
+                    if(user){
+                        consle.log("duplicate user");
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                });
+        }
     }
 })();

@@ -38,9 +38,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 app.use(cookieParser());
 app.use(session({
-    secret: process.env.SESSION_SECRET
-    /*resave: false,
-    saveUnitialized: true*/}));
+    secret: "MySecret",
+    resave: true,
+    saveUninitialized: true}));
 
 app.use(passport.initialize());
 app.use(passport.session());

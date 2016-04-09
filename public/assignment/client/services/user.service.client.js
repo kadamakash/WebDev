@@ -5,9 +5,9 @@
 (function(){
     angular
         .module("FormBuilderApp")
-        .factory("UserService",UserService);
+        .factory("UserService", UserService);
 
-    function UserService($rootScope, $http) {
+    function UserService($http, $rootScope) {
 
         var api = {
             findUserByUsername: findUserByUsername,
@@ -17,10 +17,10 @@
             updateUser: updateUser,
             login: login,
             logout: logout,
-            register: register
-
-            /*setCurrentUser:setCurrentUser,
-            getCurrentUser:getCurrentUser*/
+            register: register,
+            getLoggedinUser: getLoggedinUser,
+            setCurrentUser:setCurrentUser,
+            getCurrentUser:getCurrentUser
 
 
         };
@@ -43,11 +43,11 @@
         }
 
         function updateUser(userId, user) {
-            return $http.put("/api/assignment/user/"+userId,user);
+            return $http.put("/api/assignment/user/"+userId, user);
         }
 
-        function login(user){
-            return $http.post("/api/assignment/login", user);
+        function login(credentials){
+            return $http.post("/api/assignment/login", credentials);
         }
 
         function logout(){
@@ -57,18 +57,20 @@
         function register(user){
             return $http.post("/api/assignment/register", user);
         }
+
+        function getLoggedinUser(){
+            return $http.get("/api/assignment/loggedin");
+        }
+
+        function setCurrentUser(user) {
+            $rootScope.currentUser = user;
+        }
+
+        function getCurrentUser() {
+            return $rootScope.currentUser;
+        }
+
+
     }
 })();
 
-
-/* function findUserByCredentials(username, password) {
- return $http.get("/api/assignment/user?username="+username+"&password="+password);
- }*/
-
-/* function setCurrentUser(aUser) {
- $rootscope.newUser = aUser;
- }
-
- function getCurrentUser() {
- return $rootScope.newUser;
- }*/

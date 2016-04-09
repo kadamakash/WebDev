@@ -26,13 +26,6 @@ module.exports = function(db, mongoose, User) {
     return api;
 
     function findUserByCredentials(credentials) {
-        /*for (var i in users){
-         if(users[i].username == credentials.username && users[i].password == credentials.password){
-         return users[i];
-         }
-         }
-         return null;*/
-
         var deferred = q.defer();
         UserModel.findOne(
             {
@@ -52,12 +45,6 @@ module.exports = function(db, mongoose, User) {
 
 
     function findUserByUsername(username) {
-        /*for(var index=0;index<users.length;index++) {
-         if(users[index].username == username) {
-         return users[index];
-         }
-         }
-         return null;*/
         var deferred = q.defer();
         User.findOne(username, function (err, doc) {
             if (err) {
@@ -96,12 +83,6 @@ module.exports = function(db, mongoose, User) {
         );
         return deferred.promise;
     }
-
-    /*function createUser(user) {
-     user._id = (new Date()).getTime();
-     users[users.length] = user;
-     return user;
-     }*/
 
     function createUser(user) {
         // use q to defer the response

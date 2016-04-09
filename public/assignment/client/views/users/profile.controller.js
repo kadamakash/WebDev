@@ -7,34 +7,29 @@
         .module("FormBuilderApp")
         .controller("ProfileController",ProfileController);
 
-    function ProfileController($location, UserService, $rootScope) {
+    function ProfileController(UserService) {
 
         var vm = this;
-        var currentUser = UserService.getCurrentUser();
-        vm.user = currentUser;
+        /*var currentUser = UserService.getCurrentUser();
+        vm.user = currentUser;*/
 
 
         vm.update = update;
 
 
         function update(user) {
-            var updateUser = {
-                username: user.username,
-                password: user.password,
-                firstName: user.firstName,
-                lastname: user.lastName,
-                email: user.email,
-                phones: user.phones
-            };
             UserService
-                .updateUser(user._id, updateUser)
-                .then(updateCallback);
+                .updateUser(user._id, user)
+                .then(
+                    function(response){
+                        vm.users = response.data;
+                        vm.updateMessage = "Updated successfully"
+                    },
+
+                function(err){
+                    vm.error = err;
+                });
         }
 
-        //callback
-        function updateCallback(user) {
-            console.log(user);
-            vm.updateMessage = "Updated successfully"
-        }
     }
 })();

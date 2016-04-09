@@ -18,7 +18,7 @@
             setCurrentUser:setCurrentUser,
             getCurrentUser:getCurrentUser,
             getCurrentSessionUser: getCurrentSessionUser,
-            logout: logout,
+            logout: logout
 
         };
         return api;
@@ -53,7 +53,7 @@
         }
 
         function getCurrentSessionUser(){
-            return $hrrp.get("/api/project/loggedin");
+            return $http.get("/api/project/loggedin");
         }
 
         function logout(){
