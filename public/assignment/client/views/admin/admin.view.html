@@ -3,85 +3,37 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main table-responsive">
             <h1 class="page-header">Admin</h1>
-            <h2>Users</h2>
+            <h2>User List</h2>
 
-            <table class="table table-bordered table-striped table-hover">
+            <table class="table table-striped">
                 <tr>
-                    <th>
-                        <a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Username
-                    </th>
-                    <th>
-                        <a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Password
-                    </th>
-                    <th>
-                        <a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Role
-                    </th>
-                    <th>
-                        &nbsp; Action
-                    </th>
+                    <th><a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Username</th>
+                    <th> &nbsp; Password</th>
+                    <th><a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; First Name</th>
+                    <th><a href="#" class="glyphicon glyphicon-triangle-bottom"></a> &nbsp; Last Name</th>
+                    <th> &nbsp; Roles</th>
+                    <th> &nbsp; Actions</th>
                 </tr>
 
                 <tr>
-                    <td>
-                        <input type="text" class="form-control" id="inputUsername" placeholder="username">
-                    </td>
-                    <td>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="password">
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" id="inputRole" placeholder="role1, role2">
-                    </td>
-                    <td>
-                        <a href="#" class="glyphicon glyphicon-plus my-styling" title="Add "></a>
-                        <a href="#" class="glyphicon glyphicon-ok my-styling" title="Update "></a>
-                    </td>
+
+                    <td><input ng-model="user.username" class="form-control" placeholder="username"/></td>
+                    <td><input ng-model="user.password" class="form-control" type="password" placeholder="password"/></td>
+                    <td><input ng-model="user.firstName" class="form-control" placeholder="first"/></td>
+                    <td><input ng-model="user.lastName" class="form-control" placeholder="last"/></td>
+                    <td><input ng-model="user.roles" class="form-control" placeholder="roles"/></td>
+                    <td><button ng-click="add(user)" class="btn btn-primary">&plus;</button>
+                    <button ng-click="update(user)" class="btn btn-success">&check;</button></td>
                 </tr>
-                <tr>
-                    <td>
-                        alice
-                    </td>
-                    <td>
 
-                    </td>
-                    <td>
-                        student
-                    </td>
-                    <td>
-                        <a href="#" class="glyphicon glyphicon-remove my-styling" title="delete " ></a>
-                        <a href="#" class="glyphicon glyphicon-pencil my-styling" title="edit " ></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        bob
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-                        faculty | admin
-                    </td>
-                    <td>
-                        <span class="text-nowrap">
-                        <a href="#" class="glyphicon glyphicon-remove my-styling" title="delete "></a>
-                        <a href="#" class="glyphicon glyphicon-pencil my-styling" title="edit "></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        charlie
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-                        <a href="#" class="glyphicon glyphicon-remove my-styling" title="delete" ></a>
-                        <a href="#" class="glyphicon glyphicon-pencil my-styling" title="edit " ></a>
-                    </td>
+                <tr ng-repeat="user in users">
+                    <td>{{user._id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.roles}}</td>
+                    <td><button ng-click="remove(user)" class="btn btn-danger">X</button>
+                    <button ng-click="select(user)" class="btn btn-success">...</button></td>
                 </tr>
             </table>
 
