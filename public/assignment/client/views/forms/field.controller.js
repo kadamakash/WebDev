@@ -7,291 +7,291 @@
         .module("FormBuilderApp")
         .controller("FieldController",FieldController);
 
-    angular
-        .module('FormBuilderApp')
-        .controller('ModalInstance', function ($uibModalInstance, editField, popupHeader) {
-
-            var vm = this;
-            vm.popupHeader = popupHeader;
-            vm.editField = editField;
-
-            if(vm.editField.options.length > 0) {
-
-                console.log(editField.options);
-                var fromattedOptions = null;
-                _.forEach(editField.options, function(option){
-                    if (fromattedOptions) {
-
-                        fromattedOptions = fromattedOptions + "\n" + option.value + ":" + option.label;
-                    } else {
-
-                        fromattedOptions = option.value + ":" + option.label;
-                    }
-                });
-
-                vm.editField.options = fromattedOptions;
-            }
-            vm.submit = function(editField) {
-                if(editField.options.length > 0) {
-
-                    var temp = editField.placeholder.split('\n');
-                    var newOptions = [];
-                    _.forEach(temp, function (string) {
-                        newOptions.push({
-                            value: string.split(':')[0],
-                            label: string.split(':')[1]
-                        })
-                    });
-                    editField.options = newOptions;
-                }
-                $uibModalInstance.close(updatedOptions);
-            };
-
-            vm.cancel = function() {
-                $uibModalInstance.dismiss();
-            };
-        });
-
-
-    function FieldController($location, UserService, FormService, $routeParams, FieldService, $uibModal) {
-
+    function FieldController(FieldService, FormService, $routeParams, $route) {
         var vm = this;
-        //currently logged in user
-        var currentUser = UserService.getCurrentUser();
-
+        vm.cField = null;
+        vm.eField = null;
+        vm.editField = editField;
+        vm.commitEdit = commitEdit;
+        vm.deleteField = deleteField;
+        vm.addField = addField;
+        vm.sortFields = sortFields;
+        vm.duplicateField = duplicateField;
         var formId = $routeParams.formId;
+
+        vm.options = [
+            {name: "Single Line Text Field", value: "TEXT"},
+            {name: "Multi Line Text Field", value: "TEXTAREA"},
+            {name: "Password Field", value: "PASSWORD"},
+            {name: "Email Field", value: "EMAIL"},
+            {name: "Date Field", value: "DATE"},
+            {name: "Dropdown Field", value: "DROPDOWN"},
+            {name: "Checkboxes Field", value: "CHECKBOX"},
+            {name: "Radio Buttons Field", value: "RADIO"}
+        ];
+
         function init() {
-            FieldService.getFieldsForForm(formId)
-                .then(function successCallback(response){
-                    vm.fields = response.data;
-                });
-            console.log(formId);
+            FieldService
+                .findFieldsByForm(formId)
+                .then(
+                    function(response){
+                        vm.fields = response.data;
+                    }
+                );
+            FormService
+                .findFormById(formId)
+                .then(
+                    function (response){
+                        vm.form = response.data;
+                    }
+                );
         }
         init();
 
-        //Event handler declarations
-        vm.addField = addField;
-        vm.removeField = removeField;
-        vm.updateModelOnSort = updateModelOnSort;
-
-        /*$scope.$location = $location;
-        $scope.model = {
-            fieldType: null,
-            availableOptions: [{id: '1', name: 'Single Line Text Field'},
-                {id: '2', name: 'Multi Line Text Field'},
-                {id: '3', name: 'Date Field'},
-                {id: '4', name: 'Checkboxes Field'},
-                {id: '5', name: 'Dropdown Field'},
-                {id: '6', name: 'Radio Buttons Field'}]
-        };*/
-
-
-        vm.open = function (fieldType, field) {
-
-            var modalInstance = null;
-            var currentLabel = field.label,
-                currentPlaceholder = field.placeholder;
-
-            switch (fieldType) {
-                case 'TEXT':
-                    modalInstance = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'labelPlaceholder.html',
-                        controller: 'ModalInstance',
-                        size: 'sm',
-                        resolve: {
-                            popupHeader: function() {
-                                return 'Single Line Field'
-                            },
-                            editField: field
-                        }
-                    });
-                    break;
-                case 'EMAIL':
-                    modalInstance = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'labelPlaceholder.html',
-                        controller: 'ModalInstance',
-                        size: 'sm',
-                        resolve: {
-                            popupHeader: function() {
-                                return 'Email Field'
-                            },
-                            editField: field
-                        }
-                    });
-                    break;
-                case 'TEXTAREA':
-                    modalInstance = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'labelPlaceholder.html',
-                        controller: 'ModalInstance',
-                        size: 'sm',
-                        resolve: {
-                            popupHeader: function() {
-                                return 'Multiple Lines Field'
-                            },
-                            editField: field
-                        }
-                    });
-                    break;
-                case 'DATE':
-                    modalInstance = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'labelPlaceholderDate.html',
-                        controller: 'ModalInstance',
-                        size: 'sm',
-                        resolve: {
-                            popupHeader: function() {
-                                return 'Date Field'
-                            },
-                            editField: field
-                        }
-                    });
-                    break;
-                case 'OPTIONS':
-                    modalInstance = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'labelOptions.html',
-                        controller: 'ModalInstance',
-                        size: 'sm',
-                        resolve: {
-                            popupHeader: function() {
-                                return 'Dropdown Field'
-                            },
-                            editField: field
-                        }
-                    });
-                    break;
-                case 'CHECKBOXES':
-                    modalInstance = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'labelOptions.html',
-                        controller: 'ModalInstance',
-                        size: 'sm',
-                        resolve: {
-                            popupHeader: function() {
-                                return 'Checkbox Field'
-                            },
-                            editField: field
-                        }
-                    });
-                    break;
-                case 'RADIOS':
-                    modalInstance = $uibModal.open({
-                        animation: true,
-                        templateUrl: 'labelOptions.html',
-                        controller: 'ModalInstance',
-                        size: 'sm',
-                        resolve: {
-                            popupHeader: function() {
-                                return 'Radio Button Field'
-                            },
-                            editField: field
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-
-            modalInstance.result.then(function (model) {
-                field.label = model.label;
-                field.placeholder = model.placeholder;
-                FieldService.updateFields(formId, vm.fields);
-                console.log(field);
-            }, function () {
-                field.label = currentLabel;
-                field.placeholder = currentPlaceholder;
-                console.log("Cancel Pressed");
-            });
-
-        };
-
-
-        //Event handler implementation
-        function addField(fieldType) {
-            if(fieldType) {
-                switch(fieldType) {
-                    case 'Single Line Text Field':
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"})
-                            .then(function(res) {
-                                vm.fields = res.data.fields;
-                            });
-
-                        break;
-                    case "Multi Line Text Field":
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"})
-                            .then(function(res) {
-                                vm.fields = res.data.fields;
-                            });
-                        break;
-                    case "Date Field":
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Date Field", "type": "DATE"})
-                            .then(function(res) {
-                                vm.fields = res.data.fields;
-                            });
-                        break;
-                    case "Checkboxes Field":
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Checkboxes", "type": "CHECKBOXES", "options": [
-                                {"label": "Option A", "value": "OPTION_A"},
-                                {"label": "Option B", "value": "OPTION_B"},
-                                {"label": "Option C", "value": "OPTION_C"}
-                            ]})
-                            .then(function(res) {
-                                vm.fields = res.data.fields;
-                            });
-                        break;
-
-                    case "Dropdown Field":
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
-                                {"label": "Option 1", "value": "OPTION_1"},
-                                {"label": "Option 2", "value": "OPTION_2"},
-                                {"label": "Option 3", "value": "OPTION_3"}
-                            ]})
-                            .then(function(res) {
-                                vm.fields = res.data.fields;
-                            });
-                        break;
-                    case "Radio Buttons Field":
-                        FieldService.createFieldForForm(formId,{"_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": [
-                                {"label": "Option X", "value": "OPTION_X"},
-                                {"label": "Option Y", "value": "OPTION_Y"},
-                                {"label": "Option Z", "value": "OPTION_Z"}
-                            ]})
-                            .then(function(res) {
-                                console.log(res.data.fields);
-                                vm.fields = res.data.fields;
-                            });
-                        break;
-                    default:
-                        break;
-                }
-            }
-
+        function sortFields(start, end) {
+            FieldService
+                .sortFields(formId, start, end)
+                .then(
+                    function (response) {
+                        init();
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                );
         }
 
-        function removeField(field) {
-            console.log("remove"+field._id);
-            FieldService.deleteFieldFromForm(formId, field._id)
-                .then(function successCallback(response) {
-                    if(response.status === 200){
-                        _.remove(vm.fields, {
-                            _id: field._id
-                        })
-                    }
+        function deleteField(field) {
+            vm.cField = null;
+            FieldService
+                .deleteField(formId, field._id)
+                .then(init);
+        }
+
+        function addField(fieldType) {
+            var field = null;
+            switch (fieldType) {
+                case "TEXT":
+                    field = createSingleLineTextField();
+                    break;
+
+                case "TEXTAREA":
+                    field = createMultiLineTextField();
+                    break;
+
+                case "DATE":
+                    field = createDateField();
+                    break;
+
+                case "DROPDOWN":
+                    field = createDropDownField();
+                    break;
+
+                case "CHECKBOX":
+                    field = createCheckboxField();
+                    break;
+
+                case "RADIO":
+                    field = createRadioField();
+                    break;
+
+                case "EMAIL":
+                    field = createEmailField();
+                    break;
+
+                case "PASSWORD":
+                    field = createPasswordField();
+                    break;
+
+                default:
+                    field = createSingleLineTextField();
+            }
+            FieldService
+                .createField(formId, field)
+                .then(function(newField){
+                    init();
                 });
         }
 
-        function updateModelOnSort() {
-            FieldService.updateFields(formId, vm.fields);
+
+        function duplicateField(field){
+            var dupField = {
+                label: field.label,
+                type: field.type,
+                placeholder: field.placeholder,
+                option: field.options
+            };
+
+            FieldService
+                .createField(formId, dupField)
+                .then(init);
         }
 
-        //callbacks
-        /*function fieldsForFormCallback(fields) {
-            $scope.fields = fields.data;
-            console.log(fields);
-        }*/
+
+        function editField(field) {
+            vm.eField = {
+                _id: field._id,
+                label: field.label,
+                type: field.type,
+                placeholder: field.placeholder,
+                options: field.options,
+                header: translateFieldType(field.type)
+            };
+
+            var isOption =
+                !(
+                    vm.eField.type === 'TEXT' ||
+                    vm.eField.type === 'TEXTAREA' ||
+                    vm.eField.type === 'PASSWORD' ||
+                    vm.eField.type === 'EMAIL' ||
+                    vm.eField.type === 'DATE'
+                );
+
+            if (isOption) {
+                var optionList = [];
+                var ol = vm.eField.options;
+                for (var o in ol) {
+                    optionList.push(ol[o].label + ":" + ol[o].value)
+                }
+                vm.eField.optionText = optionList.join("\n");
+            }
+        }
+
+        function commitEdit(field) {
+            vm.eField = {
+                label: field.label,
+                type: field.type,
+                placeholder: field.placeholder
+            };
+
+            var isOption =
+                !(
+                    vm.eField.type === 'TEXT' ||
+                    vm.eField.type === 'TEXTAREA' ||
+                    vm.eField.type === 'PASSWORD' ||
+                    vm.eField.type === 'EMAIL' ||
+                    vm.eField.type === 'DATE'
+                );
+
+            var optionArray = [];
+            if (isOption) {
+                var oa = field.optionText.split("\n");
+                for (var o in oa) {
+                    var a = oa[o].split(":");
+                    optionArray.push({
+                        label: a[0].trim(),
+                        value: a[1].trim()
+                    });
+                }
+                vm.eField.options = optionArray;
+
+            }
+            FieldService
+                .updateField(formId, field._id, vm.eField)
+                .then(init);
+            vm.eField = null;
+        }
+
+
+
+        /* Helper functions to create fields*/
+        function createSingleLineTextField() {
+
+            var field = {
+                label: "New Text Field",
+                type: "TEXT",
+                placeholder: "New Field"
+            };
+
+            return field;
+        }
+
+        function createPasswordField() {
+
+            var field = {
+                label: "New Password Field",
+                type: "PASSWORD",
+                placeholder: "Password"
+            };
+
+            return field;
+        }
+
+        function createEmailField() {
+
+            var field = {
+                label: "New Email Field",
+                type: "EMAIL",
+                placeholder: "alice@wonderland.com"
+            };
+
+            return field;
+        }
+
+        function createMultiLineTextField() {
+
+            var field = {
+                label: "New Text Area",
+                type: "TEXTAREA",
+                placeholder: "New Field"
+            };
+
+            return field;
+        }
+
+        function createDateField() {
+            var field = {
+                label: "New Date Field",
+                type: "DATE"
+            };
+
+            return field;
+        }
+
+        function createDropDownField() {
+
+            var field = {"label": "New Dropdown", "type": "DROPDOWN", "options": [
+                {"label": "Option 1", "value": "OPTION_1"},
+                {"label": "Option 2", "value": "OPTION_2"},
+                {"label": "Option 3", "value": "OPTION_3"}
+            ]};
+
+            return field;
+        }
+
+        function createCheckboxField() {
+
+            var field = {"label": "New Checkboxes", "type": "CHECKBOX", "options": [
+                {"label": "Option A", "value": "OPTION_A"},
+                {"label": "Option B", "value": "OPTION_B"},
+                {"label": "Option C", "value": "OPTION_C"}
+            ]};
+
+            return field;
+        }
+
+        function createRadioField() {
+
+            var field = {"label": "New Radio Buttons", "type": "RADIO", "options": [
+                {"label": "Option X", "value": "OPTION_X"},
+                {"label": "Option Y", "value": "OPTION_Y"},
+                {"label": "Option Z", "value": "OPTION_Z"}
+            ]};
+
+            return field;
+        }
+
+        function translateFieldType(fieldType) {
+            var name = "";
+            for (var k in vm.options) {
+                if (vm.options[k].value == fieldType){
+                    name = vm.options[k].name;
+                    break;
+                }
+            }
+            return name;
+        }
+
     }
 
 

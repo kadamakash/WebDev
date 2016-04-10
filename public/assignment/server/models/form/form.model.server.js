@@ -4,29 +4,31 @@
 "use strict";
 
 var q = require("q");
+var mongoose = require("mongoose");
 
-module.exports = function(db, mongoose, Form) {
+module.exports = function(db) {
 
-   /* var FormSchema = require("./form.schema.server.js")(mongoose);
-    var Form = mongoose.model('Form', FormSchema);*/
+    var FormSchema = require("./form.schema.server.js")(mongoose);
+    var FormModel = mongoose.model("Form", FormSchema);
 
     var api = {
-        createFormForUser:createFormForUser,
-        findAllFormsForUser:findAllFormsForUser,
+        createForm:createForm,
+        findAllForms:findAllForms,
         deleteFormById:deleteFormById,
         updateFormById:updateFormById,
         findFormByTitle:findFormByTitle,
         findFormById: findFormById,
-        getMongooseModel: getMongooseModel
+        getMongooseModel: getMongooseModel,
+        findAllFormsByUserId: findAllFormsByUserId
 
     };
 
     return api;
 
 
-    function createFormForUser(userId, form) {
+    function createForm(userId, form) {
         var deferred = q.defer();
-        Form
+        FormModel
             .create(form,
             function(err, doc){
                 if(err){
@@ -38,10 +40,10 @@ module.exports = function(db, mongoose, Form) {
         return deferred.promise;
     }
 
-    function findAllFormsForUser(userId) {
+    function findAllForms(userId) {
         var deferred = q.defer();
-        Form
-            .find({userId: userId},
+        FormModel
+            .find(
             function(err, doc){
                 if(!err){
                     deferred.resolve(doc);
@@ -54,7 +56,7 @@ module.exports = function(db, mongoose, Form) {
 
     function findFormByTitle(title) {
         var deferred = q.defer();
-        Form
+        FormModel
             .find({title: title}, function(err, doc){
                 if(!err){
                     deferred.resolve(doc);
@@ -67,8 +69,8 @@ module.exports = function(db, mongoose, Form) {
 
     function updateFormById(formId, newForm) {
         var deferred = q.defer();
-        Form
-            .update({formId: formId}, {$set: newForm}, function(err, doc){
+        FormModel
+            .update({_id: formId}, {$set: newForm}, function(err, doc){
                 if(!err){
                     deferred.resolve(doc);
                 } else {
@@ -80,8 +82,8 @@ module.exports = function(db, mongoose, Form) {
 
     function deleteFormById(formId) {
         var deferred = q.defer();
-        Form
-            .remove({formId: formId}, function(err, doc){
+        FormModel
+            .remove({_id: formId}, function(err, doc){
                 if(!err){
                     deferred.resolve(doc);
                 } else {
@@ -93,19 +95,32 @@ module.exports = function(db, mongoose, Form) {
 
     function findFormById (formId) {
         var deferred = q.defer();
-        Form
-            .findOne({formId: formId}, function(err, doc){
-                if(!err){
+        FormModel.findById(formId, function(err, doc){
+            if(err){
+                deferred.reject();
+            }else{
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findAllFormsByUserId(userId) {
+        var deferred = q.defer();
+        FormModel.find(
+            {userId: userId},
+            function(err, doc){
+                if(err){
+                    deferred.reject();
+                }else{
                     deferred.resolve(doc);
-                } else {
-                    deferred.reject(err);
                 }
             });
         return deferred.promise;
     }
 
     function getMongooseModel(){
-        return Form;
+        return FormModel;
     }
 
 

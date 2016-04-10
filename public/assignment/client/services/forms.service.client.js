@@ -14,25 +14,43 @@
         createFormForUser:createFormForUser,
         updateFormById:updateFormById,
         findAllFormsForUser:findAllFormsForUser,
-        deleteFormById:deleteFormById
+        deleteFormById:deleteFormById,
+        findFormById: findFormById
     };
 
         return api;
 
-        function createFormForUser(userId, form) {
-            return $http.post("/api/assignment/user/"+userId+"/form", form);
+        function createFormForUser(userId, form){
+            var url = "/api/assignment/user/:userId/form";
+            url = url.replace(":userId", userId);
+            return $http.post(url, form);
         }
 
-        function updateFormById(formId, newForm) {
-            return $http.put("/api/assignment/form/"+formId, newForm);
+        function findAllFormsForUser(userId){
+            var url = "/api/assignment/user/:userId/form";
+            url = url.replace(":userId", userId);
+            return $http.get(url);
         }
 
-        function findAllFormsForUser(userId) {
-            return $http.get("/api/assignment/user/" +userId+ "/form");
+        function deleteFormById(formId){
+            var url = "/api/assignment/form/:formId";
+            url = url.replace(":formId", formId);
+            return $http.delete(url);
         }
 
-        function deleteFormById(formId) {
-            return $http.delete("/api/assignment/form/"+formId);
+
+        function updateFormById(formId, newForm){
+            var url = "/api/assignment/form/:formId";
+            url = url.replace(":formId", formId);
+            return $http.put(url, newForm);
+        }
+
+
+        function findFormById(formId){
+            var url = "/api/assignment/form/:formId";
+            url = url.replace(":formId", formId);
+
+            return $http.get(url);
         }
 
     }

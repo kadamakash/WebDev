@@ -7,11 +7,10 @@
         .module("FormBuilderApp")
         .controller("FormController",FormController);
 
-    function FormController($location, UserService, FormService, $routeParams) {
+    function FormController($location, UserService, FormService) {
 
         var vm = this;
-        //currently logged in user
-        var currentUser = UserService.getCurrentUser();
+
         vm.$location = $location;
 
         //Event handler declarations
@@ -19,74 +18,79 @@
         vm.deleteForm = deleteForm;
         vm.selectForm = selectForm;
         vm.updateForm = updateForm;
-        vm.formClick = formClick;
+        vm.unselectForm = unselectForm;
+        vm.setForms = setForms;
+        vm.selectedForm = null;
+
 
         //Fetching all forms for current user to display
         function init() {
+            vm.currentUser = UserService.getCurrentUser();
             FormService
-                .findAllFormsForUser(currentUser._id)
-                .then(findAllFormsForUserCallback);
+                .findAllFormsForUser(vm.currentUser._id)
+                .then(function(response){
+                    setForms(response.data);
+                    vm.$location = $location;
+                });
         }
         init();
 
-        //Event handler implementations
-        function addForm(form) {
-            form.userId = currentUser._id;
-            //form._id = (new Date()).getTime();
-            FormService
-                .createFormForUser(currentUser._id,form)
-                .then(addFormCallback);
+        function setForms(forms){
+            vm.forms = forms;
             vm.form = null;
+            vm.selectedForm = false;
+            vm.message = null;
         }
 
-        function deleteForm(index) {
-            var formId = vm.forms[index]._id;
+
+        function addForm(form) {
+            if(!form || !form.title){
+                vm.message = "Please specify a valid name of the form.";
+            }else{
+                var newForm = {
+                    title: form.title
+                };
+                FormService
+                    .createFormForUser(vm.currentUser._id, newForm)
+                    .then(init);
+            }
+        }
+
+
+        function deleteForm(form) {
             FormService
-                .deleteFormById(formId)
-                .then(deleteFormCallback);
+                .deleteFormById(form._id)
+                .then(init);
         }
 
-        function selectForm(index) {
 
-            vm.selectedRow = index;
+        function selectForm(form) {
             vm.form = {
-                _id: vm.forms[index]._id,
-                title: vm.forms[index].title,
-                userId: vm.forms[index].userId
+                _id: form._id,
+                title: form.title
             };
-
+            vm.selectedForm = true;
         }
+
 
         function updateForm(form) {
-            FormService
-                .updateFormById(form._id,form)
-                .then(updateFormCallback);
+            if(!form || !form.title){
+                vm.message = "Please specify a valid name of the form.";
+            }else {
+                var updatedForm = {
+                    title: form.title
+                };
+
+                FormService.updateFormById(form._id, updatedForm)
+                    .then(init);
+            }
+        }
+
+
+        function unselectForm(){
             vm.form = null;
+            vm.selectedForm = null;
         }
-
-        function formClick(form) {
-            console.log(form._id);
-            $location.path("/form/"+form._id+"/fields");
-        }
-
-        //callback functions
-        function findAllFormsForUserCallback(formsCurrentUser) {
-            vm.forms = formsCurrentUser.data;
-
-        }
-
-        function addFormCallback(form) {
-            init();
-        }
-
-        function deleteFormCallback(form) {
-            init();
-        }
-
-        function updateFormCallback(form) {
-            init();
-        }
-
     }
 
 })();

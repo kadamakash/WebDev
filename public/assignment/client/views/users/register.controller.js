@@ -10,9 +10,10 @@
     function RegisterController($location, UserService, $rootScope) {
 
         var vm = this;
-        this.register = register;
+        vm.register = register;
 
         function register(user) {
+            console.log("Inside Register");
             vm.message = null;
 
             if(user = null){

@@ -13,30 +13,26 @@
         vm.login = login;
 
         function login(user) {
-            if(user)
-            UserService
-                .login(user)
-                .then(
-                    function(response){
-                        $rootScope.currentUser = response.data;
-                        $location.url("/profile");
-                    },
-                    function(err){
-                        vm.error = err;
-                    }
-                );
+            if(!(user && user.username && user.password)){
+                vm.message = "Please provide username and password to login.";
+            }else{
+                UserService
+                    .login({
+                        username: user.username,
+                        password:user.password
+                    })
+                    .then(function(response){
+                        var currentUser = response.data;
+                        if (currentUser) {
+                            UserService.setCurrentUser(currentUser);
+                            $location.url("/profile");
+                        }else{
+                            vm.message = "Invalid username/password";
+                        }
+                    });
+            }
         }
 
-        //Callback
-        /*function loginCallback(user) {
-            if(user!=null) {
-                UserService.setCurrentUser(user.data);
-                $location.path('/profile');
-            }
-            else{
-                vm.loginFailed = "Invalid username and password combination"
-            }
-        }*/
     }
 })();
 

@@ -2,10 +2,11 @@
  * Created by akash on 3/30/16.
  */
 "use strict";
-module.exports = function(mongoose){
+var mongoose = require('mongoose');
+module.exports = function(){
 
     // using mongoose to declare a user schema
-    var UserSchema = mongoose.Schema({     //creates instances of Schemas
+    var UserSchema = new mongoose.Schema({     //creates instances of Schemas
         username: String,
         password: String,
         firstName: String,
@@ -13,8 +14,6 @@ module.exports = function(mongoose){
         emails: [String],
         phones: [String],
         roles: [String]
-
-
     }, {collection: 'assignment.formmaker.user'});
     return UserSchema;
 };

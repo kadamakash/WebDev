@@ -3,7 +3,7 @@
  */
 (function(){
     angular
-        .module('mySortable', [])
+        .module('myDirective', [])
         .directive("mySortable", mySortable);
 
     function mySortable() {
@@ -11,20 +11,21 @@
         var end = null;
         function link(scope, element, attributes) {
             var myAxis = attributes.dmAxis;
-            $(element).sortable({
-                axis: myAxis,
-                start: function(event, ui) {
-                    start = ui.item.index();
-                    console.log(ui.item);
+            $(element)
+                .sortable({
+                    handle: '.handle',
+                    axis: "y",
+                    sort: function(event, ui) {
+                        start = ui.item.index();
+                        console.log(ui.item);
                 },
                 stop: function(event, ui) {
                     end = ui.item.index();
                     console.log(ui.item);
-                    var temp = scope.fields[start];
-                    scope.fields[start] = scope.fields[end];
-                    scope.fields[end] = temp;
-                    scope.$apply();
-                    scope.updateModelOnSort();
+                    if(start >= end){
+                        start--;
+                    }
+                    scope.model.sortFields(start, end);
                 }
             });
         }

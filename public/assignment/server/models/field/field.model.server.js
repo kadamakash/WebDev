@@ -3,90 +3,86 @@
  */
 "use strict";
 var q = require("q");
-module.exports = function(db, mongoose, Form) {
+module.exports = function(formModel) {
 
-    /*var FormSchema = require("./models/form/form.schema.server.js")(mongoose);
-
-    var Form = mongoose.model("Form", FormSchema);*/
+    var FormModel = formModel.getMongooseModel();
 
     var api = {
-        createField: createField,
+        createFieldForForm: createFieldForForm,
         findAllFieldsForForm: findAllFieldsForForm,
-        findFieldById: findFieldById,
-        updateFieldById: updateFieldById,
-        sortField: sortField,
-        deleteFieldById: deleteFieldById,
-        updateAllFieldsInForm: updateAllFieldsInForm
+        findFieldByFieldIdAndFormId: findFieldByFieldIdAndFormId,
+        updateFieldByFieldIdAndFormId: updateFieldByFieldIdAndFormId,
+        deleteFieldByFieldIdAndFormId: deleteFieldByFieldIdAndFormId,
+        sortFields: sortFields
     };
 
     return api;
 
-    function createField(formId, field){
-        return Form.findById(formId)
+    function createFieldForForm(formId, field) {
+        return FormModel.findById(formId)
             .then(
-                function(form){
+                function(form) {
                     form.fields.push(field);
                     return form.save();
                 }
             );
     }
 
-    function findAllFieldsForForm(formId){
-        return Form
-            .findById(formId)
-            .then(function(form){
-                return form.fields;
-            })
-    }
-
-    function findFieldById(formId, fieldId){
-        return Form
-            .findById(formId)
-            .then(function(form){
-                return form.fields.id(fieldId);
-            });
-    }
-
-    function updateFieldById(formId, fieldObj){
-        return Form
-            .findById(formId)
-            .then(function(form){
-                var field = form.fields.id(fieldObj._id);
-                field.label = fieldObj.label;
-                field.type = fieldObj.type;
-                field.placeholder = fieldObj.placeholder;
-                field.options = fieldObj.options;
-
-                return form.save();
-            });
-    }
-
-    function deleteFieldById(formId, fieldId){
-        return Form
-            .findFormById(formId)
-            .then(function(form){
-                form.fields.id(fieldId).remove();
-                return form.save();
-            });
-    }
-
-    function sortField(formId, startIndex, endIndex){
-        return Form
-            .findFormById(formId)
+    function findAllFieldsForForm (formId) {
+        return FormModel.findById(formId)
             .then(
                 function(form){
-                    form.fields.splice(endIndex, 0, form.fields.splice(startIndex, 1)[0]);
-                    form.makrModified("fields"); // notify mongoose 'fields' feild changed
-                    form.save();
-                });
+                    return form.fields;
+                }
+            );
     }
 
-    function updateAllFieldsInForm(formId, fields){
-        return Form.findById(formId).then(
-            function(form){
-                form.fields = fields;
-                return form.save();
-            }
-        )
+    function findFieldByFieldIdAndFormId(formId, fieldId) {
+        return FormModel
+            .findById(formId)
+            .then(
+                function(form){
+                    return form.fields.id(fieldId);
+                }
+            );
+    }
+
+    function updateFieldByFieldIdAndFormId(formId, fieldId, field) {
+
+        return FormModel
+            .findById(formId)
+            .then(
+                function(form){
+                    var fieldToUpdate   = form.fields.id(fieldId);
+                    fieldToUpdate.label  = field.label;
+                    fieldToUpdate.type = field.type;
+                    fieldToUpdate.placeholder = field.placeholder;
+                    fieldToUpdate.options = field.options;
+                    return form.save();
+                }
+            );
+    }
+
+    function deleteFieldByFieldIdAndFormId(formId, fieldId) {
+        return FormModel
+            .findById(formId)
+            .then(
+                function(form){
+                    form.fields.id(fieldId).remove();
+                    return form.save();
+                }
+            );
+    }
+
+    function sortFields(formId, startIndex, endIndex) {
+        return FormModel
+            .findById(formId)
+            .then(
+                function(form) {
+                    form.fields.splice(endIndex, 0, form.fields.splice(startIndex, 1)[0]);
+                    form.markModified("fields");
+                    form.save();
+                }
+            );
     }
 };

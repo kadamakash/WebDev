@@ -3,7 +3,7 @@
  */
 "use strict";
 (function(){
-    angolar
+    angular
         .module("FormBuilderApp")
         .factory("AdminService", AdminService);
 

@@ -4,15 +4,12 @@
 'use strict';
 
 var q = require("q"); // loading q promise library
+var mongoose = require("mongoose");
 
-module.exports = function(db, mongoose, User) {
+module.exports = function(db) {
     //loading user schema
-   /* var UserSchema = require("./user.schema.server.js")(mongoose);
-
-    //creating a user model from schema
-    var UserModel = mongoose.model('User', UserSchema);*/
-
-    /* var users = require("./user.mock.json");*/
+    var UserSchema = require("./user.schema.server.js")(mongoose);
+    var UserModel = mongoose.model("User", UserSchema);
 
     var api = {
         findUserByCredentials: findUserByCredentials,
@@ -27,7 +24,7 @@ module.exports = function(db, mongoose, User) {
 
     function findUserByCredentials(credentials) {
         var deferred = q.defer();
-        User.findOne(
+        UserModel.findOne(
             {
                 username: credentials.username,
                 password: credentials.password
@@ -46,7 +43,7 @@ module.exports = function(db, mongoose, User) {
 
     function findUserByUsername(username) {
         var deferred = q.defer();
-        User.findOne(username, function (err, doc) {
+        UserModel.findOne({username: username}, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
@@ -59,7 +56,7 @@ module.exports = function(db, mongoose, User) {
 
     function findUserById(userId) {
         var deferred = q.defer();
-        User.findById(userId, function (err, doc) {
+        UserModel.findById(userId, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
@@ -71,7 +68,7 @@ module.exports = function(db, mongoose, User) {
 
     function findAllUsers() {
         var deferred = q.defer();
-        User.find(
+        UserModel.find(
             function(err, doc){
                 if(err){
                     deferred.resolve(doc);
@@ -88,7 +85,7 @@ module.exports = function(db, mongoose, User) {
         var deferred = q.defer();
 
         // insert new user with mongoose user model's create method
-        User.create(user, function (err, doc) {
+        UserModel.create(user, function (err, doc) {
             console.log(doc);
 
             if (err) {
@@ -107,7 +104,7 @@ module.exports = function(db, mongoose, User) {
     function deleteUser(userId) {
         var deferred = q.defer();
 
-        User.remove(userId, function (err, doc) {
+        UserModel.remove({_id: userId}, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
@@ -121,7 +118,7 @@ module.exports = function(db, mongoose, User) {
 
     function updateUser(userId, user) {
         var deferred = q.defer();
-        User
+        UserModel
             .update(
                 {_id: userId},
                 {$set: user},

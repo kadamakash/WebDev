@@ -4,5 +4,5 @@
 "use strict";
 (function(){
     angular
-        .module("FormBuilderApp", ["ngRoute", "mySortable", "ui.bootstrap"]);
+        .module("FormBuilderApp", ["ngRoute", "myDirective"]);
 })();
