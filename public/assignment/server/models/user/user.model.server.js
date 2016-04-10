@@ -27,7 +27,7 @@ module.exports = function(db, mongoose, User) {
 
     function findUserByCredentials(credentials) {
         var deferred = q.defer();
-        UserModel.findOne(
+        User.findOne(
             {
                 username: credentials.username,
                 password: credentials.password
@@ -58,7 +58,6 @@ module.exports = function(db, mongoose, User) {
 
 
     function findUserById(userId) {
-
         var deferred = q.defer();
         User.findById(userId, function (err, doc) {
             if (err) {
@@ -106,13 +105,6 @@ module.exports = function(db, mongoose, User) {
 
 
     function deleteUser(userId) {
-        /*for(var index=0;index<users.length;index++) {
-         if(users[index]._id == userId) {
-         users.remove(index);
-         }
-         }
-         return users;*/
-
         var deferred = q.defer();
 
         User.remove(userId, function (err, doc) {

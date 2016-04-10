@@ -7,8 +7,13 @@
         .module("FormBuilderApp")
         .controller("SidebarController", SidebarController);
 
-    function SidebarController($scope) {
+    function SidebarController(UserService, $location) {
+        var vm = this;
+
+        function init(){
+            vm.$location = $location;
+        }
+        init();
 
     }
-
 })();
