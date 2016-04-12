@@ -12,12 +12,12 @@
         var api = {
             findUserByUsername: findUserByUsername,
             findAllUsers: findAllUsers,
+            findUserById: findUserById,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             login: login,
             logout: logout,
-            register: register,
             getLoggedinUser: getLoggedinUser,
             setCurrentUser:setCurrentUser,
             getCurrentUser:getCurrentUser
@@ -31,11 +31,11 @@
         }
 
         function findUserByUsername(username) {
-            return $http.get("/api/assignment/user?username="+username);
+            return $http.get("/api/assignment/user/username="+username);
         }
 
         function createUser(user) {
-            return $http.post("/api/assignment/user", user);
+            return $http.post("/api/assignment/register", user);
         }
 
         function deleteUserById(userId) {
@@ -54,10 +54,6 @@
             return $http.post("/api/assignment/logout");
         }
 
-        function register(user){
-            return $http.post("/api/assignment/register", user);
-        }
-
         function getLoggedinUser(){
             return $http.get("/api/assignment/loggedin");
         }
@@ -70,6 +66,9 @@
             return $rootScope.currentUser;
         }
 
+        function findUserById(userId){
+            return $http.get("/api/assignment/user/"+userId);
+        }
 
     }
 })();

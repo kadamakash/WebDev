@@ -12,14 +12,14 @@ module.exports = function (app, userModel) {
     var auth = authorized;
 
     app.get("/api/assignment/user", getAllUsers);
-    app.get("/api/assignment/user?username=username", getUserByUsername);
+    app.get("/api/assignment/user/username/:username", getUserByUsername);
     app.put("/api/assignment/user/:id", auth, updateUserById);
     app.delete("/api/assignment/user/:id", auth, deleteUserById);
     app.get("/api/assignment/user/:id", auth, getUserById);
     app.post('/api/assignment/login', passport.authenticate('local'), login);
     app.post('/api/assignment/logout', logout);
     app.get("/api/assignment/loggedin", loggedin);
-    app.post("/api/assignment/register", auth, createUser);
+    app.post("/api/assignment/register", createUser);
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -50,9 +50,6 @@ module.exports = function (app, userModel) {
         }
     }
 
-    function isAdmin(user) {
-        return (user.roles.indexOf("admin") > 0)
-    }
 
     function serializeUser(user, done) {
         done(null, user);
@@ -85,7 +82,7 @@ module.exports = function (app, userModel) {
         res.json(user);
     }
 
-    function register (req, res){
+    /*function register (req, res){
         var user = req.body;
         user.roles = ['student'];
 
@@ -120,7 +117,7 @@ module.exports = function (app, userModel) {
                     res.status(400).send(err);
                 }
             );
-    }
+    }*/
 
     function createUser(req, res) {
         var newUser = req.body;
@@ -136,6 +133,7 @@ module.exports = function (app, userModel) {
                     if(user){
                         res.json(null);
                     } else {
+                        user.password = bcrypt.hashSync(user.password);
                         return userModel.createUser(newUser);
                     }
                 },
