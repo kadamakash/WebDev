@@ -44,7 +44,8 @@
                         var currentUser = response.data;
                         console.log(currentUser);
                         if(currentUser){
-                            UserService.setCurrentUser(currentUser);
+                            UserService
+                                .setCurrentUser(currentUser);
                             $location.url("/profile");
                         }else{
                             vm.message = "Username already exists";
@@ -57,7 +58,7 @@
 
         }
 
-        function isDuplicateUsername(username){
+        /*function isDuplicateUsername(username){
             UserService
                 .findUserByUsername(username)
                 .then(
@@ -73,6 +74,6 @@
                         return false;
                     }
                 );
-        }
+        }*/
     }
 })();

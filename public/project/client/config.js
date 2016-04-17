@@ -14,10 +14,10 @@
                 .when("/home", {
                     templateUrl: "views/home/home.view.html",
                     controller: "HomeController",
-                    controllerAs: "model",
-                    resolve:{
+                    controllerAs: "model"
+                    /*resolve:{
                         getLoggedIn: getLoggedIn
-                    }
+                    }*/
                 })
                 .when("/register", {
                     templateUrl: "views/user/register.view.html",
@@ -37,6 +37,32 @@
                         checkLoggedIn: checkLoggedIn
                     }
                 })
+                .when("/search", {
+                    templateUrl: "views/hospitals/search.view.html",
+                    controller: "SearchController",
+                    controllerAs: "model"
+                })
+                .when("/search/:name", {
+                    templateUrl: "views/hospitals/search.view.html",
+                    controller: "SearchController",
+                    controllerAs: "model"
+                })
+                .when("/details/:provider_id",{
+                    templateUrl: "views/hospitals/details.view.html",
+                    controller: "DetailsController",
+                    controllerAs: "model",
+                    resolve:{
+                        getLoggedIn: getLoggedIn
+                    }
+                })
+                /*.when("/admin",{
+                    templateUrl: "views/admin/admin.view.html",
+                    controller: "AdminController",
+                    controllerAs: "model",
+                    resolve: {
+                        checkLoggedIn: checkLoggedIn
+                    }
+                })*/
                 .otherwise({
                     redirectTo: "/"
                 });

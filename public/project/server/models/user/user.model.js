@@ -18,6 +18,7 @@ module.exports = function(db) {
         deleteUserById: deleteUserById,
         findAllUsers: findAllUsers
     };
+    return api;
 
     function findUserByCredentials(credentials) {
         var deferred = q.defer();

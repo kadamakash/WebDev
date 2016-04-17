@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-10">
+               <strong><h2 class="text-left">{{model.hospital[0].hospital_name}}</h2></strong>
+            </div>
+            <div class="col-sm-2">
+                <button  class="btn" ng-click="model.addHospitalToFavourites()" ng-show="newUser" type="submit">Add to Favourite</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <p><strong><h3> Type: {{model.hospital[0].hospital_type}}</h3></strong></p>
+        <p><strong><h3> Address: {{model.hospital[0].address}}</h3></strong></p>
+        <p><strong><h3> ZipCode: {{model.hospital[0].zip_code}}</h3></strong></p>
+        <p><strong><h3> City: {{model.hospital[0].city}}</h3></strong></p>
+        <p><strong><h3> State: {{model.hospital[0].state}}</h3></strong></p>
+        <p><strong><h3> Phone Number: {{model.hospital[0].phone_number.phone_number}}</h3></strong></p>
+    </div>
+</div>
+
