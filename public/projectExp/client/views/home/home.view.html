@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">Home</h1>
+    </div>
+</div>
+<!--
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <form>
+                <br>
+                <fieldset class="form-group">
+                    <label for="inputPlace">Find a Hospital</label>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <input ng-model="zipcode" type="text" class="form-control" id="inputPlace"
+                                   placeholder="ZIP Code, Example: 02176">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button  type="submit" ng-click="search(zipcode)" class="btn btn-block">Search</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Type</th>
+                        <th>City</th>
+                        <th>Zip Code</th>
+                        <th>ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="hospital in data">
+                        <td><a href="#/detail/{{hospital.provider_id}}">{{hospital.hospital_name}}</a></td>
+                        <td>{{hospital.address}}</td>
+                        <td>{{hospital.hospital_type}}</td>
+                        <td>{{hospital.city}}</td>
+                        <td>{{hospital.zip_code}}</td>
+                        <td>{{hospital.provider_id}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>-->

@@ -1,8 +1,8 @@
 /**
- * Created by akash on 3/4/16.
+ * Created by akash on 4/15/16.
  */
 "use strict";
 (function(){
     angular
-        .module("HospitalCompareApp", ["ngRoute"]);
+        .module("MedicalTourismApp", ["ngRoute"]);
 })();

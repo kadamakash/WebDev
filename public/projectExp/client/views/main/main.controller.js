@@ -1,12 +1,12 @@
 /**
- * Created by akash on 4/15/16.
+ * Created by akash on 2/26/16.
  */
 "use strict";
 (function(){
     angular
-        .module("MedicalTourismApp")
+        .module("HospitalCompareApp")
         .controller("MainController", MainController);
     function MainController($scope, $location){
-        $scope.$location = $location
+        $scope.$location = $location;
     }
 })();

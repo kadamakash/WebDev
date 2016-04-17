@@ -46,7 +46,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require("./public/assignment/server/app.js")(app, db);
-require("./public/project/server/app.js")(app, uuid, db, mongoose);
+require("./public/projectExp/server/app.js")(app, uuid, db, mongoose);
+require("./public/project/server/app.js")(app, db, mongoose);
 
 app.get('/hello', function(req,res){
     res.send('hello world');

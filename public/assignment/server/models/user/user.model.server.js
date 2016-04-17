@@ -18,7 +18,7 @@ module.exports = function(db) {
         findAllUsers: findAllUsers,
         createUser: createUser,
         deleteUser: deleteUser,
-        updateUser: updateUser
+        updateUserById: updateUserById
     };
     return api;
 
@@ -116,7 +116,7 @@ module.exports = function(db) {
     }
 
 
-    function updateUser(userId, user) {
+    function updateUserById(userId, user) {
         var deferred = q.defer();
         UserModel
             .update(

@@ -1,57 +1,81 @@
-<div class="container-fluid">
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header">Home</h1>
-    </div>
-</div>
-<!--
-<div class="container-fluid">
-    <div class="row">
+<div class="row" ng-if="!currentUser">
+    <div class="col-md-12">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <form>
-                <br>
-                <fieldset class="form-group">
-                    <label for="inputPlace">Find a Hospital</label>
-                    <div class="row">
-                        <div class="form-group col-xs-12">
-                            <input ng-model="zipcode" type="text" class="form-control" id="inputPlace"
-                                   placeholder="ZIP Code, Example: 02176">
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="form-group">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <button  type="submit" ng-click="search(zipcode)" class="btn btn-block">Search</button>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Type</th>
-                        <th>City</th>
-                        <th>Zip Code</th>
-                        <th>ID</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="hospital in data">
-                        <td><a href="#/detail/{{hospital.provider_id}}">{{hospital.hospital_name}}</a></td>
-                        <td>{{hospital.address}}</td>
-                        <td>{{hospital.hospital_type}}</td>
-                        <td>{{hospital.city}}</td>
-                        <td>{{hospital.zip_code}}</td>
-                        <td>{{hospital.provider_id}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img class="slide-image" src="http://chandanmedicaltourism.com/wp-content/uploads/2015/11/head.jpg" height="216" width="1000" alt="">
+                </div>
+                <div class="item">
+                    <img class="slide-image" src="https://astrahealthcare.in/resources/img/mt11.jpg" height="216" width="1000" alt="">
+                </div>
+                <div class="item">
+                    <img class="slide-image" src="http://www.top-100-doctors.com/wp-content/themes/topdoctors/images/banner.jpg" height="216" width="1000" alt="">
+                </div>
             </div>
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
         </div>
     </div>
-</div>-->
+
+    <div class="col-md-12">
+
+        <div class="row carousel-holder">
+
+
+            <br>
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Medical Tourism</div>
+                    <div class="panel-body">
+                        <p>Medical Tourism portal for World class Treatment and Surgery</p>
+                        <a href="#/register" class="btn btn-info">Register Now</a>
+                    </div>
+                </div>
+                </div>
+
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Dont want to join?</div>
+                    <div class="panel-body">
+                        <p>You can still search and manage your favourite Hospitals.</p>
+                        <a href="#/search" class="btn btn-info">Start Searching Now</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div ng-if="currentUser" class="row">
+    <h2>Welcome {{currentUser.firstName}}!</h2>
+</div>
+<br>
+
+<div ng-if="currentUser" class="row">
+    <div class="col-sm-4">
+        <h4>View your bookmarked Hospital</h4>
+        <a href="#/hospital" class="btn btn-primary">View Hospitals</a>
+    </div>
+
+    <div class="col-sm-4">
+        <h4>Manage your review</h4>
+        <a href="#/review" class="btn btn-primary">View Reviews</a>
+    </div>
+
+    <div class="col-sm-4">
+        <h4>Search Hospitals</h4>
+        <a href="#/search" class="btn btn-info">Search Hospitals</a>
+    </div>
+</div>

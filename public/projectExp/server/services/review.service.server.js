@@ -4,11 +4,11 @@
 "use strict";
 
 module.exports = function (app, model, uuid){
-    app.get("/api/project/user:userId", findAllReviewsForUser);
-    app.put("/api/project/review/:reviewId", updateReviewById);
-    app.post("/api/project/user/:userId/review", addReview);
-    app.delete("/api/project/review/:reviewId", deleteReviewById);
-    app.get("/api/project/hospital/:provider_id/review", findAllReviewsForHospital);
+    app.get("/api/projectExp/user:userId", findAllReviewsForUser);
+    app.put("/api/projectExp/review/:reviewId", updateReviewById);
+    app.post("/api/projectExp/user/:userId/review", addReview);
+    app.delete("/api/projectExp/review/:reviewId", deleteReviewById);
+    app.get("/api/projectExp/hospital/:provider_id/review", findAllReviewsForHospital);
 
     function findAllReviewsForUser(req, res){
         var userId = req.params.userId;

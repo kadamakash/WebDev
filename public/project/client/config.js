@@ -1,10 +1,10 @@
 /**
- * Created by akash on 3/4/16.
+ * Created by akash on 4/15/16.
  */
 "use strict";
 (function(){
     angular
-        .module("HospitalCompareApp")
+        .module("MedicalTourismApp")
         .config(function($routeProvider){
 
             $routeProvider
@@ -15,87 +15,62 @@
                     templateUrl: "views/home/home.view.html",
                     controller: "HomeController",
                     controllerAs: "model",
-                    resolve: {
-                        getLoggedIn : getLoggedIn
+                    resolve:{
+                        getLoggedIn: getLoggedIn
                     }
                 })
                 .when("/register", {
-                    templateUrl: "views/users/register/register.view.html",
+                    templateUrl: "views/user/register.view.html",
                     controller: "RegisterController",
                     controllerAs: "model"
                 })
-                .when("/hospital", {
-                    templateUrl: "views/hospital/hospital.view.html",
-                    controller: "SearchController",
-                    controllerAs: "model"
-                })
-                .when("/hospital/:zipcode", {
-                    templateUrl: "views/hospital/hospital.view.html",
-                    controller: "SearchController",
-                    controllerAs: "model"
-                })
-                .when("/details/:provider_id", {
-                    templateUrl: "views/hospital/details.view.html",
-                    controller: "DetailController",
-                    controllerAs: "model",
-                    resolve: {
-                        getLoggedIn : getLoggedIn
-                    }
-                })
                 .when("/login", {
-                    templateUrl: "views/users/login/login.view.html",
+                    templateUrl: "views/user/login.view.html",
                     controller: "LoginController",
                     controllerAs: "model"
                 })
                 .when("/profile", {
-                    templateUrl: "views/users/profile/profile.view.html",
+                    templateUrl: "views/user/profile.view.html",
                     controller: "ProfileController",
                     controllerAs: "model",
                     resolve: {
-                        checkLoggedIn : checkLoggedIn
+                        checkLoggedIn: checkLoggedIn
                     }
-                })
-                .when("/admin", {
-                    templateUrl: "client/views/admin/admin.view.html",
-                    controller: "AdminController",
-                    controllerAs: "model"
-                })
-                .when("/review", {
-                    templateUrl: "views/review/review.view.html",
-                    controller: "ReviewController",
-                    controllerAs: "model"
                 })
                 .otherwise({
                     redirectTo: "/"
-                })
-        });
+                });
 
-    function checkLoggedIn(UserService, $location, $q){
-        var deferred = $q.defer();
-        UserService.getCurrentSessionUser()
-            .then(function (response){
-                var currentUser = response.data;
-                if(currentUser){
-                    UserService.setCurrentUser(currentUser);
-                    deferred.resolve();
-                } else{
-                    deferred.reject();
-                    $location.url("/home");
-                }
-            });
-        return deferred.promise;
-    }
+            function checkLoggedIn(UserService, $q, $location) {
+                var deferred = $q.defer();
 
-    function getLoggedIn(UserService, $q){
-        var deferred = $q.defer();
-        UserService
-            .getCurrentSessionUser()
-            .then(function(response){
-                var currentUser = response.data;
-                UserService.setCurrentUser(currentUser);
-                deferred.resolve();
-            });
-        return deferred.promise;
-    }
+                UserService
+                    .getLoggedinUser()
+                    .success(function(user) {
+                        if(user !== '0') {
+                            UserService.setCurrentUser(user);
+                            deferred.resolve();
+                        } else {
+                            deferred.reject();
+                            $location.url("/home");
+                        }
+                    });
+                return deferred.promise;
+            }
 
+            function getLoggedIn(UserService, $q){
+                var deferred = $q.defer();
+
+                UserService
+                    .getLoggedinUser()
+                    .success(function(user){
+                        if(user !== '0'){
+                            UserService.setCurrentUser(user);
+                        }
+                        deferred.resolve();
+                    });
+                return deferred.promise;
+            }
+
+        })
 })();
