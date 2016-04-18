@@ -55,14 +55,14 @@
                         getLoggedIn: getLoggedIn
                     }
                 })
-                /*.when("/admin",{
+                .when("/admin",{
                     templateUrl: "views/admin/admin.view.html",
                     controller: "AdminController",
                     controllerAs: "model",
                     resolve: {
-                        checkLoggedIn: checkLoggedIn
+                        checkLoggedIn: checkAdmin
                     }
-                })*/
+                })
                 .otherwise({
                     redirectTo: "/"
                 });
@@ -94,6 +94,22 @@
                             UserService.setCurrentUser(user);
                         }
                         deferred.resolve();
+                    });
+                return deferred.promise;
+            }
+
+            function checkAdmin(UserService, $q, $location){
+                var deferred = $q.defer();
+                UserService
+                    .getLoggedinUser()
+                    .success(function(user){
+                        if(user !== '0' && user.valueOf('admin') != false){
+                            UserService.setCurrentUser(user);
+                            deferred.resolve();
+                        } else {
+                            deferred.reject();
+                            $location.url("/home");
+                        }
                     });
                 return deferred.promise;
             }

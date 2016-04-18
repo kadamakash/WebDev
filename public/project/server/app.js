@@ -5,5 +5,6 @@ module.exports = function (app,db, mongoose){
 
     var userModel = require("./models/user/user.model.js")();
     var userService = require("./services/user.service.server.js")(app, userModel);
+    var adminService = require("./services/admin.service.server.js")(app, userModel);
 
 };

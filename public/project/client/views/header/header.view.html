@@ -15,8 +15,8 @@
         <!--<div id="navbar" class="navbar-collapse collapse">-->
         <div id="navbar" class="navbar-collapse" ng-class="{collapse: model.isCollapsed}">
             <ul class="nav navbar-nav">
-                <li ng-class="{'active' : model.$location.url() == '/home'}" ng-click="model.isCollapsed = !model.isCollapsed"><a href="#/home">Home</a></li>
-                <li ng-show="currentUser" ng-class="{'active' : model.$location.url() == '/profile'}" ng-click="model.isCollapsed = !model.isCollapsed"><a href="#/profile">Profile</a></li>
+                <li ng-class="{'active' : model.$location.url() == '/home'}" ng-click="model.isCollapsed = true"><a href="#/home">Home</a></li>
+                <li ng-show="currentUser" ng-class="{'active' : model.$location.url() == '/profile'}" ng-click="model.isCollapsed = true"><a href="#/profile">Profile</a></li>
             </ul>
             <div class="col-sm-4 col-md-3 pull-right">
                 <form class="navbar-form" role="search">
@@ -30,10 +30,10 @@
             </div>
 
             <ul class="nav navbar-nav">
-                <li ng-hide="currentUser" ng-class="{'active' : model.$location.url() == '/register'}" ng-click="model.isCollapsed = !model.isCollapsed"><a href="#/register">Register</a></li>
-                <li ng-show="currentUser.admin" ng-class="{'active' : model.$location.url() == '/admin'}" ng-click="model.isCollapsed = !model.isCollapsed"><a href="#/admin">Admin</a></li>
-                <li ng-hide="currentUser" ng-class="{'active' : model.$location.url() == '/login'}"><a href="#/login" ng-click="model.isCollapsed = !model.isCollapsed">Login</a></li>
-                <li ng-show="currentUser" ng-class="{'active' : model.$location.url() == '/logout'}" ng-click="model.isCollapsed = !model.isCollapsed"><a href ng-click="model.logout()">Logout</a></li>
+                <li ng-hide="currentUser" ng-class="{'active' : model.$location.url() == '/register'}" ng-click="model.isCollapsed = true"><a href="#/register">Register</a></li>
+                <li ng-show="currentUser.admin" ng-class="{'active' : model.$location.url() == '/admin'}" ng-click="model.isCollapsed = true"><a href="#/admin">Admin</a></li>
+                <li ng-hide="currentUser" ng-class="{'active' : model.$location.url() == '/login'}"><a href="#/login" ng-click="model.isCollapsed = true">Login</a></li>
+                <li ng-show="currentUser" ng-class="{'active' : model.$location.url() == '/logout'}" ng-click="model.isCollapsed = true"><a href ng-click="model.logout()">Logout</a></li>
             </ul>
         </div>
     </div>

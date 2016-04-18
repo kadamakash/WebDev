@@ -35,9 +35,9 @@
             vm.searchtxt = null;
             vm.isCollapsed = !vm.isCollapsed;
             if(name) {
-                $location.url('/hospital' + name);
+                $location.url('/search' + name);
             } else {
-                $location.url('/hospital');
+                $location.url('/search');
             }
         }
     }
