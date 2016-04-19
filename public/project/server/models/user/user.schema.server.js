@@ -11,7 +11,8 @@ module.exports = function(){
             lastName: String,
             email: String,
             address: String,
-            admin: {type: Boolean, default: false}
+            admin: {type: Boolean, default: false},
+            bookmarked: [String]
 
         }, {collection: "project.user"});
     return UserSchema;

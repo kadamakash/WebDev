@@ -8,17 +8,23 @@
         .module("MedicalTourismApp")
         .controller("DetailsController", DetailsController);
 
-    function DetailsController($routeParams, HospitalService){
+    function DetailsController($routeParams, HospitalService, ReviewService, UserService){
         var vm = this;
         vm.details = details;
         vm.care = care;
 
+        vm.addReview = addReview;
+        vm.showReviews = showReviews;
+        vm.bookmarkHospital = bookmarkHospital;
+        var provider_id = $routeParams.provider_id;
+        vm.provider_id = provider_id;
 
         function init(){
-            var provider_id = $routeParams.provider_id;
-            vm.provider_id = provider_id;
+
             details(provider_id);
             care(provider_id);
+            showReviews();
+
         }
         init();
 
@@ -37,6 +43,32 @@
                 });
         }
 
+        function showReviews(){
+            ReviewService
+                .findAllReviewsForHospital(provider_id)
+                .then(function(res){
+                    console.log(res.data);
+                    vm.reviews = res.data;
+                });
+        }
+
+        function addReview(review){
+            var user = UserService.getCurrentUser();
+            var newReview = {
+                provider_id: provider_id,
+                review: review.description,
+                rating: review.rating,
+                reviewed_by: user._id
+            };
+            ReviewService
+                .addReview(newReview)
+                .then(addReviewCallback);
+            vm.review = null;
+        }
+        function addReviewCallback(review){
+            console.log(review);
+            showReviews();
+        }
         /*function image(provider_id){
             HospitalService
                 .findHospitalById(provider_id)
@@ -49,14 +81,14 @@
         }*/
     }
 
-    function addHospitalToFavourites(){
+    function bookmarkHospital(){
         var user = UserService.getCurrentUser();
-        user.favourites.push(provider_id);
-        UserService.updateUser(user._id, user, addHospitalToFavouriteCallback);
+        user.bookmarked.push(provider_id);
+        UserService.updateUser(user._id, user, bookmarkHospitalCallback);
     }
 
-    function addHospitalToFavouritesCallback(user){
-        console.log(user.favourites);
+    function bookmarkHospitalCallback(user){
+        console.log(user.bookmarked);
     }
 
 })();

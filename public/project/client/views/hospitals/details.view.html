@@ -21,7 +21,7 @@
        <h2> USER ACTIONS </h2>
     </div>
     <div class="panel-body">
-        <button  class="btn btn-group-justified" ng-click="model.addHospitalToFavourites()" ng-show="currentUser" type="submit"><h4>Add to Favourite</h4></button><br>
+        <button  class="btn btn-group-justified" ng-click="model.bookmarkHospital()" ng-show="currentUser" type="submit"><h4>Add to Favourite</h4></button><br>
         <button  class="btn btn-group-justified" ng-click="model.addReview()" ng-show="currentUser" type="submit"><h4>Reviews</h4></button><br>
         <button  class="btn btn-group-justified" ng-click="model.findAccommodation()" ng-show="currentUser" type="submit"><h4>Find Apartment</button></h4><br>
         <button  class="btn btn-group-justified" ng-click="model.askTheExpert()" ng-show="currentUser" type="submit"><h4>Ask the Expert</h4></button>
@@ -54,4 +54,28 @@
     </div>
 
 </div>
+<br>
+<div class="col-sm-6" ng-if="currentUser">
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>Review</th>
+            <th>No. of Stars(_/5)</th>
+        </tr>
 
+        </thead>
+        <tbody>
+        <tr ng-repeat="review in model.reviews">
+            <td>{{review.review}}</td>
+            <td>{{review.rating}}</td>
+        </tr>
+        <tr>
+            <th><input ng-model="model.review.description" class="form-control"/></th>
+            <th><input ng-model="model.review.rating" class="form-control"/></th>
+            <th>
+                <button ng-click="model.addReview(model.review)" class="btn btn-primary">Add</button>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</div>
