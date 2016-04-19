@@ -22,12 +22,42 @@
     <table class="table table-bordered table-responsive">
         <thead>
         <tr>
-            <th>PAC ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Medical School attended</th>
-            <th>Graduation Year</th>
-            <th>Primary Speciality</th>
+            <th>
+                <span class="sortorder" ng-show="model.predicate == 'ind_pac_id'" ng-class="{reverse:model.reverse}"></span>
+                <a ng-click="model.toggleSort('ind_pac_id')" href="">
+                    PAC ID
+                </a>
+            </th>
+            <th>
+                <span class="sortorder" ng-show="model.predicate == 'frst_nm'" ng-class="{reverse:model.reverse}"></span>
+                <a ng-click="model.toggleSort('frst_nm')" href="">
+                    First Name
+                </a>
+            </th>
+            <th>
+                <span class="sortorder" ng-show="model.predicate == 'lst_nm'" ng-class="{reverse:model.reverse}"></span>
+                <a ng-click="model.toggleSort('lst_nm')" href="">
+                    Last Name
+                </a>
+            </th>
+            <th>
+                <span class="sortorder" ng-show="model.predicate == 'med_sch'" ng-class="{reverse:model.reverse}"></span>
+                <a ng-click="model.toggleSort('med_sch')" href="">
+                    Medical School Attended
+                </a>
+            </th>
+            <th>
+                <span class="sortorder" ng-show="model.predicate == 'grd_yr'" ng-class="{reverse:model.reverse}"></span>
+                <a ng-click="model.toggleSort('grd_yr')" href="">
+                    Graduation Year
+                </a>
+            </th>
+            <th>
+                <span class="sortorder" ng-show="model.predicate == 'pri_spec'" ng-class="{reverse:model.reverse}"></span>
+                <a ng-click="model.toggleSort('pri_spec')" href="">
+                    Primary Speciality
+                </a>
+            </th>
             <th>Address</th>
             <th>Zipcode</th>
         </tr>
