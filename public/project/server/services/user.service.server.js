@@ -4,15 +4,16 @@
 
 "use strict";
 
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+/*var passport = require('passport');*/
+/*var LocalStrategy = require('passport-local').Strategy;*/
 var bcrypt = require("bcrypt-nodejs");
 
-module.exports = function(app, userModel){
+module.exports = function(app, userModel, securityService){
 
     var auth = authorized;
+    var passport = securityService.getPassport();
 
-    app.post    ("/api/project/login", passport.authenticate('medical-tourism'), login);
+    app.post    ("/api/project/login", passport.authenticate('project'), login);
     app.get     ("/api/project/loggedin",   loggedin);
     app.post    ("/api/project/logout",     logout);
     app.post    ("/api/project/register",   createUser);
@@ -22,7 +23,7 @@ module.exports = function(app, userModel){
     app.delete  ("/api/project/user/:username",   auth,  deleteUser);
     app.get     ("/api/project/user/:userId", auth,     getUserByUserId);
 
-    passport.use('medical-tourism',  new LocalStrategy(localStrategy));
+    /*passport.use('medical-tourism',  new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -59,7 +60,7 @@ module.exports = function(app, userModel){
                     done(err, null);
                 }
             );
-    }
+    }*/
 
     function login(req, res){
         var user = req.user;
@@ -67,7 +68,7 @@ module.exports = function(app, userModel){
     }
 
     function loggedin(req, res){
-        res.send(req.isAuthenticated() ? req.user : '0');
+        res.send(req.isAuthenticated() && req.user.app === "medicalTourism" ? req.user : '0');
     }
 
     function logout(req, res){

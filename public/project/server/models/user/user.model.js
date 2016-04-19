@@ -16,7 +16,8 @@ module.exports = function(db) {
         findUserById: findUserById,
         findUserByUsername: findUserByUsername,
         deleteUserById: deleteUserById,
-        findAllUsers: findAllUsers
+        findAllUsers: findAllUsers,
+        updateUserById: updateUserById
     };
     return api;
 
@@ -116,4 +117,5 @@ module.exports = function(db) {
         );
         return deferred.promise;
     }
-}
+
+};

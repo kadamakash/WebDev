@@ -4,24 +4,25 @@
 'use strict';
 
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+/*var LocalStrategy = require('passport-local').Strategy;*/
 var bcrypt = require("bcrypt-nodejs");
 
-module.exports = function (app, userModel) {
+module.exports = function (app, userModel, securityService) {
 
     var auth = authorized;
+    var passport = securityService.getPassport();
 
     app.get("/api/assignment/user", getAllUsers);
     app.get("/api/assignment/user/username/:username", getUserByUsername);
     app.put("/api/assignment/user/:id", auth, updateUserById);
     app.delete("/api/assignment/user/:id", auth, deleteUserById);
     app.get("/api/assignment/user/:id", auth, getUserById);
-    app.post('/api/assignment/login', passport.authenticate('local'), login);
+    app.post('/api/assignment/login', passport.authenticate('assignment'), login);
     app.post('/api/assignment/logout', logout);
     app.get("/api/assignment/loggedin", loggedin);
     app.post("/api/assignment/register", createUser);
 
-    passport.use(new LocalStrategy(localStrategy));
+    /*passport.use('assignment', new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -42,15 +43,6 @@ module.exports = function (app, userModel) {
             );
     }
 
-    function authorized (req, res, next) {
-        if (!req.isAuthenticated()) {
-            res.send(401);
-        } else {
-            next();
-        }
-    }
-
-
     function serializeUser(user, done) {
         done(null, user);
     }
@@ -67,9 +59,20 @@ module.exports = function (app, userModel) {
                 }
             );
     }
+*/
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    }
+
+
+
 
     function loggedin(req, res){
-        res.send(req.isAuthenticated() ? req.user : '0');
+        res.send(req.isAuthenticated() && req.user.app === "assignment" ? req.user : '0');
     }
 
     function logout(req, res){

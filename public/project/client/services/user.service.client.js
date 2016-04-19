@@ -52,11 +52,11 @@
         }
 
         function findUserById(userId){
-            return $http.get("/api/project/user"+userId);
+            return $http.get("/api/project/user/"+userId);
         }
 
         function deleteUserById(userId){
-            return $http.delete("/api/project/user"+userId);
+            return $http.delete("/api/project/user/"+userId);
         }
 
         function getLoggedinUser(){

@@ -55,26 +55,38 @@
 
 </div>
 <br>
-<div class="col-sm-6" ng-if="currentUser">
+<div class="col-sm-8 col-sm-offset-2" ng-if="currentUser">
     <table class="table table-responsive">
         <thead>
         <tr>
             <th>Review</th>
-            <th>No. of Stars(_/5)</th>
+            <th>Ratings (out of 5)</th>
+            <td>Actions</td>
+
         </tr>
 
         </thead>
         <tbody>
+
+        <tr>
+            <td><input type="text" class="form-control" id="review" placeholder="Write Review" ng-model="model.review.description"/> </td>
+            <td><input type="text" class="form-control" id="rating" placeholder="Rating out of 5" ng-model="model.review.rating"/> </td>
+            <td class="action-column">
+                <a ng-show="model.selectedReview" ng-click="model.unselectReview()" class="glyphicon glyphicon-remove btn btn-danger"></a>
+                <a ng-hide="model.selectedReview" ng-click="model.addReview(model.review)" class="glyphicon glyphicon-plus btn btn-primary"></a>
+                <a ng-show="model.selectedReview" ng-click="model.updateReview(model.review)" class="glyphicon glyphicon-ok btn btn-success"></a>
+            </td>
+        </tr>
+
+
         <tr ng-repeat="review in model.reviews">
             <td>{{review.review}}</td>
             <td>{{review.rating}}</td>
-        </tr>
-        <tr>
-            <th><input ng-model="model.review.description" class="form-control"/></th>
-            <th><input ng-model="model.review.rating" class="form-control"/></th>
-            <th>
-                <button ng-click="model.addReview(model.review)" class="btn btn-primary">Add</button>
-            </th>
+            <td class="action-column">
+                <a ng-click="model.deleteReview(review)" class="glyphicon glyphicon-remove btn btn-danger"></a>&nbsp;
+                <a ng-click="model.selectReview(review)" class="glyphicon glyphicon-cog btn btn-info"></a>
+            </td>
+
         </tr>
         </tbody>
     </table>

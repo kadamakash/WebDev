@@ -38,18 +38,25 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
-app.use(cookieParser());
+
 app.use(session({
     secret: "MySecret",
     resave: true,
     saveUninitialized: true}));
-
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./public/assignment/server/app.js")(app, db);
+var assignmentUserModel = require("./public/assignment/server/models/user/user.model.server.js")(db, mongoose);
+var projectUserModel = require("./public/project/server/models/user/user.model.js")(db, mongoose);
+
+var securityService = require("./public/security/security.js")(assignmentUserModel, projectUserModel);
+require("./public/assignment/server/app.js")(app, db, assignmentUserModel,securityService);
+require("./public/project/server/app.js")(app,db, projectUserModel, securityService);
+
+/*require("./public/assignment/server/app.js")(app, db);*/
 require("./public/projectExp/server/app.js")(app, uuid, db, mongoose);
-require("./public/project/server/app.js")(app, db, mongoose);
+/*require("./public/project/server/app.js")(app, db, mongoose);*/
 
 app.get('/hello', function(req,res){
     res.send('hello world');

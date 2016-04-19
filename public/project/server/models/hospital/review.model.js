@@ -87,7 +87,7 @@ module.exports = function(db){
     function deleteReviewById(reviewId){
         var deferred = q.defer();
         ReviewModel
-            .remove({_id: review_id}, function(err, doc){
+            .remove({_id: reviewId}, function(err, doc){
                 if(err){
                     deferred.reject(err);
                 } else {

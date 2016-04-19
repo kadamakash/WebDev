@@ -19,14 +19,51 @@
         var provider_id = $routeParams.provider_id;
         vm.provider_id = provider_id;
 
+        vm.selectReview = selectReview;
+        vm.unselectReview = unselectReview;
+        vm.deleteReview = deleteReview;
+        vm.updateReview = updateReview;
+
+        vm.selectedReview = null;
+        vm.review = null;
+
         function init(){
 
             details(provider_id);
             care(provider_id);
-            showReviews();
+            /*showReviews();*/
+
+            ReviewService
+                .findAllReviewsForHospital(provider_id)
+                .then(function(res){
+                    console.log(res.data);
+                    vm.reviews = res.data;
+                },
+                function(err){
+                    console.log(err);
+                });
+            unselectReview();
 
         }
         init();
+
+        function unselectReview(){
+            vm.review = null;
+            vm.selectedReview = null;
+        }
+
+        function selectReview(review){
+            vm.review = angular.copy(review);
+            vm.selectedReview = true;
+        }
+
+        function deleteReview(review){
+            ReviewService
+                .deleteReviewById(review._id)
+                .then(function(response){
+                    init();
+                });
+        }
 
         function details(provider_id){
             HospitalService
@@ -62,13 +99,21 @@
             };
             ReviewService
                 .addReview(newReview)
-                .then(addReviewCallback);
-            vm.review = null;
+                .then(function(response){
+                    init();
+                });
         }
-        function addReviewCallback(review){
-            console.log(review);
-            showReviews();
+
+        function updateReview(review){
+            var updatedReview = angular.copy(review);
+            delete updatedReview._id;
+            ReviewService
+                .updateReviewById(review._id, updatedReview)
+                .then(function(response){
+                    init();
+                });
         }
+
         /*function image(provider_id){
             HospitalService
                 .findHospitalById(provider_id)

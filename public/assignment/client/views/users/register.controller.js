@@ -7,7 +7,7 @@
         .module("FormBuilderApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($location, UserService, $rootScope) {
+    function RegisterController($location, UserService) {
 
         var vm = this;
         vm.register = register;
@@ -51,19 +51,19 @@
                 );
         }
 
-        function isDuplicateUsername(username){
+        /*function isDuplicateUsername(username){
             UserService
                 .findUserByUsername(username)
                 .then(function(response){
                     var user = response.data;
                     if(user){
-                        consle.log("duplicate user");
+                        console.log("duplicate user");
                         return true;
                     }
                     else {
                         return false;
                     }
                 });
-        }
+        }*/
     }
 })();

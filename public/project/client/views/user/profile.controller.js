@@ -11,10 +11,10 @@
         var vm = this;
 
         function init(){
-            var user = UserService.getCurrentUser();
-            if(user) {
+            var usr = UserService.getCurrentUser();
+            if(usr) {
                 UserService
-                    .findUserById(user._id)
+                    .findUserById(usr._id)
                     .then(
                         function(response){
                             vm.currentUser = response.data;
