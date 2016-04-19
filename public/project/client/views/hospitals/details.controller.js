@@ -11,11 +11,14 @@
     function DetailsController($routeParams, HospitalService){
         var vm = this;
         vm.details = details;
+        vm.care = care;
+
 
         function init(){
             var provider_id = $routeParams.provider_id;
             vm.provider_id = provider_id;
             details(provider_id);
+            care(provider_id);
         }
         init();
 
@@ -26,6 +29,24 @@
                         vm.hospital = response;
                     });
         }
+
+        function care(provider_id){
+            HospitalService
+                .findCareInfoById(provider_id, function(response){
+                    vm.careInfo = response;
+                });
+        }
+
+        /*function image(provider_id){
+            HospitalService
+                .findHospitalById(provider_id)
+                .then(function(response){
+                    HospitalService
+                        .findHospitalImage(response.hospital_name, function(response){
+                            vm.img = img;
+                        })
+                })
+        }*/
     }
 
     function addHospitalToFavourites(){

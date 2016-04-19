@@ -31,7 +31,7 @@
 
         <div class="row carousel-holder">
             <br>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Medical Tourism</div>
                     <div class="panel-body">
@@ -41,12 +41,22 @@
                 </div>
                 </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Dont want to join?</div>
                     <div class="panel-body">
                         <p>You can still search and manage your favourite Hospitals.</p>
                         <a href="#/search" class="btn btn-info">Start Searching Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Find Physicians in your city</div>
+                    <div class="panel-body">
+                        <p>Search and view information about physicians working in hospitals across the city</p>
+                        <a href="#/physician" class="btn btn-info">Start Searching</a>
                     </div>
                 </div>
             </div>
@@ -58,7 +68,7 @@
 
 <div class="col-md-12">
 <div ng-if="currentUser" class="row">
-    <h2>Welcome {{currentUser.firstName}}!</h2>
+    <h2>Welcome {{currentUser.username}}!</h2>
 </div>
 <br>
 

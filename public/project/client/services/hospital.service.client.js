@@ -11,7 +11,8 @@
 
         var api = {
             findHospitalByCity: findHospitalByCity,
-            findHospitalById: findHospitalById
+            findHospitalById: findHospitalById,
+            findCareInfoById: findCareInfoById
         };
         return api;
 
@@ -25,5 +26,9 @@
                 .success(callback);
         }
 
+        function findCareInfoById(provider_id, callback){
+            $http.get("https://data.medicare.gov/resource/3z8n-wcgr.json?provider_id="+ provider_id)
+                .success(callback);
+        }
     }
 })();

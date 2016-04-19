@@ -1,6 +1,6 @@
 <div class="row search-text">
-    <div class="col-sm-4 col-sm-offset-4">
-        <h2>Enter City to Search Hospitals</h2>
+    <div class="col-sm-6">
+        <h2>Enter City to Search for Hospitals</h2>
         <form>
             <div class="input-group input-group-lg">
                 <input type="text" class="form-control input-lg" placeholder="e.g. Boston" ng-model="model.name"/>
@@ -16,13 +16,14 @@
 
 <div class="panel panel-success" ng-show="model.hospitals">
     <div class="panel-heading"><h4>Search Results</h4></div>
-    <div class="panel-bodyl">
+    <div class="panel-body">
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Provider ID</th>
             <th>Name</th>
             <th>Address</th>
+            <th>Type</th>
         </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@
             <td><a href="#/details/{{hospital.provider_id}}">{{hospital.provider_id}}</a></td>
             <td>{{hospital.hospital_name}}</td>
             <td>{{hospital.address}}</td>
+            <td>{{hospital.hospital_type}}</td>
         </tr>
         </tbody>
     </table>

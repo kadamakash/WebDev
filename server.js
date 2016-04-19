@@ -8,6 +8,8 @@ var uuid = require('node-uuid');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var bing = require('node-bing-api')({accKey: "Tk5Wf6QPZEIEJ0tLjugmb9BWzflaxddD3ilqY8rz0ho"});
+
 
 // creating default connection string
 var connectionString ='mongodb://127.0.0.1:27017/webDevAssignment';

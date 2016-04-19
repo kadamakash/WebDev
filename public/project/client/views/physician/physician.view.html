@@ -1,0 +1,51 @@
+<div class="col-md-12">
+    <div class="row search-text">
+        <div class="col-sm-6">
+            <h2>Search Physician's by city</h2>
+            <form>
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control input-lg" placeholder="e.g. Boston" ng-model="model.city"/>
+                <span class="input-group-btn">
+                    <a class="btn btn-info btn-lg" type="submit" ng-click="model.search(model.city)"><i class="fa fa-search"></i></a>
+                </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br>
+    <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
+
+    <div ng-show="model.physicians">
+    <strong><h2>Physician Details</h2></strong>
+
+    <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+            <th>PAC ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Medical School attended</th>
+            <th>Graduation Year</th>
+            <th>Primary Speciality</th>
+            <th>Address</th>
+            <th>Zipcode</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="physician in model.physicians">
+            <td>{{physician.ind_pac_id}}</td>
+            <td>{{physician.frst_nm}}</td>
+            <td>{{physician.lst_nm}}</td>
+            <td>{{physician.med_sch}}</td>
+            <td>{{physician.grd_yr}}</td>
+            <td>{{physician.pri_spec}}</td>
+            <td>{{physician.adr_ln_1}}</td>
+            <td>{{physician.zip}}</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+</div>

@@ -47,6 +47,16 @@
                     controller: "SearchController",
                     controllerAs: "model"
                 })
+                .when("/physician", {
+                    templateUrl: "views/physician/physician.view.html",
+                    controller: "PhysicianController",
+                    controllerAs: "model"
+                })
+                .when("/physician/:city", {
+                    templateUrl: "views/physician/physician.view.html",
+                    controller: "PhysicianController",
+                    controllerAs: "model"
+                })
                 .when("/details/:provider_id",{
                     templateUrl: "views/hospitals/details.view.html",
                     controller: "DetailsController",
@@ -60,7 +70,8 @@
                     controller: "AdminController",
                     controllerAs: "model",
                     resolve: {
-                        checkLoggedIn: checkAdmin
+                        /*checkAdmin: checkAdmin*/
+                        checkLoggedIn: checkLoggedIn
                     }
                 })
                 .otherwise({
@@ -103,7 +114,8 @@
                 UserService
                     .getLoggedinUser()
                     .success(function(user){
-                        if(user !== '0' && user.valueOf('admin') != false){
+                        /*console.log(user);*/
+                        if(user !== '0' && user.admin){
                             UserService.setCurrentUser(user);
                             deferred.resolve();
                         } else {

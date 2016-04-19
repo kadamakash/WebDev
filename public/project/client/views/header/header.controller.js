@@ -14,6 +14,7 @@
         vm.logout = logout;
         vm.search = search;
 
+
         function init(){
             vm.$location = $location;
         }
@@ -35,7 +36,7 @@
             vm.searchtxt = null;
             vm.isCollapsed = !vm.isCollapsed;
             if(name) {
-                $location.url('/search' + name);
+                $location.url("/search/"+ name);
             } else {
                 $location.url('/search');
             }
