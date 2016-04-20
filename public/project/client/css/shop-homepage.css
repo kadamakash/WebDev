@@ -64,3 +64,8 @@ footer {
     padding-bottom: 5px;
     margin-bottom: 5px;
 }
+
+.panel-pad {
+    height: 200px;
+    overflow-y: scroll;
+}

@@ -35,5 +35,6 @@
         function search(name){
             $location.url('/search/' +name);
         }
+
     }
 })();

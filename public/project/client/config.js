@@ -74,6 +74,14 @@
                         checkLoggedIn: checkLoggedIn
                     }
                 })
+                .when("/get-a-quote/:userId",{
+                    templateUrl: "views/quote/quote.view.html",
+                    controller: "QuoteController",
+                    controllerAs: "model",
+                    resolve: {
+                        checkLoggedIn: checkLoggedIn
+                    }
+                })
                 .otherwise({
                     redirectTo: "/"
                 });
