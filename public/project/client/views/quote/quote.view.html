@@ -1,0 +1,100 @@
+<div class="row" ng-if="currentUser">
+    <div class="col-md-8 col-sm-offset-2">
+
+        <h2 class="text-center"><strong>Profile</strong></h2>
+
+        <div ng-show="model.message" class="alert alert-success" role="alert">
+            <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.message}}
+        </div>
+
+        <div ng-show="model.error" class="alert alert-danger" role="alert">
+            <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.error}}
+        </div>
+
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                <label for="firstName" class="col-md-2 control-label">First Name:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="firstName" placeholder="Firstname" ng-model="model.quote.firstName">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName" class="col-md-2 control-label">Last Name:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="lastName" placeholder="Lastname" ng-model="model.quote.lastName">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="gender" class="col-md-2 control-label">Gender:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="gender" placeholder="Male/Female" ng-model="model.quote.gender">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="age" class="col-md-2 control-label">Age:</label>
+                <div class="col-md-10">
+                    <input type="number" class="form-control" id="age" placeholder="25" ng-model="model.quote.age">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="col-md-2 control-label">Email:</label>
+                <div class="col-md-10">
+                    <input type="email" class="form-control" id="email" placeholder="Email" ng-model="model.quote.email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="col-md-2 control-label">Phone Number:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="phone" placeholder="123-456-7788" ng-model="model.quote.phone">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address" class="col-md-2 control-label">Address:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="address" placeholder="1 Huntington Ave" ng-model="model.quote.address">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="city" class="col-md-2 control-label">City:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="city" placeholder="Boston" ng-model="model.quote.city">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="state" class="col-md-2 control-label">State:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="state" placeholder="MA" ng-model="model.quote.state">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="country" class="col-md-2 control-label">Country:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="country" placeholder="USA" ng-model="model.quote.country">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="message" class="col-md-2 control-label">Message: </label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="message" placeholder="Enter any questions you have" ng-model="model.quote.message">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a class="btn btn-success btn-block" ng-click="model.sendQuote(model.quote)">Submit</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -62,7 +62,8 @@
                     controller: "DetailsController",
                     controllerAs: "model",
                     resolve:{
-                        getLoggedIn: getLoggedIn
+                        /*getLoggedIn: getLoggedIn*/
+                        checkLoggedIn: checkLoggedIn
                     }
                 })
                 .when("/admin",{
@@ -74,7 +75,7 @@
                         checkLoggedIn: checkLoggedIn
                     }
                 })
-                .when("/get-a-quote/:userId",{
+                .when("/get-a-quote",{
                     templateUrl: "views/quote/quote.view.html",
                     controller: "QuoteController",
                     controllerAs: "model",

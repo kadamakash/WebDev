@@ -12,8 +12,10 @@ module.exports = function(){
             email: String,
             address: String,
             admin: {type: Boolean, default: false},
+            expert: {type: Boolean, default: false},
             bookmarked: [String],
             app: {type:String, default:"medicalTourism"}
+
 
         }, {collection: "project.user"});
     return UserSchema;

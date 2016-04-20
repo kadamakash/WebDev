@@ -10,7 +10,7 @@
     function AdminService($http){
         var api = {
             findUserById: findUserById,
-            findAllUsrs: findAllUsers,
+            findAllUsers: findAllUsers,
             createUser: createUser,
             updateUser: updateUser,
             deleteUserById: deleteUserById

@@ -31,13 +31,12 @@
                     function(response){
                         vm.users = response.data;
                         refreshSort();
-                        console.log(vm.users);
                     },
                     function(err){
                         console.log(err);
                     }
                 );
-            unselectedUser();
+            unselectUser();
         }
         init();
 

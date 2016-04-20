@@ -21,7 +21,7 @@
             console.log("Inside Register");
             vm.message = null;
             if(!user){
-                vm.message = "Please fill all the reqired fields";
+                vm.message = "Please fill all the required fields";
                 return;
             }
             if(!user.username){
