@@ -20,7 +20,7 @@
         vm.addUser = addUser;
         vm.updateUser = updateUser;
         vm.selectUser = selectUser;
-        vm.unselectedUser = unselectedUser;
+        vm.unselectUser = unselectUser;
         vm.toggleSort = toggleSort;
         vm.deleteUser = deleteUser;
 
@@ -55,14 +55,14 @@
             vm.selectedUser = true;
         }
 
-        function unselectedUser(){
+        function unselectUser(){
             vm.user = null;
             vm.selectedUser = null;
         }
 
         function updateUser(user){
             if(user && user.username && user.password){
-                var updateUser = angular.copy(user);
+                var updatedUser = angular.copy(user);
                 delete updatedUser._id;
                 AdminService
                     .updateUser(user._id, updatedUser)

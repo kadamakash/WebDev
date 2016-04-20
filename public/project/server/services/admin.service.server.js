@@ -18,7 +18,7 @@ module.exports = function(app, userModel){
     function getUserByUserId(Req, res){
         var userId = req.params.userId;
         userModel
-            .findUserByUserId(userId)
+            .findUserById(userId)
             .then(
                 function(doc){
                     res.json(user);

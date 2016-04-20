@@ -59,7 +59,7 @@ module.exports = function(db) {
                     deferred.resolve(stats);
                 }
             });
-        return defered.promise;
+        return deferred.promise;
     }
 
     function findUserById(userId){
