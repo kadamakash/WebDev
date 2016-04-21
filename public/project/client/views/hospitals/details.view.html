@@ -1,59 +1,77 @@
-<div class="panel panel-primary col-sm-6">
-    <div class="panel-heading">
-        <div class="row">
-               <strong><h2 class="text-left">{{model.hospital[0].hospital_name}}</h2></strong>
+<div class="col-md-8 col-md-offset-2">
+
+    <div class="panel panel-grid panel-info">
+
+        <div class="panel-heading">
+
+            <div>
+                <i class="fa fa-ambulance fa-4x"></i>&nbsp;
+                <h1 class="custom-heading">{{model.hospital[0].hospital_name}}</h1>
+            </div>
+
+        </div>
+
+        <div class="panel-body">
+            <p><strong> Type: {{model.hospital[0].hospital_type}}</strong></p>
+            <p><strong> Address: {{model.hospital[0].address}}</strong></p>
+            <p><strong> ZipCode: {{model.hospital[0].zip_code}}</strong></p>
+            <p><strong> City: {{model.hospital[0].city}}</strong></p>
+            <p><strong> State: {{model.hospital[0].state}}</strong></p>
+            <p><strong> Phone Number: {{model.hospital[0].phone_number.phone_number}}</strong></p>
+        </div>
+
+        <div class="panel-footer">
+            <button ng-hide="model.isBookmarked" ng-click="model.bookmark()" class="btn btn-primary">Bookmark Hospital</button>
+            <button ng-show="model.isBookmarked" ng-click="model.unbookmark()" class="btn btn-primary">Unbookmark Hospital</button>
         </div>
     </div>
-
-    <div class="panel-body">
-        <p><strong><h3> Type: {{model.hospital[0].hospital_type}}</h3></strong></p>
-        <p><strong><h3> Address: {{model.hospital[0].address}}</h3></strong></p>
-        <p><strong><h3> ZipCode: {{model.hospital[0].zip_code}}</h3></strong></p>
-        <p><strong><h3> City: {{model.hospital[0].city}}</h3></strong></p>
-        <p><strong><h3> State: {{model.hospital[0].state}}</h3></strong></p>
-        <p><strong><h3> Phone Number: {{model.hospital[0].phone_number.phone_number}}</h3></strong></p>
-    </div>
-
 </div>
 
-<div class="panel panel-primary col-sm-6">
+<!--<div class="panel panel-primary col-sm-6">
     <div class="panel-heading">
        <h2> USER ACTIONS </h2>
     </div>
     <div class="panel-body">
-        <button  class="btn btn-group-justified" ng-click="model.bookmarkHospital()" ng-show="currentUser" type="submit"><h4>Add to Favourite</h4></button><br>
+        <button  class="btn btn-group-justified" ng-click="model.bookmarkHospital()" ng-show="currentUser" type="submit"><h4>Bookmark this Hospital</h4></button><br>
         <button  class="btn btn-group-justified" ng-click="model.addReview()" ng-show="currentUser" type="submit"><h4>Reviews</h4></button><br>
         <button  class="btn btn-group-justified" ng-click="model.findAccommodation()" ng-show="currentUser" type="submit"><h4>Find Apartment</button></h4><br>
         <button  class="btn btn-group-justified" ng-click="model.askTheExpert()" ng-show="currentUser" type="submit"><h4>Ask the Expert</h4></button>
     </div>
+</div>-->
+
+<div class="col-md-8 col-md-offset-2">
+
+    <strong><h2>Timely and Effective Care Information</h2></strong>
+    <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+            <th>Condition</th>
+            <th>Measure Name</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="care in model.careInfo">
+            <td>{{care.condition}}</td>
+            <td>{{care.measure_name}}</td>
+            <td>{{care.score}}</td>
+        </tr>
+        </tbody>
+    </table>
+
 </div>
 
 <br>
-<div class="panel panel-primary col-sm-12">
+<!--<div class="panel panel-primary col-sm-12">
     <div class="panel-heading">
-        <strong><h2>Timely and Effective Care Information</h2></strong>
+
     </div>
 
     <div class="panel-body">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Condition</th>
-                <th>Measure Name</th>
-                <th>Score</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="care in model.careInfo">
-                <td>{{care.condition}}</td>
-                <td>{{care.measure_name}}</td>
-                <td>{{care.score}}</td>
-            </tr>
-            </tbody>
-        </table>
+
     </div>
 
-</div>
+</div>-->
 <br>
 <div class="col-sm-8 col-sm-offset-2" ng-if="currentUser">
     <table class="table table-responsive">

@@ -22,6 +22,8 @@ module.exports = function(app, userModel, securityService){
     app.put     ("/api/project/user/:userId", auth,  updateUser);
     app.delete  ("/api/project/user/:username",   auth,  deleteUser);
     app.get     ("/api/project/user/:userId", auth,     getUserByUserId);
+    app.post    ("/api/project/user/:userId/bookmarked", addBookmarkedHospital);
+    app.delete  ("/api/project/user/:userId/bookmarked/:bookmarkedId", deleteBookmarkedHospital);
 
     /*passport.use('medical-tourism',  new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -203,5 +205,35 @@ module.exports = function(app, userModel, securityService){
         } else {
             next();
         }
+    }
+
+    function addBookmarkedHospital(req, res){
+        var userId = req.params.userId;
+        var bookmarkedHospital = req.body;
+        userModel
+            .addBookmarkedHospital(userId, bookmarkedHospital)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function deleteBookmarkedHospital(req, res){
+        var userId = req.params.userId;
+        var bookmarkedId = req.params.bookmarkedId;
+        userModel
+            .deleteBookmarkedHospital(userId, bookmarkedId)
+            .then(
+                function(stats){
+                    res.send(stats);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
 };

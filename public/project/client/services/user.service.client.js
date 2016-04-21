@@ -19,7 +19,9 @@
             deleteUserById: deleteUserById,
             getLoggedinUser: getLoggedinUser,
             login: login,
-            logout: logout
+            logout: logout,
+            addBookmarkedHospital: addBookmarkedHospital,
+            deleteBookmarkedHospital: deleteBookmarkedHospital
         };
         return api;
 
@@ -69,6 +71,14 @@
 
         function logout(){
             return $http.post("/api/project/logout");
+        }
+
+        function addBookmarkedHospital(userId, bookmarkedHospital){
+            return $http.post("/api/project/user/"+userId+"/bookmarked", bookmarkedHospital);
+        }
+
+        function deleteBookmarkedHospital(userId, bookmarkedId){
+            return $http.delete("/api/project/user/"+userId+"/bookmarked/"+bookmarkedId);
         }
 
 

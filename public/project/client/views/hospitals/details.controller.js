@@ -24,6 +24,10 @@
         vm.deleteReview = deleteReview;
         vm.updateReview = updateReview;
 
+        vm.bookmark = bookmark;
+        vm.unbookmark = unbookmark;
+        vm.viewingUser = UserService.getCurrentUser();
+
         vm.selectedReview = null;
         vm.review = null;
 
@@ -44,8 +48,44 @@
                 });
             unselectReview();
 
+            vm.isBookmarked = doesExist(vm.provider_id, vm.viewingUser.bookmarked);
         }
         init();
+
+        function doesExist(id, list){
+            var f = false;
+            for(var a in list){
+                if(list[a].providerId == id){
+                    f = true;
+                    break;
+                }
+            }
+            return f;
+        }
+
+        function bookmark(){
+            UserService
+                .addBookmarkedHospital(vm.viewingUser._id, {providerId: vm.provider_id, hospitalName: vm.hospital[0].hospital_name})
+                .then(
+                    function(response){
+                        vm.isBookmarked = true;
+                    },
+                    function(err){
+                        console.log(err);
+                    }
+                )
+        }
+
+        function unbookmark(){
+            UserService
+                .deleteBookmarkedHospital(vm.viewingUser._id, vm.provider_id)
+                .then(function(response){
+                    vm.isBookmarked = false;
+                },
+                function(err){
+                    console.log(err);
+                })
+        }
 
         function unselectReview(){
             vm.review = null;

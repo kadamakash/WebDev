@@ -13,7 +13,7 @@ module.exports = function(){
             address: String,
             admin: {type: Boolean, default: false},
             expert: {type: Boolean, default: false},
-            bookmarked: [String],
+            bookmarked: [{providerId: String, hospitalName: String}],
             app: {type:String, default:"medicalTourism"}
 
 

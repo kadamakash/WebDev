@@ -1,11 +1,5 @@
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-10 col-md-offset-1">
     <h2 class="text-center"><strong>Profile</strong></h2>
-    <div ng-show="model.message" class="alert alert-success" role="alert">
-        <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.message}}
-    </div>
-    <div ng-show="model.error" class="alert alert-danger" role="alert">
-        <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.error}}
-    </div>
 
     <form class="form-horizontal">
         <div class="form-group">
@@ -55,4 +49,41 @@
             </div>
         </div>
     </form>
+
+    <div ng-show="model.message" class="alert alert-success" role="alert">
+        <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.message}}
+    </div>
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.error}}
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"> Bookmarked Hospitals</div>
+                <div class="panel-body table-responsive fixed-panel">
+                    <ul class="list-inline">
+                        <li ng-repeat="hospital in model.currentUser.bookmarked" class="col-xs-4">
+                            <a href="#/details/{{hospital.providerId}}"><i class="fa fa-user"></i>&nbsp;{{hospital.hospitalName}}</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Reviews</div>
+            <div class="panel-body fixed-panel">
+                <ul class="list-inline">
+                    <li ng-repeat="review in model.reviews" class="col-xs-4">
+                        {{review.review}}&nbsp;{{review.rating}}&nbsp;{{review.hospitalName}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 </div>

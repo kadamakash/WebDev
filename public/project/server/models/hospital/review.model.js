@@ -11,7 +11,7 @@ module.exports = function(db){
 
     var api = {
         addReview: addReview,
-        findAllReviewsForUser: findAllReviewsForUser,
+        getReviewForUser: getReviewForUser,
         findAllReviewsForHospital: findAllReviewsForHospital,
         findReviewById: findReviewById,
         updateReviewById: updateReviewById,
@@ -32,7 +32,7 @@ module.exports = function(db){
         return deferred.promise;
     }
 
-    function findAllReviewsForUser(userId){
+    function getReviewForUser(userId){
         var deferred = q.defer();
         ReviewModel
             .find({reviewed_by: userId}, function(err, doc){

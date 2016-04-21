@@ -13,7 +13,7 @@ module.exports = function (app, model){
     function findAllReviewsForUser(req, res){
         var review = req.body;
         model
-            .addReview(review)
+            .getReviewForUser(review)
             .then(function(doc){
                 res.json(doc);
             }, function(err){

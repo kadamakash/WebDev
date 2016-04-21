@@ -75,3 +75,13 @@ footer {
     height: 450px;
     width: 1900px;
 }
+
+.fixed-panel {
+    min-height: 100px;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.custom-heading{
+    display: inline;
+}

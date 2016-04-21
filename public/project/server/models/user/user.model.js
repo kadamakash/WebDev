@@ -17,7 +17,9 @@ module.exports = function(db) {
         findUserByUsername: findUserByUsername,
         deleteUserById: deleteUserById,
         findAllUsers: findAllUsers,
-        updateUserById: updateUserById
+        updateUserById: updateUserById,
+        addBookmarkedHospital: addBookmarkedHospital,
+        deleteBookmarkedHospital: deleteBookmarkedHospital
     };
     return api;
 
@@ -115,6 +117,40 @@ module.exports = function(db) {
                 }
             }
         );
+        return deferred.promise;
+    }
+
+    function addBookmarkedHospital(userId, bookmarkedHospital){
+        var deferred = q.defer();
+        UserModel
+            .findById(
+                userId,
+                function(err, doc){
+                    if(err){
+                        deferred.reject(err);
+                    } else {
+                        doc.bookmarked.push(bookmarkedHospital);
+                        deferred.resolve(doc.save());
+                    }
+                }
+            );
+        return deferred.promise;
+    }
+
+    function deleteBookmarkedHospital(userId, bookmarkedId){
+        var deferred = q.defer();
+        UserModel
+            .findByIdAndUpdate(
+                {_id: userId},
+                {$pull: {bookmarked: {providerId: bookmarkedId}}},
+                function(err, stats){
+                    if(err){
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(stats);
+                    }
+                }
+            );
         return deferred.promise;
     }
 

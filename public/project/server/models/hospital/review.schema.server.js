@@ -7,6 +7,7 @@ module.exports = function(){
         review: String,
         rating: String,
         provider_id: String,
+        hospitalName: String,
         reviewed_by: String
     }, {collection: 'project.review'});
     return ReviewSchema;

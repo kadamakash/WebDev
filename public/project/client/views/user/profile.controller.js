@@ -27,10 +27,14 @@
             } else {
                 $location.url("/home");
             }
+
+            getReviews(usr);
         }
         init();
 
         vm.updateUser = updateUser;
+
+        vm.getReviews = getReviews;
 
         function updateUser(user){
             if(!vm.changePassword){
@@ -54,6 +58,22 @@
                         console.log("err");
                     }
                 );
+        }
+
+        function getReviews(user){
+            ReviewService
+                .findAllReviewsForUser(user._id)
+                .then(function(response){
+                    var data = response.data;
+                    if(data){
+                        vm.reviews = data;
+                    } else {
+                        vm.msg = "You have no reviews";
+                    }
+                },
+                function(err){
+                    console.log("err");
+                });
         }
     }
 })();
