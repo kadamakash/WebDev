@@ -12,13 +12,13 @@
 
         function init(){
             var usr = UserService.getCurrentUser();
+            vm.changePassword = false;
             if(usr) {
                 UserService
                     .findUserById(usr._id)
                     .then(
                         function(response){
                             vm.currentUser = response.data;
-                            console.log(vm.currentUser);
                         },
                         function(err){
                             console.log(err);
@@ -33,15 +33,19 @@
         vm.updateUser = updateUser;
 
         function updateUser(user){
+            if(!vm.changePassword){
+                delete user.password;
+            }
             UserService
                 .updateUser(user._id, user)
                 .then(
                     function(response){
                         var updatedUser = response.data;
                         if(updatedUser){
-                            vm.message = "Update successfuly";
+                            vm.message = "Update Successfully";
                             UserService
                                 .setCurrentUser(updatedUser);
+                            init();
                         } else {
                             vm.message = "Update failed";
                         }

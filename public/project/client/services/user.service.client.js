@@ -28,15 +28,15 @@
         }
 
         function findUserByUsername(username){
-            return $http.get("/api/project/user/" +username);
+            return $http.get("/api/project/user/username/" +username);
         }
 
         function findAllUsers(){
             return $http.get("/api/project/user");
         }
 
-        function updateUser(userId){
-            return $http.put("/api/project/user/"+userId);
+        function updateUser(userId, user){
+            return $http.put("/api/project/user/"+userId, user);
         }
 
         function deleteUser(userId){

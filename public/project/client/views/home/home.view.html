@@ -1,21 +1,28 @@
-<div class="row" ng-if="!currentUser">
-    <div class="col-md-12">
+<div class="col-md-12" ng-if="!currentUser">
+    <!--<div class="col-md-12">-->
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                 <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-
+                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="4"></li>
             </ol>
             <div class="carousel-inner">
                 <div class="item active">
-                    <img class="slide-image" src="http://chandanmedicaltourism.com/wp-content/uploads/2015/11/head.jpg" height="216" width="1000" alt="">
+                    <img class="slide-image fixed-banner" src="http://www.eme-bd.com/wp-content/uploads/2016/01/banner-of-hospital.jpg" alt="">
                 </div>
                 <div class="item">
-                    <img class="slide-image" src="https://astrahealthcare.in/resources/img/mt11.jpg" height="216" width="1000" alt="">
+                    <img class="slide-image fixed-banner" src="http://www.bilalhospital.com/images/hospital.jpg" alt="">
                 </div>
                 <div class="item">
-                    <img class="slide-image" src="http://www.top-100-doctors.com/wp-content/themes/topdoctors/images/banner.jpg" height="216" width="1000" alt="">
+                    <img class="slide-image fixed-banner" src="http://satish456.freetzi.com/banner_inside.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img class="slide-image fixed-banner" src="http://www.vasavihospitals.com/images/internationa_patient_banner.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img class="slide-image fixed-banner" src="http://www.xh-gauze.com/wp-content/themes/WPTradeD-en/images/banner.jpg" alt="">
                 </div>
             </div>
             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -25,7 +32,7 @@
                 <span class="glyphicon glyphicon-chevron-right"></span>
             </a>
         </div>
-    </div>
+    <!--</div>-->
 
 <div class="col-md-12 div-block">
     <div class="col-md-8 col-md-offset-2 text-center title-block">
@@ -48,18 +55,18 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Medical Tourism</div>
                     <div class="panel-body panel-pad">
-                        <p>Medical Tourism portal for World class Treatment and Surgery</p>
-                        <a href="#/register" class="btn btn-info">Register Now</a>
+                        <p>Medical Tourism Health Services provides treatment and surgery to international patients at JCI / ISO Internationally accredited hospitals in USA.
+                            All treatments are performed by USA trained and board certified doctors and surgeons. <br><br> <a href="#/register" class="btn btn-info">Register Now</a></p>
                     </div>
                 </div>
                 </div>
 
             <div class="col-md-3">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Dont want to join?</div>
+                <div class="panel panel-primary ">
+                    <div class="panel-heading">Don't want to join?</div>
                     <div class="panel-body panel-pad">
-                        <p>You can still search and manage your favourite Hospitals.</p>
-                        <a href="#/search" class="btn btn-info">Start Searching Now</a>
+                        <p>You can still search and manage your favourite Hospitals. Our portal allows you to view Hospitals across all the cities in United States. You can also view
+                        access information about your physicians across the country. <br><br> <a href="#/search" class="btn btn-info">Start Searching Now</a></p>
                     </div>
                 </div>
             </div>
@@ -68,8 +75,9 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Find Physicians in your city</div>
                     <div class="panel-body panel-pad">
-                        <p>Search and view information about physicians working in hospitals across the city</p>
-                        <a href="#/physician" class="btn btn-info">Start Searching</a>
+                        <p>Search and view information about physicians working in hospitals across the city. You can access all physician's information including the
+                        physician's ID, Medical school attended, Graduation year and Speciality.<br><br> <a href="#/physician" class="btn btn-info">Start Searching Now</a></p>
+
                     </div>
                 </div>
             </div>
@@ -79,8 +87,7 @@
                     <div class="panel-heading">Get Free Medical Quote</div>
                     <div class="panel-body panel-pad">
                         <p>MedicalTourism gives you best hospital for taking best and safe treatments. You can request a free no obligation medical
-                            quote from Medical Tourism Services by submitting your current medical status.</p>
-                        <a href="#/login" class="btn btn-info">Get Now</a>
+                            quote from Med ical Tourism Services by submitting your current medical status. So why Wait?<br><br> <a href="#/login" class="btn btn-info">Get Quote Now</a></p>
                     </div>
                 </div>
             </div>
@@ -93,7 +100,7 @@
 
 <div class="col-md-12">
 <div ng-if="currentUser" class="row">
-    <h2>Welcome {{currentUser.username}}!</h2>
+    <h2>Welcome {{currentUser.firstName}}!</h2>
 </div>
 <br>
 

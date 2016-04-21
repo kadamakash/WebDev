@@ -66,6 +66,12 @@ footer {
 }
 
 .panel-pad {
-    height: 200px;
-    overflow-y: scroll;
+    height: auto;
+    width: auto;
+    text-align: justify;
+}
+
+.fixed-banner {
+    height: 450px;
+    width: 1900px;
 }

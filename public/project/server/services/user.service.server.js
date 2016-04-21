@@ -4,7 +4,7 @@
 
 "use strict";
 
-/*var passport = require('passport');*/
+var passport = require('passport');
 /*var LocalStrategy = require('passport-local').Strategy;*/
 var bcrypt = require("bcrypt-nodejs");
 
@@ -17,7 +17,7 @@ module.exports = function(app, userModel, securityService){
     app.get     ("/api/project/loggedin",   loggedin);
     app.post    ("/api/project/logout",     logout);
     app.post    ("/api/project/register",   createUser);
-    app.get     ("/api/project/user/:username",     getUserByUsername);
+    app.get     ("/api/project/user/username/:username",     getUserByUsername);
     app.get     ("/api/project/user",   auth, getAllUsers);
     app.put     ("/api/project/user/:userId", auth,  updateUser);
     app.delete  ("/api/project/user/:username",   auth,  deleteUser);
@@ -145,7 +145,9 @@ module.exports = function(app, userModel, securityService){
     function updateUser(req, res){
         var userId = req.params.userId;
         var userData = req.body;
-        userData.password = bcrypt.hashSync(userData.password);
+        if(userData.password){
+            userData.password = bcrypt.hashSync(userData.password);
+        }
 
         userModel
             .updateUserById(userId, userData)
