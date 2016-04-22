@@ -5,29 +5,61 @@
 (function () {
     angular
         .module("FormBuilderApp")
-        .controller("ProfileController",ProfileController);
+        .controller("ProfileController", ProfileController);
 
     function ProfileController(UserService) {
 
         var vm = this;
-        /*var currentUser = UserService.getCurrentUser();
-        vm.user = currentUser;*/
+        var usr = null;
+        function init(){
+            usr = UserService.getCurrentUser();
+            vm.changePassword = false;
+            if(usr){
+                vm.currentUser = {
+                    username: usr.username,
+                    firstName: usr.firstName,
+                    lastName: usr.lastName,
+                    password: usr.password,
+                    emails: makeString(usr.emails),
+                    phones: makeString(usr.phones),
+                    roles: usr.roles
+                };
+            } else {
+                vm.$location.url("/home");
+            }
+        }
+        init();
 
 
-        vm.update = update;
+        vm.updateUser = updateUser;
+
+        function makeString(array){
+            return array.join(";");
+        }
 
 
-        function update(user) {
+        function updateUser(user) {
+            if(!vm.changePassword){
+                delete user.password;
+            }
+            user.emails = user.emails.split(";");
+            user.phones = user.phones.split(";");
+            user.updated = Date.now;
             UserService
                 .updateUser(user._id, user)
                 .then(
                     function(response){
-                        vm.users = response.data;
-                        vm.updateMessage = "Updated successfully"
+                        var updatedUser = response.data;
+                        if(updatedUser){
+                            vm.message = "User updated successfully";
+                            UserService.setCurrentUser(updatedUser);
+                            init();
+                        } else {
+                            vm.message = "User update failed";
+                        }
                     },
-
-                function(err){
-                    vm.error = err;
+                    function(err){
+                    console.log(err);
                 });
         }
 
