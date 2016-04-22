@@ -51,7 +51,7 @@
                 );
         }
 
-        /*function isDuplicateUsername(username){
+        function isDuplicateUsername(username){
             UserService
                 .findUserByUsername(username)
                 .then(function(response){
@@ -64,6 +64,6 @@
                         return false;
                     }
                 });
-        }*/
+        }
     }
 })();

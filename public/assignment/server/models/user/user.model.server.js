@@ -86,7 +86,6 @@ module.exports = function(db) {
 
         // insert new user with mongoose user model's create method
         UserModel.create(user, function (err, doc) {
-            console.log(doc);
 
             if (err) {
                 //reject promise if error

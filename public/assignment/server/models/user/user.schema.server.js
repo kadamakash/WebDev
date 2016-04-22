@@ -14,7 +14,7 @@ module.exports = function(){
         emails: [String],
         phones: [String],
         roles: [String],
-        app: {type:String, default:"assignment"}
+        app: {type: String, default:"assignment"}
     }, {collection: 'assignment.formmaker.user'});
     return UserSchema;
 };
