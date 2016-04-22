@@ -4,6 +4,7 @@
 "use strict";
 
 var passport = require('passport');
+var bcrypt      = require("bcrypt-nodejs");
 
 module.exports = function(app, userModel){
     var adminAuth = isAdmin;
@@ -40,12 +41,16 @@ module.exports = function(app, userModel){
                     if(user){
                         res.json(null);
                     } else {
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.createUser(newUser);
                     }
                 },
                 function(err){
-                    res.json(user);
-                },
+                    res.status(400).send(err);
+                })
+            .then(function(user){
+                res.json(user);
+            },
                 function(err){
                     res.status(400).send(err);
                 }
