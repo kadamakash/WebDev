@@ -119,7 +119,7 @@
                 label: field.label,
                 type: field.type,
                 placeholder: field.placeholder,
-                option: field.options
+                options: field.options
             };
 
             FieldService

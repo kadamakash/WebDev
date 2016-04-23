@@ -26,7 +26,7 @@ module.exports = function(db) {
     return api;
 
 
-    function createForm(userId, form) {
+    function createForm(form) {
         var deferred = q.defer();
         FormModel
             .create(form,
@@ -40,7 +40,7 @@ module.exports = function(db) {
         return deferred.promise;
     }
 
-    function findAllForms(userId) {
+    function findAllForms() {
         var deferred = q.defer();
         FormModel
             .find(
@@ -57,7 +57,7 @@ module.exports = function(db) {
     function findFormByTitle(title) {
         var deferred = q.defer();
         FormModel
-            .find({title: title}, function(err, doc){
+            .findOne({title: title}, function(err, doc){
                 if(!err){
                     deferred.resolve(doc);
                 } else {

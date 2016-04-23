@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <div class="row">
 
+
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Form</h1>
             <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
@@ -13,7 +14,11 @@
                    <thead>
                    <tr>
                        <th class="col-sm-9">
-                           <a href="#/forms"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;Form Name</a>
+                           <span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
+                           <span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
+                           <a ng-click="sortType = 'title'; sortReverse = !sortReverse" href="">
+                               Form&nbsp;Name
+                           </a>
                        </th>
                        <th class="col-sm-3">Action</th>
                    </tr>
@@ -30,7 +35,7 @@
                             <a ng-show="model.selectedForm" ng-click="model.updateForm(model.form)" class="glyphicon glyphicon-ok btn btn-success"></a>
                         </td>
                     </tr>
-                    <tr ng-repeat="form in model.forms">
+                    <tr ng-repeat="form in model.forms | orderBy:sortType:sortReverse">
                         <td class="col-sm-9"><a href="#/form/{{form._id}}/fields">{{form.title}}</a></td>
                         <td class="col-sm-3">
                             <a ng-click="model.deleteForm(form)" class="glyphicon glyphicon-remove btn btn-danger"></a>
