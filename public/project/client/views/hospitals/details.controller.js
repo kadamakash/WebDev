@@ -35,6 +35,7 @@
 
             details(provider_id);
             care(provider_id);
+            findExpenses(provider_id);
             /*showReviews();*/
 
             ReviewService
@@ -120,6 +121,12 @@
                 });
         }
 
+        function findExpenses(provide_id){
+            HospitalService
+                .findHospitalExpenses(provide_id, function(response){
+                    vm.expenses = response;
+                })
+        }
         function showReviews(){
             ReviewService
                 .findAllReviewsForHospital(provider_id)

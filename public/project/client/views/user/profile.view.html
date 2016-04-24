@@ -84,11 +84,11 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Your Reviews</div>
             <div class="panel-body fixed-panel">
-                <ul class="list-inline">
-                    <li ng-repeat="review in model.reviews" class="col-xs-4">
+                <ol>
+                    <li ng-repeat="review in model.reviews">
                         {{review.review}}&nbsp;{{review.rating}}&nbsp;{{review.hospitalName}} {{model.msg}}
                     </li>
-                </ul>
+                </ol>
             </div>
         </div>
     </div>

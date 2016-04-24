@@ -69,10 +69,39 @@
 
 </div>
 
-<br>
+<div class="col-md-8 col-md-offset-2">
 
-<br>
+    <strong><h2>Payment and value of care</h2></strong>
+    <form class="inline">
+        <div class="form-group">
+            <label>Search</label>
+            <input type="text" ng-model="searchValue" class="form-control" placeholder="Search">
+        </div>
+    </form>
+    <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+            <th>Category</th>
+            <th>Measure Name</th>
+            <th>Lower Estimate</th>
+            <th>Higher Estimate</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="price in model.expenses|filter:searchValue">
+            <td>{{price.value_of_care_category}}</td>
+            <td>{{price.measure_name}}</td>
+            <td>{{price.higher_estimate}}</td>
+            <td>{{price.lower_estimate}}</td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
 <div class="col-sm-8 col-sm-offset-2" ng-if="currentUser">
+    <strong><h2>Reviews</h2></strong>
     <table class="table table-responsive table-bordered">
         <thead>
         <tr>

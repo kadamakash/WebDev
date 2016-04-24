@@ -12,7 +12,8 @@
         var api = {
             findHospitalByCity: findHospitalByCity,
             findHospitalById: findHospitalById,
-            findCareInfoById: findCareInfoById
+            findCareInfoById: findCareInfoById,
+            findHospitalExpenses: findHospitalExpenses
         };
         return api;
 
@@ -28,6 +29,11 @@
 
         function findCareInfoById(provider_id, callback){
             $http.get("https://data.medicare.gov/resource/3z8n-wcgr.json?provider_id="+ provider_id)
+                .success(callback);
+        }
+
+        function findHospitalExpenses(provider_id, callback){
+            $http.get("https://data.medicare.gov/resource/c7us-v4mf.json?provider_id="+ provider_id)
                 .success(callback);
         }
     }
