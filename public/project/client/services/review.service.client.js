@@ -30,7 +30,7 @@
         }
 
         function findAllReviewsForUser(reviewedBy){
-            return $http.get("/api/project/user/"+ reviewedBy+ "/review");
+            return $http.get("/api/project/user/"+reviewedBy+ "/review");
         }
 
         function findAllReviewsForHospital(providerId){

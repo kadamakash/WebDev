@@ -11,9 +11,9 @@ module.exports = function (app, model){
     app.delete("/api/project/review/:reviewId", deleteReviewById);
 
     function findAllReviewsForUser(req, res){
-        var review = req.body;
+        var id = req.params.userId;
         model
-            .getReviewForUser(review)
+            .getReviewForUser(id)
             .then(function(doc){
                 res.json(doc);
             }, function(err){

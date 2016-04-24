@@ -86,7 +86,7 @@
             <div class="panel-body fixed-panel">
                 <ul class="list-inline">
                     <li ng-repeat="review in model.reviews" class="col-xs-4">
-                        {{review.review}}&nbsp;{{review.rating}}&nbsp;{{review.hospitalName}}
+                        {{review.review}}&nbsp;{{review.rating}}&nbsp;{{review.hospitalName}} {{model.msg}}
                     </li>
                 </ul>
             </div>
@@ -99,31 +99,12 @@
             <div class="panel-heading">Your Quote</div>
             <div class="panel-body fixed-panel">
                 {{model.quote}} {{model.qmsg}}
-               <!-- <ul class="list-inline">
-                    <li ng-repeat="model.quote" class="col-xs-4">
-                        {{quote.response}}
-                    </li>
-                </ul>-->
             </div>
         </div>
     </div>
 
 </div>
 
-<!--<div ng-if="currentUser.expert" class="col-md-8 col-md-offset-2">
-    <br><br>
-    <div class="panel panel-primary">
-        <div class="panel-heading">User Quotes</div>
-        <div class="panel-body fixed-panel">
-            <ul class="list-inline">
-                <li ng-repeat="model.quote" class="col-xs-6">
-                    {{quote.response}}
-
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>-->
 
 <div ng-if="currentUser.expert" class="col-md-8 col-md-offset-2">
     <br><br>

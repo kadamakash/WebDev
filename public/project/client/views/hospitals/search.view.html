@@ -9,32 +9,26 @@
                 </span>
             </div>
         </form>
+        <br><br>
     </div>
 </div>
 <br>
-<div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
+<div ng-show="model.message" class="alert alert-danger col-sm-8 col-sm-offset-2" role="alert">{{model.message}}</div>
 
+<div class="col-sm-8 col-sm-offset-2">
 
-<div class="panel panel-success" ng-show="model.hospitals">
-    <div class="panel-heading"><h4>Search Results</h4></div>
-    <div class="panel-body">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Provider ID</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Type</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="hospital in model.hospitals">
-            <td><a href="#/details/{{hospital.provider_id}}">{{hospital.provider_id}}</a></td>
-            <td>{{hospital.hospital_name}}</td>
-            <td>{{hospital.address}}</td>
-            <td>{{hospital.hospital_type}}</td>
-        </tr>
-        </tbody>
-    </table>
-    </div>
+        <div ng-repeat="hospital in model.hospitals">
+            <div class="panel panel-info col-sm-6">
+                <div class="panel-heading text-center text-capitalize">{{hospital.hospital_name}}</div>
+                <div class="panel-body">
+                    <ul>
+                        <li>Provider Id&nbsp;&nbsp;: <a href="#/details/{{hospital.provider_id}}">{{hospital.provider_id}}</a></li>
+                        <li>Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hospital.address}}</li>
+                        <li>Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hospital.hospital_type}}</li>
+                        <li>Ownership&nbsp;&nbsp;: {{hospital.hospital_ownership}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
 </div>

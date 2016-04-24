@@ -73,7 +73,7 @@
                         if(updatedQuote){
                             vm.message = "Quote Sent Successfully";
                         } else {
-                            vm.umessage = "Quote Failed";
+                            vm.message = "Quote Failed";
                         }
                     },
                     function(err){

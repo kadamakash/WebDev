@@ -12,12 +12,12 @@
         </div>
 
         <div class="panel-body">
-            <p><strong> Type: {{model.hospital[0].hospital_type}}</strong></p>
-            <p><strong> Address: {{model.hospital[0].address}}</strong></p>
-            <p><strong> ZipCode: {{model.hospital[0].zip_code}}</strong></p>
-            <p><strong> City: {{model.hospital[0].city}}</strong></p>
-            <p><strong> State: {{model.hospital[0].state}}</strong></p>
-            <p><strong> Phone Number: {{model.hospital[0].phone_number.phone_number}}</strong></p>
+            <p><strong> Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{model.hospital[0].hospital_type}}</strong></p>
+            <p><strong> Address&nbsp;&nbsp;&nbsp;: &nbsp;{{model.hospital[0].address}}</strong></p>
+            <p><strong> ZipCode&nbsp;&nbsp;&nbsp;: &nbsp;{{model.hospital[0].zip_code}}</strong></p>
+            <p><strong> City&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{model.hospital[0].city}}</strong></p>
+            <p><strong> State&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{model.hospital[0].state}}</strong></p>
+            <p><strong> Phone Number: &nbsp;{{model.hospital[0].phone_number.phone_number}}</strong></p>
         </div>
 
         <div class="panel-footer">
@@ -26,18 +26,6 @@
         </div>
     </div>
 </div>
-
-<!--<div class="panel panel-primary col-sm-6">
-    <div class="panel-heading">
-       <h2> USER ACTIONS </h2>
-    </div>
-    <div class="panel-body">
-        <button  class="btn btn-group-justified" ng-click="model.bookmarkHospital()" ng-show="currentUser" type="submit"><h4>Bookmark this Hospital</h4></button><br>
-        <button  class="btn btn-group-justified" ng-click="model.addReview()" ng-show="currentUser" type="submit"><h4>Reviews</h4></button><br>
-        <button  class="btn btn-group-justified" ng-click="model.findAccommodation()" ng-show="currentUser" type="submit"><h4>Find Apartment</button></h4><br>
-        <button  class="btn btn-group-justified" ng-click="model.askTheExpert()" ng-show="currentUser" type="submit"><h4>Ask the Expert</h4></button>
-    </div>
-</div>-->
 
 <div class="col-md-8 col-md-offset-2">
 
@@ -62,19 +50,10 @@
 </div>
 
 <br>
-<!--<div class="panel panel-primary col-sm-12">
-    <div class="panel-heading">
 
-    </div>
-
-    <div class="panel-body">
-
-    </div>
-
-</div>-->
 <br>
 <div class="col-sm-8 col-sm-offset-2" ng-if="currentUser">
-    <table class="table table-responsive">
+    <table class="table table-responsive table-bordered">
         <thead>
         <tr>
             <th>Review</th>
