@@ -14,10 +14,10 @@
                 .when("/home", {
                     templateUrl: "views/home/home.view.html",
                     controller: "HomeController",
-                    controllerAs: "model"
-                    /*resolve:{
+                    controllerAs: "model",
+                    resolve:{
                         getLoggedIn: getLoggedIn
-                    }*/
+                    }
                 })
                 .when("/register", {
                     templateUrl: "views/user/register.view.html",

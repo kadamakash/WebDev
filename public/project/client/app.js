@@ -4,5 +4,5 @@
 "use strict";
 (function(){
     angular
-        .module("MedicalTourismApp", ["ngRoute"]);
+        .module("MedicalTourismApp", ['ngRoute', 'angularUtils.directives.dirPagination']);
 })();

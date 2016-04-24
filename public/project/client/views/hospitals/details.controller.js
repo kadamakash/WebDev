@@ -154,16 +154,6 @@
                 });
         }
 
-        /*function image(provider_id){
-            HospitalService
-                .findHospitalById(provider_id)
-                .then(function(response){
-                    HospitalService
-                        .findHospitalImage(response.hospital_name, function(response){
-                            vm.img = img;
-                        })
-                })
-        }*/
     }
 
     function bookmarkHospital(){
