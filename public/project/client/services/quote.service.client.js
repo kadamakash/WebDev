@@ -9,13 +9,27 @@
 
     function QuoteService($http){
         var api = {
-            createQuote: createQuote
+            createQuote: createQuote,
+            getQuoteForUser: getQuoteForUser,
+            getAllQuotes: getAllQuotes,
+            updateQuote: updateQuote
         };
         return api;
 
-        function createQuote(userId, quote){
-            return $http.post("/api/project/quote/"+ userId, quote);
+        function createQuote(quote){
+            return $http.post("/api/project/quote", quote);
+        }
 
+        function getQuoteForUser(userId){
+            return $http.get("/api/project/response", userId);
+        }
+
+        function getAllQuotes(){
+            return $http.get("/api/project/quotes");
+        }
+
+        function updateQuote(username, response){
+            return $http.put("/api/project/response/"+username, response);
         }
     }
 })();

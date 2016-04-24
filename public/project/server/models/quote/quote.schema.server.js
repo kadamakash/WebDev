@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 module.exports = function(){
     var QuoteSchema = new mongoose.Schema(
         {
+            username: String,
             firstName: String,
             lastName: String,
             gender: String,

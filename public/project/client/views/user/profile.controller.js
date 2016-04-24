@@ -7,11 +7,13 @@
         .module("MedicalTourismApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController(UserService, $location){
+    function ProfileController(UserService, ReviewService, QuoteService, $location){
         var vm = this;
+
 
         function init(){
             var usr = UserService.getCurrentUser();
+            vm.currentUser = usr;
             vm.changePassword = false;
             if(usr) {
                 UserService
@@ -29,11 +31,13 @@
             }
 
             getReviews(usr);
+            getQuote(usr);
+            getAllQuoteRequest();
         }
         init();
 
         vm.updateUser = updateUser;
-
+        vm.updateQuote = updateQuote;
         vm.getReviews = getReviews;
 
         function updateUser(user){
@@ -60,6 +64,24 @@
                 );
         }
 
+        function updateQuote(qmessage, username){
+            QuoteService
+                .updateQuote(username, qmessage)
+                .then(
+                    function(response){
+                        var updatedQuote = response.data;
+                        if(updatedQuote){
+                            vm.message = "Quote Sent Successfully";
+                        } else {
+                            vm.umessage = "Quote Failed";
+                        }
+                    },
+                    function(err){
+                        console.log("err");
+                    }
+                );
+        }
+
         function getReviews(user){
             ReviewService
                 .findAllReviewsForUser(user._id)
@@ -69,6 +91,38 @@
                         vm.reviews = data;
                     } else {
                         vm.msg = "You have no reviews";
+                    }
+                },
+                function(err){
+                    console.log("err");
+                });
+        }
+
+        function getQuote(user){
+            QuoteService
+                .getQuoteForUser(user._id)
+                .then(function(response){
+                    var data = response.data;
+                    if(data){
+                        vm.quote = data;
+                    } else {
+                        vm.qmsg = "We are working on your quote"
+                    }
+                },
+                function(err){
+                    console.log(err);
+                });
+        }
+
+        function getAllQuoteRequest(){
+            QuoteService
+                .getAllQuotes()
+                .then(function(response){
+                    var data = response.data;
+                    if(data){
+                        vm.quotes = data;
+                    } else {
+                        vm.aqmsg = "No Quote Requests from User";
                     }
                 },
                 function(err){

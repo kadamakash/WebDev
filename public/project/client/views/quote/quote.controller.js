@@ -77,13 +77,26 @@
                 return;
             }
 
-            var usr1 = UserService.getCurrentUser();
+            var usr = UserService.getCurrentUser();
+            var newQuote = {
+                firstName: quote.firstName,
+                lastName: quote.lastName,
+                gender: quote.gender,
+                age: quote.age,
+                email: quote.email,
+                phone: quote.phone,
+                city: quote.city,
+                state: quote.state,
+                country: quote.country,
+                message: quote.message,
+                userId: usr
+            };
             QuoteService
-                .createQuote(usr1._id, quote)
+                .createQuote(newQuote)
                 .then(
                     function(response){
                         if(response.data){
-                            vm.message = "Quote Sent successfully";
+                            vm.message = "Quote Sent successfully. You can check your quote in profile page";
                         } else {
                             vm.error = "Please fill in the form and try submitting again"
                         }

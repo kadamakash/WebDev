@@ -85,3 +85,25 @@ body {
 .custom-heading{
     display: inline;
 }
+
+.boxed{
+    border:1px solid grey;
+    height: 250px;
+}
+
+.hospitalTitle{
+    font-weight: bold;
+}
+
+.hospitalImage{
+    padding-top: 10px;
+}
+
+.italics-font{
+    font-style: italic;
+}
+
+.custom-image{
+    height: 209px;
+    width: 300px;
+}

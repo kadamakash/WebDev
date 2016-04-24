@@ -1,17 +1,17 @@
 <div class="row" ng-if="currentUser">
     <div class="col-md-8 col-sm-offset-2">
 
-        <h2 class="text-center"><strong>Profile</strong></h2>
-
-        <div ng-show="model.message" class="alert alert-success" role="alert">
-            <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.message}}
-        </div>
-
-        <div ng-show="model.error" class="alert alert-danger" role="alert">
-            <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.error}}
-        </div>
+        <h2 class="text-center"><strong>Get A Quote</strong></h2>
+        <br>
 
         <form class="form-horizontal">
+
+            <div class="form-group">
+                <label for="username" class="col-md-2 control-label">Username:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="username" placeholder="Firstname" ng-model="model.quote.username">
+                </div>
+            </div>
 
             <div class="form-group">
                 <label for="firstName" class="col-md-2 control-label">First Name:</label>
@@ -96,5 +96,14 @@
                 </div>
             </div>
         </form>
+
+        <div ng-show="model.message" class="alert alert-success" role="alert">
+            <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.message}}
+        </div>
+
+        <div ng-show="model.error" class="alert alert-danger" role="alert">
+            <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.error}}
+        </div>
+
     </div>
 </div>

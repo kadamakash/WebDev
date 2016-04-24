@@ -1,5 +1,6 @@
-<div class="col-md-10 col-md-offset-1">
+<div class="col-md-8 col-md-offset-2">
     <h2 class="text-center"><strong>Profile</strong></h2>
+    <br>
 
     <form class="form-horizontal">
         <div class="form-group">
@@ -50,6 +51,7 @@
         </div>
     </form>
 
+
     <div ng-show="model.message" class="alert alert-success" role="alert">
         <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.message}}
     </div>
@@ -57,25 +59,30 @@
         <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.error}}
     </div>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="panel panel-default">
-                <div class="panel-heading"> Bookmarked Hospitals</div>
-                <div class="panel-body table-responsive fixed-panel">
-                    <ul class="list-inline">
-                        <li ng-repeat="hospital in model.currentUser.bookmarked" class="col-xs-4">
-                            <a href="#/details/{{hospital.providerId}}"><i class="fa fa-user"></i>&nbsp;{{hospital.hospitalName}}</a>
-                        </li>
-                    </ul>
+    <br><br>
 
-                </div>
+</div>
+
+<div ng-if="!currentUser.expert && !currentUser.admin" class="col-md-12">
+
+    <div class="col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading"> Bookmarked Hospitals</div>
+            <div class="panel-body table-responsive fixed-panel">
+                <ul class="list-inline">
+                    <li ng-repeat="hospital in model.currentUser.bookmarked">
+                        <a href="#/details/{{hospital.providerId}}"><i class="fa fa-hospital-o"></i>&nbsp;{{hospital.hospitalName}}</a>
+                    </li>
+                </ul>
+
             </div>
         </div>
     </div>
 
+
     <div class="col-sm-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">Reviews</div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Your Reviews</div>
             <div class="panel-body fixed-panel">
                 <ul class="list-inline">
                     <li ng-repeat="review in model.reviews" class="col-xs-4">
@@ -86,4 +93,52 @@
         </div>
     </div>
 
+    <div class="col-sm-12">
+        <br><br>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Your Quote</div>
+            <div class="panel-body fixed-panel">
+                {{model.quote}} {{model.qmsg}}
+               <!-- <ul class="list-inline">
+                    <li ng-repeat="model.quote" class="col-xs-4">
+                        {{quote.response}}
+                    </li>
+                </ul>-->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--<div ng-if="currentUser.expert" class="col-md-8 col-md-offset-2">
+    <br><br>
+    <div class="panel panel-primary">
+        <div class="panel-heading">User Quotes</div>
+        <div class="panel-body fixed-panel">
+            <ul class="list-inline">
+                <li ng-repeat="model.quote" class="col-xs-6">
+                    {{quote.response}}
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>-->
+
+<div ng-if="currentUser.expert" class="col-md-8 col-md-offset-2">
+    <br><br>
+    <ul class="list-inline">
+        <li ng-repeat="q in model.quotes">
+            <div class="panel panel-info">
+                <div class="panel-heading">Quote Request From: {{q.firstName}}</div>
+                <div class="panel-body fixed-panel">
+                    <div>{{q.message}}{{model.aqmsg}}</div>
+                    <div><input type="text" class="form-control" id="message" placeholder="Type response" ng-model="qmessage"></div>
+                </div>
+                <div class="panel-footer">
+                    <a class="btn btn-success btn-block" ng-click="model.updateQuote(qmessage, q.username)">Send Quote</a>
+                </div>
+            </div>
+        </li>
+    </ul>
 </div>
