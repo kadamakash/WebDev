@@ -1,0 +1,35 @@
+<div class="row search-text">
+    <div class="col-sm-8 col-sm-offset-2">
+        <h2>Search Hotels</h2>
+        <h4 class="pull-right"><a href="http://air-travel.discoverfrance.net/airport_codes_us.shtml" target="_blank" class="btn btn-dark">IATA Help</a></h4>
+        <form>
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control input-lg" placeholder="IATA code for city eg: Bos" ng-model="model.code"/>
+                <span class="input-group-btn">
+                    <a class="btn btn-info btn-lg" type="submit" ng-click="model.searchHotel(model.code)"><i class="fa fa-search"></i></a>
+                </span>
+            </div>
+        </form>
+        <br><br>
+    </div>
+</div>
+<br>
+<div ng-show="model.message" class="alert alert-danger col-sm-8 col-sm-offset-2" role="alert">{{model.message}}</div>
+
+<div class="col-sm-8 col-sm-offset-2">
+
+    <div ng-repeat="hotel in model.hotels.results">
+        <div class="panel panel-info col-sm-6">
+            <div class="panel-heading text-center text-capitalize">{{hotel.property_name}}</div>
+            <div class="panel-body">
+                <ul>
+                    <li>Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hotel.address.line1}}</li>
+                    <li>Daily Rate&nbsp;&nbsp;: {{hotel.min_daily_rate.amount}}</li>
+                    <li>Contact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hotel.contacts[0].detail}}</li>
+                    <li>Ratings&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hotel.awards[0].rating}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

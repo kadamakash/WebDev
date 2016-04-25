@@ -31,6 +31,10 @@
         vm.selectedReview = null;
         vm.review = null;
 
+        /*vm.searchApartment = searchApartment;
+        var ci = $routParams.city;
+        vm.city = ci;*/
+
         function init(){
 
             details(provider_id);
@@ -172,5 +176,14 @@
     function bookmarkHospitalCallback(user){
         console.log(user.bookmarked);
     }
+
+  /*  function searchApartment(city){
+        ApartmentService
+            .findApartmentsByCity(city)
+            .then(function(response){
+                vm.apartments = response.data;
+            })
+    }*/
+
 
 })();

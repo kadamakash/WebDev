@@ -83,6 +83,14 @@
                         checkLoggedIn: checkLoggedIn
                     }
                 })
+                .when("/apartment",{
+                    templateUrl: "views/apartment/apartment.view.html",
+                    controller: "ApartmentController",
+                    controllerAs: "model",
+                    resolve: {
+                        checkLoggedIn: checkLoggedIn
+                    }
+                })
                 .otherwise({
                     redirectTo: "/"
                 });
