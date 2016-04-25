@@ -18,12 +18,15 @@
 
 <div class="col-sm-8 col-sm-offset-2">
 
-    <div ng-repeat="hotel in model.hotels.results">
+    <div dir-paginate="hotel in model.hotels.results|itemsPerPage:4">
         <div class="panel panel-info col-sm-6">
-            <div class="panel-heading text-center text-capitalize">{{hotel.property_name}}</div>
+            <div class="panel-heading text-center"><strong>{{hotel.property_name}}</strong></div>
             <div class="panel-body">
                 <ul>
-                    <li>Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hotel.address.line1}}</li>
+                    <li>Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hotel.address.line1}}</li>
+                    <li>City&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hotel.address.city}}</li>
+                    <li>Region&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hotel.address.region}}</li>
+                    <li>ZipCode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hotel.address.postal_code}}</li>
                     <li>Daily Rate&nbsp;&nbsp;: {{hotel.min_daily_rate.amount}}</li>
                     <li>Contact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hotel.contacts[0].detail}}</li>
                     <li>Ratings&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{hotel.awards[0].rating}}</li>
@@ -32,4 +35,15 @@
         </div>
     </div>
 
+
+
+    <div class="col-md-8 col-md-offset-4">
+        <br>
+        <br>
+        <dir-pagination-controls
+                max-size="10"
+                direction-links="true"
+                boundary-links="true">
+        </dir-pagination-controls>
+    </div>
 </div>

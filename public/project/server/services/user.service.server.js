@@ -5,7 +5,6 @@
 "use strict";
 
 var passport = require('passport');
-/*var LocalStrategy = require('passport-local').Strategy;*/
 var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function(app, userModel, securityService){
@@ -25,44 +24,6 @@ module.exports = function(app, userModel, securityService){
     app.post    ("/api/project/user/:userId/bookmarked", addBookmarkedHospital);
     app.delete  ("/api/project/user/:userId/bookmarked/:bookmarkedId", deleteBookmarkedHospital);
 
-    /*passport.use('medical-tourism',  new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
-
-    function localStrategy(username, password, done){
-        userModel
-            .findUserByUsername(username)
-            .then(
-                function(user){
-                    if(user && bcrypt.compareSync(password, user.password)){
-                        return done(null, user);
-                    } else {
-                        return done (null, false);
-                    }
-                },
-                function(err){
-                    if(err) {return done(err);
-                    }
-                }
-            )
-    }
-
-    function serializeUser(user, done){
-        done(null, user);
-    }
-
-    function deserializeUser(user, done){
-        userModel
-            .findUserById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
-    }*/
 
     function login(req, res){
         var user = req.user;

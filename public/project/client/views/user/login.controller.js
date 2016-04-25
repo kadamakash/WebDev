@@ -29,7 +29,7 @@
                             var currentUser = response.data;
                             if(currentUser){
                                 UserService.setCurrentUser(currentUser);
-                                $location.url("/profile");
+                                $location.url("/home");
                             } else {
                                 vm.message = "Invalid username/password";
                             }
