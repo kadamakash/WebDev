@@ -10,9 +10,10 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var bing = require('node-bing-api')({accKey: "Tk5Wf6QPZEIEJ0tLjugmb9BWzflaxddD3ilqY8rz0ho"});
 
+var connectionString = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://127.0.0.1:27017/cs5610spring2016';
 
 // creating default connection string
-var connectionString ='mongodb://127.0.0.1:27017/webDevAssignment';
+/*var connectionString ='mongodb://127.0.0.1:27017/webDevAssignment';*/
 // connect to the database
 var db = mongoose.connect(connectionString);
 mongoose.connection.once('connected', function() {
@@ -21,14 +22,13 @@ mongoose.connection.once('connected', function() {
 
 // use remote connection string
 // if running in remote server
-if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+/*if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
     connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
         process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
         process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
         process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
         process.env.OPENSHIFT_APP_NAME;
-}
-
+}*/
 
 
 app.use(express.static(__dirname + '/public'));
