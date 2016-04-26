@@ -11,4 +11,6 @@
         var vm = this;
         var user = UserService.getCurrentUser();
     }
+
+
 })();

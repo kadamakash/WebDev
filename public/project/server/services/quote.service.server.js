@@ -7,7 +7,7 @@ module.exports = function(app, quoteModel, userModel){
     app.post("/api/project/quote", addQuote);
     app.get("/api/project/response", getQuote);
     app.get("/api/project/quotes", getAllQuotes);
-    app.put("/api/project/response/username", updateQuote);
+    app.put("/api/project/response/:username", updateQuote);
 
     function addQuote(req, res){
         var id = req.params.userId;
@@ -43,10 +43,11 @@ module.exports = function(app, quoteModel, userModel){
     }
 
     function updateQuote(req, res){
-        var id = req.params.username;
+        var username = req.params.username;
         var response = req.body;
+        console.log(response);
         quoteModel
-            .updateQuote(id, response)
+            .updateQuote(username, response)
             .then(function(doc){
                 res.json(doc);
             }, function(err){

@@ -11,7 +11,7 @@ module.exports = function(app, userModel){
 
     app.get("/api/project/admin/user/:userId", adminAuth, getUserByUserId);
     app.get("/api/project/admin/user/", adminAuth, getAllUsers);
-    app.post("/api/project/admin/user/:userId", adminAuth, createUser);
+    app.post("/api/project/admin/user", adminAuth, createUser);
     app.put("/api/project/admin/user/:userId", adminAuth, updateUser);
     app.delete("/api/project/admin/user/:userId", adminAuth, deleteUser);
 
@@ -42,8 +42,6 @@ module.exports = function(app, userModel){
 
     function createUser(req, res){
         var newUser = req.body;
-        if(!newUser.roles || !newUser.roles.length > 0)
-            newUser.roles = ["student"];
 
         userModel
             .findUserByUsername(newUser.username)

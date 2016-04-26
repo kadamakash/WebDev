@@ -114,10 +114,10 @@
                 <div class="panel-heading">Quote Request From: {{q.firstName}}</div>
                 <div class="panel-body fixed-panel">
                     <div>{{q.message}}{{model.aqmsg}}</div>
-                    <div><input type="text" class="form-control" id="message" placeholder="Type response" ng-model="qmessage"></div>
+                    <div><input type="text" class="form-control" id="message" placeholder="Type response" ng-model="model.qmessage"></div>
                 </div>
                 <div class="panel-footer">
-                    <a class="btn btn-success btn-block" ng-click="model.updateQuote(qmessage, q.username)">Send Quote</a>
+                    <a class="btn btn-success btn-block" ng-click="model.updateQuote(model.qmessage, q.username)">Send Quote</a>
                 </div>
             </div>
         </li>

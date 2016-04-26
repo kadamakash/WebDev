@@ -59,7 +59,7 @@ module.exports = (function(db){
         return deferred.promise;
     }
 
-    function updateQuote(id, response){
+    function updateQuote(username, response){
         var deferred = q.defer();
         QuoteModel
             .update(

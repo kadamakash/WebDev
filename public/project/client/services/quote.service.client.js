@@ -29,7 +29,7 @@
         }
 
         function updateQuote(username, response){
-            return $http.put("/api/project/response/"+username, response);
+            return $http.put("/api/project/response/" + username, response);
         }
     }
 })();

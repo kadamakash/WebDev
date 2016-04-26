@@ -79,6 +79,7 @@
 
             var usr = UserService.getCurrentUser();
             var newQuote = {
+                username: quote.username,
                 firstName: quote.firstName,
                 lastName: quote.lastName,
                 gender: quote.gender,
@@ -89,7 +90,8 @@
                 state: quote.state,
                 country: quote.country,
                 message: quote.message,
-                userId: usr
+                userId: usr,
+                response: ""
             };
             QuoteService
                 .createQuote(newQuote)
